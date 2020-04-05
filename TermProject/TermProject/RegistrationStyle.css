@@ -1,0 +1,35 @@
+﻿body {
+    font-family: Encode Sans Semi Expanded;
+}
+
+.mainRegister {
+    width: 50%;
+    border-radius: 10px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 2ex;
+}
+
+.register1 {
+    text-align: left;
+    margin: 0px auto 0px auto;
+    width: 85%;
+    font-size: 16px;
+    padding: 0 5% 0 5%;
+}
+
+.buttonDiv{
+    text-align: right;
+    padding: 0 15% 0 5%;
+}
+
+.registerButtons {
+    padding: 10px 20px 10px 20px;
+    background-color: #232323;
+    color: white;
+    border-style: none;
+    font-family: Encode Sans Semi Expanded;
+    font-size: 16px;
+}
