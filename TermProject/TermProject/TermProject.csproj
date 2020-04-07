@@ -91,6 +91,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DatingSiteLibrary\DatingSiteLibrary.csproj">
+      <Project>{689be2c6-2e35-4896-895a-98f805c02465}</Project>
+      <Name>DatingSiteLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{0669c12a-4aa2-4a20-8e5d-e35d3ef63df6}</Project>
       <Name>Utilities</Name>

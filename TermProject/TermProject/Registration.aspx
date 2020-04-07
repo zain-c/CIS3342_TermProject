@@ -16,7 +16,7 @@
             <h3>Register</h3>
 
             <div class="register1">
-                <asp:Label ID="lblErrorMessage" runat="server" Text="" ForeColor="Red"></asp:Label><br />
+                <asp:Label ID="lblErrorMessage" runat="server" Text="" ForeColor="Red" Visible="false" ></asp:Label><br />
 
                 Username <br />
                 <asp:TextBox ID="txtUsername" runat="server" Width="50%"></asp:TextBox><br />
