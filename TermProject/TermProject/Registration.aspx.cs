@@ -8,6 +8,7 @@ using Utilities;
 using DatingSiteLibrary;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net.Mail;
 
 namespace TermProject
 {
@@ -34,19 +35,31 @@ namespace TermProject
             {
                 Response.Write("LOGIN VALID");
                 User newUser = new User();
-                try
+                try  
                 {
                     newUser.addUserToDB(txtUsername.Text, txtPassword.Text, txtEmail.Text, txtFirstName.Text, txtLastName.Text);
                     int userID = getUserID(txtUsername.Text);
                     newUser.addAddressToDB(userID, txtAddress.Text, txtCity.Text, ddState.SelectedValue, int.Parse(txtZip.Text), txtBillingAddress.Text,
                                            txtBillingCity.Text, ddBillingState.SelectedValue, int.Parse(txtBillingZip.Text));
                     newUser.addSecurityQuestionsToDB(txtSecurityQuestion1.Text, txtSecurityQuestion2.Text, txtSecurityQuestion3.Text, userID);
+
+                    
                 }
                 catch
                 {
 
                 }
             }
+        }
+
+        private void sendVerificationEmail(string recipient)
+        {
+            MailMessage objMail = new MailMessage();
+            MailAddress toAddress = new MailAddress(recipient);
+            MailAddress fromAddress = new MailAddress("tug85523@temple.edu");
+            string subject = "Verify your account";
+            string body = "Click the link below to verify your account <br />";
+
         }
 
         public int getUserID(string username)

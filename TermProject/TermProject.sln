@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Util
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingSiteLibrary", "DatingSiteLibrary\DatingSiteLibrary.csproj", "{689BE2C6-2E35-4896-895A-98F805C02465}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP_WebAPI", "TP_WebAPI\TP_WebAPI.csproj", "{4E898BA8-0A92-4320-8E01-C41B7DDE3CFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{689BE2C6-2E35-4896-895A-98F805C02465}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{689BE2C6-2E35-4896-895A-98F805C02465}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{689BE2C6-2E35-4896-895A-98F805C02465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E898BA8-0A92-4320-8E01-C41B7DDE3CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E898BA8-0A92-4320-8E01-C41B7DDE3CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E898BA8-0A92-4320-8E01-C41B7DDE3CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E898BA8-0A92-4320-8E01-C41B7DDE3CFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
