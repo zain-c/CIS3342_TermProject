@@ -12,6 +12,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <br /><br />
         <div id="mainRegisterContainer" class="mainRegister">
             <h3>Register</h3>
 
@@ -162,9 +163,10 @@
                 What is the name the first school you attended?<br />
                 <asp:TextBox ID="txtSecurityQuestion3" runat="server" Width="50%"></asp:TextBox><br /><br />
 
-                <asp:Button ID="btnCreateAccount" runat="server" Text="Create Account" CssClass="registerButtons" OnClick="btnCreateAccount_Click" />
+                <asp:Button ID="btnCreateAccount" runat="server" Text="Create Account" CssClass="registerButtons" OnClick="btnCreateAccount_Click" /><br />
             </div>
         </div>
+        <br /><br />
     </form>
 
 
