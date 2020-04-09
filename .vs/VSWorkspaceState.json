@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\TermProject",
+    "\\TermProject\\TermProject"
   ],
+  "SelectedNode": "\\TermProject\\TermProject\\Registration.aspx.cs",
   "PreviewInSolutionExplorer": false
 }
