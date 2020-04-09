@@ -4,23 +4,39 @@
 
 <html lang="en">
 <head runat="server">
-    <title>Welcome</title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
-        <!--Bootstrap Stylesheet-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--Bootstrap Stylesheet-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    
 
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        
     </asp:ContentPlaceHolder>
 </head>
 <body>
+    
     <form id="form1" runat="server">
+        <nav class="navbar navbar-light sticky-top justify-content-between" style="background-color: #e3f2fd;">
+            <a class="navbar-brand text-primary" >A to Z Dating</a>
+            
+            <asp:Button ID="btnSearchOnLoginPage" OnClick="SearchOnLogin_Click" runat="server" class="btn btn-outline-primary my-2 my-sm-0" Text="Search Public Profiles" />
+        </nav>
+        
+        
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
+        <!-- Footer -->
+        <footer class="footer fixed-bottom font-small" style="background-color: #e3f2fd;">
+            <div class="footer-copyright text-center text-primary py-3">© 2020 Copyright:</div>
+        </footer>
+
     </form>
 
     <!-- Optional JavaScript -->

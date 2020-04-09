@@ -13,5 +13,10 @@ namespace TermProject
         {
 
         }
+
+        protected void SearchOnLogin_Click(Object sender,EventArgs e)
+        {
+            Response.Redirect("Search.aspx");
+        }
     }
 }
