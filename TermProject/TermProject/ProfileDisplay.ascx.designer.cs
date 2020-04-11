@@ -10,69 +10,51 @@
 namespace TermProject {
     
     
-    public partial class Search {
+    public partial class ProfileDisplay {
         
         /// <summary>
-        /// tblPublicSearchFilter control.
+        /// tblProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblPublicSearchFilter;
+        protected global::System.Web.UI.WebControls.Table tblProfile;
         
         /// <summary>
-        /// txtLocationFilter control.
+        /// imgProfilePic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLocationFilter;
+        protected global::System.Web.UI.WebControls.Image imgProfilePic;
         
         /// <summary>
-        /// ddStateFilter control.
+        /// lblTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddStateFilter;
+        protected global::System.Web.UI.WebControls.Label lblTitle;
         
         /// <summary>
-        /// ddGenderFilter control.
+        /// lblAge control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddGenderFilter;
+        protected global::System.Web.UI.WebControls.Label lblAge;
         
         /// <summary>
-        /// tblPrivateSearchFilter control.
+        /// btnViewProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblPrivateSearchFilter;
-        
-        /// <summary>
-        /// btnSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
-        
-        /// <summary>
-        /// gvSearchResults control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvSearchResults;
+        protected global::System.Web.UI.WebControls.Button btnViewProfile;
     }
 }

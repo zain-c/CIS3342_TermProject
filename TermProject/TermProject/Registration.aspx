@@ -7,7 +7,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <br />
+    <br /><br />
     <div id="mainRegisterContainer" class="mainRegister">
         <h3>Register</h3>
 
@@ -180,6 +180,5 @@
             <asp:Button ID="btnCreateAccount" runat="server" Text="Create Account" CssClass="registerButtons" OnClick="btnCreateAccount_Click" /><br />
         </div>
     </div>
-    <br />
-    <br />
+    <br /><br /><br /><br />
 </asp:Content>
