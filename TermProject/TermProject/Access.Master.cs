@@ -18,5 +18,10 @@ namespace TermProject
         {
             Response.Redirect("Search.aspx");
         }
+
+        protected void btnRegister_Click(Object sender, EventArgs e)
+        {
+            Response.Redirect("Registration.aspx");
+        }
     }
 }
