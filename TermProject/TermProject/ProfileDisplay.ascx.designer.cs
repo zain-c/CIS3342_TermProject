@@ -13,13 +13,13 @@ namespace TermProject {
     public partial class ProfileDisplay {
         
         /// <summary>
-        /// tblProfile control.
+        /// tblProfle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblProfile;
+        protected global::System.Web.UI.WebControls.Table tblProfle;
         
         /// <summary>
         /// imgProfilePic control.

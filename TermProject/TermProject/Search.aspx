@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="Search" Language="C#" MasterPageFile="~/Access.Master" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="TermProject.Search" %>
 
-<%@ Register Src="~/ProfileDisplay.ascx" TagName="ProfileDisplay" TagPrefix="uc" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="SearchStyle.css" />
     <link href='https://fonts.googleapis.com/css?family=Encode Sans Semi Expanded' rel='stylesheet' />
@@ -105,11 +103,12 @@
                 <br />
 
                 <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="searchButton" /> <br /><br />
+
                 <asp:GridView ID="gvSearchResults" runat="server" HorizontalAlign="Center" AutoGenerateColumns="false" GridLines="Both">
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <uc:ProfileDisplay />
+                                <asp:PlaceHolder ID="phProfileDisplay" runat="server"></asp:PlaceHolder>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

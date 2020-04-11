@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.ComponentModel;
+using Utilities;
 
 namespace TermProject
 {
@@ -12,17 +13,15 @@ namespace TermProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
-        [Category("Misc")]
         public string Title
         {
             get { return lblTitle.Text; }
             set { lblTitle.Text = value; }
         }
 
-        [Category("Misc")]
         public string Age
         {
             get { return lblAge.Text; }
@@ -35,5 +34,9 @@ namespace TermProject
             set { imgProfilePic = value; }
         }
 
+        protected void btnViewProfile_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

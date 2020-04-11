@@ -67,6 +67,7 @@
   <ItemGroup>
     <Content Include="Login.aspx" />
     <Content Include="ProfileCreation.aspx" />
+    <Content Include="ProfileDisplay.ascx" />
     <Content Include="Registration.aspx" />
     <Content Include="RegistrationStyle.css" />
     <Content Include="Search.aspx" />
@@ -101,6 +102,13 @@
     </Compile>
     <Compile Include="ProfileCreation.aspx.designer.cs">
       <DependentUpon>ProfileCreation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileDisplay.ascx.cs">
+      <DependentUpon>ProfileDisplay.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProfileDisplay.ascx.designer.cs">
+      <DependentUpon>ProfileDisplay.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.aspx.cs">
