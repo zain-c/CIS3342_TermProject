@@ -18,19 +18,25 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light justify-content-between">
-            <a class="navbar-brand">Navbar</a>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-    </nav>
-
     <form id="form1" runat="server">
+        <nav class="navbar navbar-light sticky-top justify-content-between" style="background-color: #e3f2fd;">
+            <a class="navbar-brand text-primary" >A to Z Dating</a>
+            
+           
+            <asp:Button ID="btnSearchOnMainPage" runat="server" class="btn btn-outline-primary my-2 my-sm-0" Text="Search Public Profiles" />
+        </nav>
+        
+        
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
+        <!-- Footer -->
+        <footer class="footer fixed-bottom font-small" style="background-color: #e3f2fd;">
+            <div class="footer-copyright text-center text-primary py-3">© 2020 Copyright:</div>
+        </footer>
+
     </form>
 
     <!-- Optional JavaScript -->
