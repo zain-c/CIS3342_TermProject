@@ -1,0 +1,29 @@
+﻿body {
+}
+
+.mainRecovery {
+    width: 50%;
+    border-radius: 10px;
+    margin: 7% auto;
+    text-align: center;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 2ex;
+}
+
+.recovery1 {
+    text-align: left;
+    margin: 0px auto 0px auto;
+    width: 85%;
+    font-size: 16px;
+    padding: 0 5% 0 5%;
+}
+
+.recoveryButton {
+    padding: 10px 20px 10px 20px;
+    background-color: #232323;
+    color: white;
+    border-style: none;
+    font-family: Encode Sans Semi Expanded;
+    font-size: 16px;
+}

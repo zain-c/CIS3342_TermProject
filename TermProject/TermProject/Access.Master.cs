@@ -14,12 +14,17 @@ namespace TermProject
 
         }
 
-        protected void SearchOnLogin_Click(Object sender,EventArgs e)
+        protected void btnSearchOnLoginPage_Click(object sender, EventArgs e)
         {
             Response.Redirect("Search.aspx");
         }
 
-        protected void btnRegister_Click(Object sender, EventArgs e)
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+        }
+
+        protected void btnRegister_Click(object sender, EventArgs e)
         {
             Response.Redirect("Registration.aspx");
         }

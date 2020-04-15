@@ -88,13 +88,13 @@ namespace TermProject
             if (string.IsNullOrWhiteSpace(txtLoginUsername.Text))
             {
                 valid = false;
-                lblErrorMsg.Text += "*Please enter a username<br />";
+                lblErrorMsg.Text += "*Please enter a username. <br />";
                 lblErrorMsg.Visible = true;
             }
             if (string.IsNullOrWhiteSpace(txtLoginPwd.Text))
             {
                 valid = false;
-                lblErrorMsg.Text += "*Please enter a password";
+                lblErrorMsg.Text += "*Please enter a password.";
                 lblErrorMsg.Visible = true;
             }
             return valid;

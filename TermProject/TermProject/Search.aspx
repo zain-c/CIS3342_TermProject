@@ -3,7 +3,7 @@
 <%@ Register Src="~/ProfileDisplay.ascx" TagName="ProfileDisplay" TagPrefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" type="text/css" href="SearchStyle.css" />
+    <link rel="stylesheet" type="text/css" href="Stylesheets/SearchStyle.css" />
     <link href='https://fonts.googleapis.com/css?family=Encode Sans Semi Expanded' rel='stylesheet' />
 </asp:Content>
 

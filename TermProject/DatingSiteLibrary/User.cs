@@ -84,6 +84,46 @@ namespace DatingSiteLibrary
             objDb.DoUpdateUsingCmdObj(objCmd);
         }
 
+        public int getUserID(string username)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_GetUserID";
+
+            objCmd.Parameters.AddWithValue("@username", username);
+
+            SqlParameter outputUserID = new SqlParameter("@userID", 0);
+            outputUserID.Direction = ParameterDirection.Output;
+            outputUserID.SqlDbType = SqlDbType.Int;
+            objCmd.Parameters.Add(outputUserID);
+
+            objDB.GetDataSetUsingCmdObj(objCmd);
+            int userID = int.Parse(objCmd.Parameters["@userID"].Value.ToString());
+
+            return userID;
+        }
+
+        public int getUserIDByEmail(string email)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_GetUserIDByEmail";
+
+            objCmd.Parameters.AddWithValue("@email", email);
+
+            SqlParameter outputUserID = new SqlParameter("@userID", 0);
+            outputUserID.Direction = ParameterDirection.Output;
+            outputUserID.SqlDbType = SqlDbType.Int;
+            objCmd.Parameters.Add(outputUserID);
+
+            objDB.GetDataSetUsingCmdObj(objCmd);
+            int userID = int.Parse(objCmd.Parameters["@userID"].Value.ToString());
+
+            return userID;
+        }
+
         public string Username
         {
             get { return username; }
