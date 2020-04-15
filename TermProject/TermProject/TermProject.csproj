@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Login.aspx" />
+    <Content Include="LoginStyle.css" />
     <Content Include="ProfileCreation.aspx" />
     <Content Include="ProfileDisplay.ascx" />
     <Content Include="Registration.aspx" />
