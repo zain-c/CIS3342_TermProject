@@ -27,6 +27,11 @@ namespace DatingSiteLibrary
         string securityQuestion2;
         string securityQuestion3;
 
+        public User()
+        {
+
+        }
+
         public void addUserToDB(string _username, string _password, string _email, string _firstName, string _lastName)
         {
             DBConnect objDb = new DBConnect();
@@ -90,70 +95,70 @@ namespace DatingSiteLibrary
             get { return email; }
             set { email = value; }
         }
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
-        //public string Username
-        //{
-        //    get { return username; }
-        //    set { username = value; }
-        //}
+        public string FirstName
+        {
+            get { return firstName; }
+            set { firstName = value; }
+        }
+        public string LastName
+        {
+            get { return lastName; }
+            set { lastName = value; }
+        }
+        public string HomeAddress
+        {
+            get { return homeAddress; }
+            set { homeAddress = value; }
+        }
+        public string HomeCity
+        {
+            get { return homeCity; }
+            set { homeCity = value; }
+        }
+        public string HomeState
+        {
+            get { return homeState; }
+            set { homeState = value; }
+        }
+        public int HomeZip
+        {
+            get { return homeZip; }
+            set { homeZip = value; }
+        }
+        public string BillingAddress
+        {
+            get { return billingAddress; }
+            set { billingAddress = value; }
+        }
+        public string BillingCity
+        {
+            get { return billingCity; }
+            set { billingCity = value; }
+        }
+        public string BillingState
+        {
+            get { return billingState; }
+            set { billingState = value; }
+        }
+        public int BillingZip
+        {
+            get { return billingZip; }
+            set { billingZip = value; }
+        }
+        public string SecurityQ1
+        {
+            get { return securityQuestion1; }
+            set { securityQuestion1 = value; }
+        }
+        public string SecurityQ2
+        {
+            get { return securityQuestion2; }
+            set { securityQuestion2 = value; }
+        }
+        public string SecurityQ3
+        {
+            get { return securityQuestion3; }
+            set { securityQuestion3 = value; }
+        }
     }
 }

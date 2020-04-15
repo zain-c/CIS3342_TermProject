@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="Search" Language="C#" MasterPageFile="~/Access.Master" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="TermProject.Search" %>
 
+<%@ Register Src="~/ProfileDisplay.ascx" TagName="ProfileDisplay" TagPrefix="uc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="SearchStyle.css" />
     <link href='https://fonts.googleapis.com/css?family=Encode Sans Semi Expanded' rel='stylesheet' />
@@ -108,7 +110,7 @@
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:PlaceHolder ID="phProfileDisplay" runat="server"></asp:PlaceHolder>
+                                <uc1:ProfileDisplay ID="profileDisplay" runat="server"></uc1:ProfileDisplay>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
