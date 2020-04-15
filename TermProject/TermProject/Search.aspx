@@ -110,7 +110,7 @@
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <uc1:ProfileDisplay ID="profileDisplay" runat="server"></uc1:ProfileDisplay>
+                                <uc1:ProfileDisplay ID="profileDisplay" runat="server" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

@@ -4,18 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Utilities;
-using DatingSiteLibrary;
 
 namespace TermProject
 {
-    public partial class Search : System.Web.UI.Page
+    public partial class LoginRecovery : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-        }
 
-       
+        }
     }
 }

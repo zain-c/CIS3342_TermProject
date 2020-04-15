@@ -8,18 +8,18 @@
     <div class="mainLogin">
         <h3>Login</h3>
         <div class="login1">
+            <asp:Label ID="lblErrorMsg" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label> <br />
             Username <br />
-            <asp:TextBox ID="txtLoginUsername" runat="server" placeholder="Username" Width="100%"></asp:TextBox>
-            <br />
+            <asp:TextBox ID="txtLoginUsername" runat="server" placeholder="Username" Width="100%"></asp:TextBox> <br /><br />
+
             Password <br />
-            <asp:TextBox ID="txtLoginPwd" runat="server" placeholder="Password" TextMode="Password" Width="100%"></asp:TextBox>
-            <br /><br />
-            <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="loginButton" OnClick="btnLogin_Click" />
-            <br />
-            <asp:CheckBox ID="chkRememberInfo" runat="server" />Remember Me
-            <br />
-            <asp:HyperLink ID="linkRetrieveUsernamePassword" NavigateUrl="/login.aspx" Text="Forgot Username/Password" runat="server" Width="100%">Forgot Username/Password</asp:HyperLink>
-            <br />
+            <asp:TextBox ID="txtLoginPwd" runat="server" placeholder="Password" Width="100%"></asp:TextBox> <br /><br />
+
+            <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="loginButton" OnClick="btnLogin_Click" /> <br /><br />
+
+            <asp:CheckBox ID="chkRememberInfo" runat="server" Text="Remember Me" /> <br />
+
+            <asp:HyperLink ID="linkRetrieveUsernamePassword" NavigateUrl="~/LoginRecovery.aspx" Text="Forgot Username/Password" runat="server" Width="100%">Forgot Username/Password</asp:HyperLink> <br />
             <asp:HyperLink ID="linkRegister" NavigateUrl="/Registration.aspx" Text="Create an Account" runat="server" Width="100%">Create an Account</asp:HyperLink>
         </div>
     </div>
