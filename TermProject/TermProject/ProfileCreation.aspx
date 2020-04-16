@@ -14,6 +14,13 @@
         </div>
         <div class="row">
             <div class="col text-center">
+                <asp:Label ID="lblErrorMsg" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
+                <br />
+                <br />
+                Add Profile Picture:&nbsp;&nbsp;&nbsp; 
+                <asp:FileUpload ID="fileProfilePic" runat="server" accept=".png, .jpeg, .jpg" />
+                <br />
+                <br />
                 Phone: <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone Number" TextMode="Phone"></asp:TextBox>  
                 Occupation: <asp:TextBox ID="txtOccupation" runat="server" placeholder="Occupation" MaxLength="50"></asp:TextBox>
                 <br />
@@ -28,15 +35,20 @@
                 <br />
                 <br />
                 Commitment: <asp:DropDownList ID="drpCommitment" runat="server">
+                    <asp:ListItem Value="Select" Selected="True">Select Commitment</asp:ListItem>
                     <asp:ListItem>Casual</asp:ListItem>
                     <asp:ListItem>Relationship</asp:ListItem>
                     <asp:ListItem>Marriage</asp:ListItem>
                 </asp:DropDownList>
+                &nbsp;
                 Have Kids: <asp:DropDownList ID="drpHaveKids" runat="server">
+                    <asp:ListItem Value="Select" Selected="True">Select</asp:ListItem>
                     <asp:ListItem>No</asp:ListItem>
                     <asp:ListItem>Yes</asp:ListItem>
                 </asp:DropDownList>
+                &nbsp;
                 Want Kids: <asp:DropDownList ID="drpWantKids" runat="server">
+                    <asp:ListItem Value="Select" Selected="True">Select</asp:ListItem>
                     <asp:ListItem>No</asp:ListItem>
                     <asp:ListItem>Yes</asp:ListItem>
                 </asp:DropDownList>

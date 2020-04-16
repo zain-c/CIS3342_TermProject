@@ -13,6 +13,24 @@ namespace TermProject {
     public partial class Profile {
         
         /// <summary>
+        /// lblErrorMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorMsg;
+        
+        /// <summary>
+        /// fileProfilePic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileProfilePic;
+        
+        /// <summary>
         /// txtPhone control.
         /// </summary>
         /// <remarks>

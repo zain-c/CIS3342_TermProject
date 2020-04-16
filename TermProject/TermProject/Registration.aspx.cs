@@ -43,7 +43,7 @@ namespace TermProject
                                            txtBillingCity.Text, ddBillingState.SelectedValue, int.Parse(txtBillingZip.Text));
                     newUser.addSecurityQuestionsToDB(txtSecurityQuestion1.Text, txtSecurityQuestion2.Text, txtSecurityQuestion3.Text, userID);
 
-
+                    Session.Add("Username", txtUsername.Text);
                 }
                 catch
                 {
