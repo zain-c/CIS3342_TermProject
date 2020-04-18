@@ -54,6 +54,11 @@ namespace DatingSiteLibrary
             return result;
         }
 
+        public void retreiveUserProfileFromDB(int userID)
+        {
+
+        }
+
         public string PhoneNumber
         {
             get { return phoneNumber; }

@@ -21,5 +21,11 @@ namespace TP_WebAPI.Controllers
             int value = 10;
             return "value: " + value;
         }
+
+        [HttpGet("/LoadUserProfile")]
+        public void loadProfile(string username)
+        {
+
+        }
     }
 }

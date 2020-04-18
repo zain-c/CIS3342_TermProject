@@ -11,10 +11,10 @@ namespace TermProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty((string)Session["Username"]))
-            {
-                Response.Redirect("Search.aspx");
-            }
+            //if (string.IsNullOrEmpty((string)Session["Username"]))
+            //{
+            //    Response.Redirect("Search.aspx");
+            //}
         }
 
 

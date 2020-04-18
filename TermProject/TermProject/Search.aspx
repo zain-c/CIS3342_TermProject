@@ -106,7 +106,7 @@
 
                 <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="searchButton" /> <br /><br />
 
-                <asp:GridView ID="gvSearchResults" runat="server" HorizontalAlign="Center" AutoGenerateColumns="false" GridLines="Both">
+                <asp:GridView ID="gvSearchResults" runat="server" HorizontalAlign="Center" AutoGenerateColumns="false" GridLines="Both" AllowPaging="True" PageSize="6">
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
