@@ -29,7 +29,7 @@ namespace DatingSiteLibrary
 
         }
 
-        public void addUserProfileToDB(string _phoneNumber, byte[] _imageData, string _occupation, int _age, string _height, int _weight, string _title,
+        public int addUserProfileToDB(string _phoneNumber, byte[] _imageData, string _occupation, int _age, string _height, int _weight, string _title,
                                        string _commitment, string _kids, string _interests, string _description, int _userID)
         {
             DBConnect objDB = new DBConnect();
@@ -50,7 +50,8 @@ namespace DatingSiteLibrary
             objCmd.Parameters.AddWithValue("@title", _title);
             objCmd.Parameters.AddWithValue("@userID", _userID);
 
-            objDB.DoUpdateUsingCmdObj(objCmd);
+            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+            return result;
         }
 
         public string PhoneNumber

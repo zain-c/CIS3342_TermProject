@@ -44,6 +44,7 @@ namespace TermProject
                     newUser.addSecurityQuestionsToDB(txtSecurityQuestion1.Text, txtSecurityQuestion2.Text, txtSecurityQuestion3.Text, userID);
 
                     Session.Add("Username", txtUsername.Text);
+                    Server.Transfer("ProfileCreation.aspx");
                 }
                 catch
                 {

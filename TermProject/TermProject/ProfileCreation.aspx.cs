@@ -25,12 +25,12 @@ namespace TermProject
 
         protected void btnSaveProfile_Click(object sender, EventArgs e)
         {
-            if (validateRequiredFields())
+            if (validateFields())
             {
                 DBConnect objDB = new DBConnect();
                 SqlCommand objCmd = new SqlCommand();
                 int result = 0, imageSize;
-                string fileExt, imageType, imageName, imageTitle;
+                string fileExt, imageName;
 
                 try
                 {
@@ -41,19 +41,27 @@ namespace TermProject
 
                         fileProfilePic.PostedFile.InputStream.Read(imageData, 0, imageSize);
                         imageName = fileProfilePic.PostedFile.FileName;
-                        imageType = fileProfilePic.PostedFile.ContentType;
 
                         fileExt = imageName.Substring(imageName.LastIndexOf("."));
                         fileExt = fileExt.ToLower();
 
                         if(fileExt == ".jpg" || fileExt == ".jpeg" || fileExt == ".png")
                         {
+                            User tempUser = new User();
                             string kids = drpHaveKids.SelectedValue + "|" + drpWantKids.SelectedValue;
                             string commitment = drpCommitment.SelectedValue;
-                            
+                            int userID = tempUser.getUserID(Session["Username"].ToString());
+                            string height = txtHeightFeet.Text + "'" + txtHeightIn + "\"";
 
                             UserProfile profile = new UserProfile();
+                            result = profile.addUserProfileToDB(txtPhone.Text, imageData, txtOccupation.Text, int.Parse(txtAge.ToString()), height, int.Parse(txtWeight.Text),
+                                                       txtTitle.Text, commitment, kids, txtInterests.Text, txtDescription.Text, userID);
 
+                            if(result == 1)
+                            {
+                                //User profile created successfully
+                                Response.Redirect(""); //redirect to main search page or profile page?
+                            }
                         }
                         else
                         {
@@ -70,7 +78,7 @@ namespace TermProject
             }
         }
 
-        private bool validateRequiredFields()
+        private bool validateFields()
         {
             bool valid = true;
             Int64 i;
@@ -86,22 +94,23 @@ namespace TermProject
                 lblErrorMsg.Text += "*Please enter your occupation. <br />";
                 lblErrorMsg.Visible = true;
             }
-            if (string.IsNullOrWhiteSpace(txtAge.Text))
+            int age;
+            if (string.IsNullOrWhiteSpace(txtAge.Text) || !int.TryParse(txtAge.Text, out age))
             {
                 valid = false;
                 lblErrorMsg.Text += "*Please enter your age. <br />";
                 lblErrorMsg.Visible = true;
             }
             int heightFt, heightIn;
-            if(string.IsNullOrWhiteSpace(txtHeightFeet.Text) || string.IsNullOrWhiteSpace(txtHeightIn.Text) || int.TryParse(txtHeightFeet.Text, out heightFt) || 
-               int.TryParse(txtHeightIn.Text, out heightIn))
+            if(string.IsNullOrWhiteSpace(txtHeightFeet.Text) || string.IsNullOrWhiteSpace(txtHeightIn.Text) || !int.TryParse(txtHeightFeet.Text, out heightFt) || 
+               !int.TryParse(txtHeightIn.Text, out heightIn))
             {
                 valid = false;
                 lblErrorMsg.Text += "*Please enter a valid height. <br />";
                 lblErrorMsg.Visible = true;
             }
             int weight;
-            if(string.IsNullOrWhiteSpace(txtWeight.Text) || int.TryParse(txtWeight.Text, out weight))
+            if(string.IsNullOrWhiteSpace(txtWeight.Text) || !int.TryParse(txtWeight.Text, out weight))
             {
                 valid = false;
                 lblErrorMsg.Text += "*Please enter a valid weight. <br />";
