@@ -67,6 +67,7 @@
   <ItemGroup>
     <Content Include="Login.aspx" />
     <Content Include="LoginRecovery.aspx" />
+    <Content Include="Profile.aspx" />
     <Content Include="Stylesheets\LoginRecoveryStyle.css" />
     <Content Include="Stylesheets\LoginStyle.css" />
     <Content Include="ProfileCreation.aspx" />
@@ -105,6 +106,13 @@
     </Compile>
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProfileCreation.aspx.cs">
       <DependentUpon>ProfileCreation.aspx</DependentUpon>

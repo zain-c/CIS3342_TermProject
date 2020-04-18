@@ -25,12 +25,21 @@ namespace TermProject
 
         protected void btnSaveProfile_Click(object sender, EventArgs e)
         {
+            lblErrorMsg.Text = string.Empty;
+            lblErrorMsg.Visible = false;
+
             if (validateFields())
             {
                 DBConnect objDB = new DBConnect();
                 SqlCommand objCmd = new SqlCommand();
+                User tempUser = new User();
+                UserProfile profile = new UserProfile();
                 int result = 0, imageSize;
                 string fileExt, imageName;
+                string kids = drpHaveKids.SelectedValue + "|" + drpWantKids.SelectedValue;
+                string commitment = drpCommitment.SelectedValue;
+                int userID = tempUser.getUserID(Session["Username"].ToString());
+                string height = txtHeightFeet.Text + "'" + txtHeightIn.Text + '"';
 
                 try
                 {
@@ -46,27 +55,32 @@ namespace TermProject
                         fileExt = fileExt.ToLower();
 
                         if(fileExt == ".jpg" || fileExt == ".jpeg" || fileExt == ".png")
-                        {
-                            User tempUser = new User();
-                            string kids = drpHaveKids.SelectedValue + "|" + drpWantKids.SelectedValue;
-                            string commitment = drpCommitment.SelectedValue;
-                            int userID = tempUser.getUserID(Session["Username"].ToString());
-                            string height = txtHeightFeet.Text + "'" + txtHeightIn + "\"";
-
-                            UserProfile profile = new UserProfile();
-                            result = profile.addUserProfileToDB(txtPhone.Text, imageData, txtOccupation.Text, int.Parse(txtAge.ToString()), height, int.Parse(txtWeight.Text),
+                        {                          
+                            result = profile.addUserProfileToDB(txtPhone.Text, imageData, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
                                                        txtTitle.Text, commitment, kids, txtInterests.Text, txtDescription.Text, userID);
 
                             if(result == 1)
                             {
                                 //User profile created successfully
-                                Response.Redirect(""); //redirect to main search page or profile page?
+                                Response.Redirect("Profile.aspx"); //redirect to member only search page or profile page?
                             }
                         }
                         else
                         {
                             lblErrorMsg.Text += "*Only jpg, jpeg, and png file types supported. <br />";
                             lblErrorMsg.Visible = true;
+                        }
+                    }
+                    else //if no profile pic
+                    {
+                        //inserts 'null' for the imageData field
+                        result = profile.addUserProfileToDB(txtPhone.Text, null, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
+                                                   txtTitle.Text, commitment, kids, txtInterests.Text, txtDescription.Text, userID);
+
+                        if (result == 1)
+                        {
+                            //User profile created successfully
+                            Response.Redirect("Profile.aspx"); //redirect to member only search page or profile page?
                         }
                     }
                 }

@@ -8,11 +8,9 @@
                 <br />
                 <br />
                 <h2>Create Your Profile</h2>
-                <br />
-                <br />
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom: 10%">
             <div class="col text-center">
                 <asp:Label ID="lblErrorMsg" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
                 <br />
@@ -64,7 +62,7 @@
                 <asp:TextBox ID="txtDescription" runat="server" placeholder="Description" class="col-5" TextMode="MultiLine" MaxLength="250"></asp:TextBox>
                 <br />
                 <br />
-                <asp:Button ID="btnSaveProfile" class="btn btn-outline-primary" runat="server" Text="Save Profile" />
+                <asp:Button ID="btnSaveProfile" class="btn btn-outline-primary" runat="server" Text="Save Profile" OnClick="btnSaveProfile_Click" />
             </div>
         </div>
     </div>

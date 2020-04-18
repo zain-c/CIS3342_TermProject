@@ -33,7 +33,7 @@ namespace TermProject
 
             if (lblErrorMessage.Visible == false)
             {
-                Response.Write("LOGIN VALID");
+                //Response.Write("LOGIN VALID"); //for debugging
                 User newUser = new User();
                 try
                 {
