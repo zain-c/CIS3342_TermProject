@@ -10,69 +10,96 @@
 namespace TermProject {
     
     
-    public partial class Search {
+    public partial class LoginRecovery {
         
         /// <summary>
-        /// tblPublicSearchFilter control.
+        /// recoveryDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblPublicSearchFilter;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl recoveryDiv;
         
         /// <summary>
-        /// txtLocationFilter control.
+        /// lblErrorMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLocationFilter;
+        protected global::System.Web.UI.WebControls.Label lblErrorMsg;
         
         /// <summary>
-        /// ddStateFilter control.
+        /// txtRecoveryEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddStateFilter;
+        protected global::System.Web.UI.WebControls.TextBox txtRecoveryEmail;
         
         /// <summary>
-        /// ddGenderFilter control.
+        /// txtSQ1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddGenderFilter;
+        protected global::System.Web.UI.WebControls.TextBox txtSQ1;
         
         /// <summary>
-        /// tblPrivateSearchFilter control.
+        /// txtSQ2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblPrivateSearchFilter;
+        protected global::System.Web.UI.WebControls.TextBox txtSQ2;
         
         /// <summary>
-        /// btnSearch control.
+        /// txtSQ3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.TextBox txtSQ3;
         
         /// <summary>
-        /// gvSearchResults control.
+        /// btnRecover control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvSearchResults;
+        protected global::System.Web.UI.WebControls.Button btnRecover;
+        
+        /// <summary>
+        /// successDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl successDiv;
+        
+        /// <summary>
+        /// lblUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUsername;
+        
+        /// <summary>
+        /// lblPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPassword;
     }
 }
