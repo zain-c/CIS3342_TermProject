@@ -52,7 +52,9 @@
                 <asp:TextBox ID="txtDescription" runat="server" placeholder="Description" class="col-5" TextMode="MultiLine" MaxLength="250"></asp:TextBox>
                 <br />
                 <br />
-                <asp:Button ID="btnSaveProfile" class="btn btn-outline-primary" runat="server" Text="Save Profile" />
+                <asp:Label ID="lblErrorMessage" runat="server" Text="" ForeColor="Red" Visible="false" ></asp:Label><br />
+                <br />
+                <asp:Button ID="btnSaveProfile" class="btn btn-outline-primary" OnClick="btnSaveProfile_Click" runat="server" Text="Save Profile" />
             </div>
         </div>
     </div>
