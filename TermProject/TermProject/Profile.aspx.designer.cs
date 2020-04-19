@@ -10,25 +10,34 @@
 namespace TermProject {
     
     
-    public partial class Profile {
+    public partial class Profile1 {
         
         /// <summary>
-        /// lblErrorMsg control.
+        /// imgProfilePic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorMsg;
+        protected global::System.Web.UI.WebControls.Image imgProfilePic;
         
         /// <summary>
-        /// fileProfilePic control.
+        /// lblName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileProfilePic;
+        protected global::System.Web.UI.WebControls.Label lblName;
+        
+        /// <summary>
+        /// txtTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTitle;
         
         /// <summary>
         /// txtPhone control.
@@ -85,13 +94,13 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.TextBox txtWeight;
         
         /// <summary>
-        /// txtTitle control.
+        /// lblCommitment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTitle;
+        protected global::System.Web.UI.WebControls.Label lblCommitment;
         
         /// <summary>
         /// drpCommitment control.
@@ -103,6 +112,15 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.DropDownList drpCommitment;
         
         /// <summary>
+        /// lblHaveKids control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHaveKids;
+        
+        /// <summary>
         /// drpHaveKids control.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,15 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpHaveKids;
+        
+        /// <summary>
+        /// lblWantKids control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblWantKids;
         
         /// <summary>
         /// drpWantKids control.
@@ -137,14 +164,5 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
-        
-        /// <summary>
-        /// btnSaveProfile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveProfile;
     }
 }

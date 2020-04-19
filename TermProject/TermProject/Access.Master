@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Access.master.cs" Inherits="TermProject.Access" %>
 
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -21,10 +22,12 @@
     
     <form id="form1" runat="server">
         <nav class="navbar navbar-light sticky-top justify-content-between" style="background-color: #e3f2fd;">
-            <a class="navbar-brand text-primary" >A to Z Dating</a>
+            <a class="navbar-brand text-primary">A to Z Dating</a>            
             
-            <asp:Button ID="btnRegister" OnClick="btnRegister_Click" runat="server" class="btn btn-outline-primary my-2 my-sm-" Text="Create Account" />
-            <asp:Button ID="btnSearchOnLoginPage" OnClick="SearchOnLogin_Click" runat="server" class="btn btn-outline-primary my-2 my-sm-0" Text="Search Public Profiles" />
+            <asp:Button ID="btnSearchOnLoginPage" runat="server" class="btn btn-outline-primary my-2 my-sm-0" Text="Search Public Profiles" OnClick="btnSearchOnLoginPage_Click" />
+            <asp:Button ID="btnLogin" runat="server" Text="Login" class="btn btn-outline-primary my-2 my-sm-" OnClick="btnLogin_Click" />
+            <asp:Button ID="btnRegister" runat="server" class="btn btn-outline-primary my-2 my-sm-" Text="Create Account" OnClick="btnRegister_Click" />
+            
         </nav>
         
         

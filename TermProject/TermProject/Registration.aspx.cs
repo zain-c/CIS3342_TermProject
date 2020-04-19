@@ -33,17 +33,18 @@ namespace TermProject
 
             if (lblErrorMessage.Visible == false)
             {
-                Response.Write("LOGIN VALID");
+                //Response.Write("LOGIN VALID"); //for debugging
                 User newUser = new User();
                 try
                 {
                     newUser.addUserToDB(txtUsername.Text, txtPassword.Text, txtEmail.Text, txtFirstName.Text, txtLastName.Text);
-                    int userID = getUserID(txtUsername.Text);
+                    int userID = newUser.getUserID(txtUsername.Text);
                     newUser.addAddressToDB(userID, txtAddress.Text, txtCity.Text, ddState.SelectedValue, int.Parse(txtZip.Text), txtBillingAddress.Text,
                                            txtBillingCity.Text, ddBillingState.SelectedValue, int.Parse(txtBillingZip.Text));
                     newUser.addSecurityQuestionsToDB(txtSecurityQuestion1.Text, txtSecurityQuestion2.Text, txtSecurityQuestion3.Text, userID);
 
-
+                    Session.Add("Username", txtUsername.Text);
+                    Server.Transfer("ProfileCreation.aspx");
                 }
                 catch
                 {
@@ -62,7 +63,7 @@ namespace TermProject
 
         }
 
-        public int getUserID(string username)
+        private int getUserID(string username)
         {
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();
@@ -147,6 +148,22 @@ namespace TermProject
                     {
                         lblErrorMessage.Visible = true;
                         lblErrorMessage.Text += "*Please enter a valid email. <br />";
+                    }
+                    else
+                    {
+                        DBConnect objDb = new DBConnect();
+                        SqlCommand objCmd = new SqlCommand();
+
+                        objCmd.CommandType = CommandType.StoredProcedure;
+                        objCmd.CommandText = "TP_ValidateEmail";
+
+                        objCmd.Parameters.AddWithValue("@email", txtEmail.Text);
+                        DataTable emailTbl = objDb.GetDataSetUsingCmdObj(objCmd).Tables[0];
+                        if (emailTbl.Rows.Count != 0)
+                        {
+                            lblErrorMessage.Visible = true;
+                            lblErrorMessage.Text += "*An account with this email already exists. <br />";
+                        }
                     }
                 }
             }
