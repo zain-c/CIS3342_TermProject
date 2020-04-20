@@ -36,7 +36,7 @@ namespace DatingSiteLibrary
         }
 
         public int addUserProfileToDB(string _phoneNumber, byte[] _imageData, string _occupation, int _age, string _height, int _weight, string _title,
-                                       string _commitment, string _kids, string _interests, string _description, int _userID)
+                                       string _commitment, string _haveKids, string _wantKids, string _interests, string _description, int _userID)
         {
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();
@@ -52,7 +52,8 @@ namespace DatingSiteLibrary
             objCmd.Parameters.AddWithValue("@interests", _interests);
             objCmd.Parameters.AddWithValue("@description", _description);
             objCmd.Parameters.AddWithValue("@commitment", _commitment);
-            objCmd.Parameters.AddWithValue("@kids", _kids);
+            objCmd.Parameters.AddWithValue("@wantKids", _wantKids);
+            objCmd.Parameters.AddWithValue("@haveKids", _haveKids);
             objCmd.Parameters.AddWithValue("@title", _title);
             objCmd.Parameters.AddWithValue("@userID", _userID);
 
@@ -70,7 +71,7 @@ namespace DatingSiteLibrary
 
             DataSet profileDS = objDB.GetDataSetUsingCmdObj(objCmd);
             UserProfile profile = new UserProfile();
-            if(profileDS.Tables[0].Rows.Count == 1)
+            if (profileDS.Tables[0].Rows.Count == 1)
             {
                 DataTable profileDT = profileDS.Tables[0];
                 profile.FirstName = profileDT.Rows[0]["FirstName"].ToString();
@@ -88,12 +89,14 @@ namespace DatingSiteLibrary
                 profile.Interests = profileDT.Rows[0]["Interests"].ToString();
                 profile.Description = profileDT.Rows[0]["Description"].ToString();
                 profile.Commitment = profileDT.Rows[0]["Commitment"].ToString();
-                profile.HaveKids = profileDT.Rows[0]["Kids"].ToString().Split('|')[0];
-                profile.WantKids = profileDT.Rows[0]["Kids"].ToString().Split('|')[1];
-                profile.Title = profileDT.Rows[0]["Title"].ToString();                               
+                profile.HaveKids = profileDT.Rows[0]["wantKids"].ToString();
+                profile.WantKids = profileDT.Rows[0]["haveKids"].ToString();
+                profile.Title = profileDT.Rows[0]["Title"].ToString();
+
             }
             return profile;
         }
+
 
         public string FirstName
         {
@@ -106,6 +109,7 @@ namespace DatingSiteLibrary
             get { return lastName; }
             set { lastName = value; }
         }
+
 
         public string Address
         {
@@ -157,7 +161,7 @@ namespace DatingSiteLibrary
 
         public string Height
         {
-            get { return height;}
+            get { return height; }
             set { height = value; }
         }
 
@@ -175,7 +179,7 @@ namespace DatingSiteLibrary
 
         public string Commitment
         {
-            get { return commitment;}
+            get { return commitment; }
             set { commitment = value; }
         }
 
