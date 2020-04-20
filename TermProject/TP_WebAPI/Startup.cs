@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Serialization;
 
 namespace TP_WebAPI
 {
@@ -25,7 +26,21 @@ namespace TP_WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //New Configuration Used to handle Session state in the Web APIs (controller classes)
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                //set the sessions timeout period and optional settings
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                //options.Cookie.Name = ".CIS3342.SessionCookie";
+                //options.Cookie.HttpOnly = true;
+            }); //end of AddSession() method
+
+            services.AddMvc()//.SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(Options =>
+                    Options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+                .AddXmlSerializerFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
