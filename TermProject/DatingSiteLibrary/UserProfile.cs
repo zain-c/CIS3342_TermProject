@@ -11,6 +11,12 @@ namespace DatingSiteLibrary
 {
     public class UserProfile
     {
+        string firstName;
+        string lastName;
+        string address;
+        string city;
+        string state;
+        int zip;
         string phoneNumber;
         byte[] imageData;
         string occupation;
@@ -55,9 +61,78 @@ namespace DatingSiteLibrary
             return result;
         }
 
-        public void retreiveUserProfileFromDB(int userID)
+        public UserProfile retreiveUserProfileFromDB(int userID)
         {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_LoadProfile";
+            objCmd.Parameters.AddWithValue("@userID", userID);
 
+            DataSet profileDS = objDB.GetDataSetUsingCmdObj(objCmd);
+            UserProfile profile = new UserProfile();
+            if (profileDS.Tables[0].Rows.Count == 1)
+            {
+                DataTable profileDT = profileDS.Tables[0];
+                profile.FirstName = profileDT.Rows[0]["FirstName"].ToString();
+                profile.LastName = profileDT.Rows[0]["LastName"].ToString();
+                profile.Address = profileDT.Rows[0]["HomeAddress"].ToString();
+                profile.City = profileDT.Rows[0]["HomeCity"].ToString();
+                profile.State = profileDT.Rows[0]["HomeState"].ToString();
+                profile.Zip = int.Parse(profileDT.Rows[0]["HomeZip"].ToString());
+                profile.PhoneNumber = profileDT.Rows[0]["Phone"].ToString();
+                profile.Occupation = profileDT.Rows[0]["Occupation"].ToString();
+                profile.Age = int.Parse(profileDT.Rows[0]["Age"].ToString());
+                profile.Height = profileDT.Rows[0]["Height"].ToString();
+                profile.Weight = int.Parse(profileDT.Rows[0]["Weight"].ToString());
+                profile.ImageData = (byte[])profileDT.Rows[0]["Photo"];
+                profile.Interests = profileDT.Rows[0]["Interests"].ToString();
+                profile.Description = profileDT.Rows[0]["Description"].ToString();
+                profile.Commitment = profileDT.Rows[0]["Commitment"].ToString();
+                profile.HaveKids = profileDT.Rows[0]["wantKids"].ToString();
+                profile.WantKids = profileDT.Rows[0]["haveKids"].ToString();
+                profile.Title = profileDT.Rows[0]["Title"].ToString();
+            }
+            return profile;
+        }
+
+
+
+
+        public string FirstName
+        {
+            get { return firstName; }
+            set { firstName = value; }
+        }
+
+        public string LastName
+        {
+            get { return lastName; }
+            set { lastName = value; }
+        }
+
+        public string Address
+        {
+            get { return address; }
+            set { address = value; }
+        }
+
+        public string City
+        {
+            get { return city; }
+            set { city = value; }
+        }
+
+        public string State
+        {
+            get { return state; }
+            set { state = value; }
+        }
+
+        public int Zip
+        {
+            get { return zip; }
+            set { zip = value; }
         }
 
         public string PhoneNumber
@@ -86,7 +161,7 @@ namespace DatingSiteLibrary
 
         public string Height
         {
-            get { return height;}
+            get { return height; }
             set { height = value; }
         }
 
@@ -104,7 +179,7 @@ namespace DatingSiteLibrary
 
         public string Commitment
         {
-            get { return commitment;}
+            get { return commitment; }
             set { commitment = value; }
         }
 
