@@ -36,7 +36,8 @@ namespace TermProject
                 UserProfile profile = new UserProfile();
                 int result = 0, imageSize;
                 string fileExt, imageName;
-                string kids = drpHaveKids.SelectedValue + "|" + drpWantKids.SelectedValue;
+                string haveKids = drpHaveKids.SelectedValue; 
+                string wantKids = drpWantKids.SelectedValue;
                 string commitment = drpCommitment.SelectedValue;
                 int userID = tempUser.getUserID(Session["Username"].ToString());
                 string height = txtHeightFeet.Text + "|" + txtHeightIn.Text;
@@ -57,7 +58,7 @@ namespace TermProject
                         if(fileExt == ".jpg" || fileExt == ".jpeg" || fileExt == ".png")
                         {                          
                             result = profile.addUserProfileToDB(txtPhone.Text, imageData, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
-                                                       txtTitle.Text, commitment, kids, txtInterests.Text, txtDescription.Text, userID);
+                                                       txtTitle.Text, commitment, wantKids, haveKids, txtInterests.Text, txtDescription.Text, userID);
 
                             if(result == 1)
                             {
@@ -75,7 +76,7 @@ namespace TermProject
                     {
                         //inserts 'null' for the imageData field
                         result = profile.addUserProfileToDB(txtPhone.Text, null, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
-                                                   txtTitle.Text, commitment, kids, txtInterests.Text, txtDescription.Text, userID);
+                                                   txtTitle.Text, commitment, haveKids, wantKids, txtInterests.Text, txtDescription.Text, userID);
 
                         if (result == 1)
                         {
