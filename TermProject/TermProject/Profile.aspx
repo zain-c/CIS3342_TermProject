@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col text-center">
                 <br />
-                <asp:GridView ID="GridView1" runat="server"></asp:GridView><br />
+                <%--<asp:GridView ID="GridView1" runat="server"></asp:GridView><br />--%>
                 <asp:Button ID="btnEditProfile" runat="server" class="btn btn-outline-primary" Text="Edit Profile" />
                 &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="btnMemberView" runat="server" class="btn btn-outline-primary" Text="View profile as other members would see it" />
@@ -27,11 +27,9 @@
                 <br />
                 Age:
                 <asp:TextBox ID="txtAge" runat="server" class="col-1 text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
-                &nbsp;
                 Height:
                 <asp:TextBox ID="txtHeightFeet" runat="server" class="col-1 text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>ft
                 <asp:TextBox ID="txtHeightIn" runat="server" class="col-1 text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>in.
-                &nbsp;
                 Weight:
                 <asp:TextBox ID="txtWeight" runat="server" class="col-1 text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>                               
                 <br />
@@ -40,7 +38,7 @@
                 <asp:TextBox ID="txtOccupation" runat="server" MaxLength="50" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
                 <br />
                 <br />                
-                Commitment:&nbsp;
+                Commitment:
                 <asp:Label ID="lblCommitment" runat="server" Text=""></asp:Label>
                 <asp:DropDownList ID="drpCommitment" runat="server" Visible="False">
                     <asp:ListItem Value="Select" Selected="True">Select Commitment</asp:ListItem>
@@ -48,16 +46,14 @@
                     <asp:ListItem>Relationship</asp:ListItem>
                     <asp:ListItem>Marriage</asp:ListItem>
                 </asp:DropDownList>
-                &nbsp;
-                Have Kids:&nbsp;
+                Have Kids:
                 <asp:Label ID="lblHaveKids" runat="server" Text=""></asp:Label>
                 <asp:DropDownList ID="drpHaveKids" runat="server" Visible="False">
                     <asp:ListItem Value="Select" Selected="True">Select</asp:ListItem>
                     <asp:ListItem>No</asp:ListItem>
                     <asp:ListItem>Yes</asp:ListItem>
                 </asp:DropDownList>
-                &nbsp;
-                Want Kids:&nbsp;
+                Want Kids:
                 <asp:Label ID="lblWantKids" runat="server" Text=""></asp:Label>
                 <asp:DropDownList ID="drpWantKids" runat="server" Visible="False">
                     <asp:ListItem Value="Select" Selected="True">Select</asp:ListItem>
@@ -81,17 +77,15 @@
             <div class="row">
                 <div class="col text-center">
                     <h4>Contact Information</h4>
-                    Phone:&nbsp;
+                    Phone:
                     <asp:TextBox ID="txtPhone" runat="server" MaxLength="10" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
-                    &nbsp;&nbsp;&nbsp;
-                    Email:&nbsp;
+                    Email:
                     <asp:TextBox ID="txtEmail" runat="server" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
                     <br />
                     <br />
                     Address: <br />
                     <asp:TextBox ID="txtAddress" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox><br />
                     <asp:TextBox ID="txtCity" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
-                    &nbsp;&nbsp;&nbsp;
                     <asp:Label ID="lblState" class="text-center" runat="server" Text=""></asp:Label>
                     <asp:DropDownList ID="ddState" runat="server" Visible="false">
                         <asp:ListItem Value="Select">Select State</asp:ListItem>

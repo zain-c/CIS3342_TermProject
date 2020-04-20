@@ -55,14 +55,17 @@ namespace TermProject
                         fileExt = imageName.Substring(imageName.LastIndexOf("."));
                         fileExt = fileExt.ToLower();
 
+                        //string imageDataAsString = System.Text.Encoding.Default.GetString(imageData);
+
                         if(fileExt == ".jpg" || fileExt == ".jpeg" || fileExt == ".png")
                         {                          
                             result = profile.addUserProfileToDB(txtPhone.Text, imageData, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
-                                                       txtTitle.Text, commitment, wantKids, haveKids, txtInterests.Text, txtDescription.Text, userID);
+                                                       txtTitle.Text, commitment, haveKids, wantKids,txtInterests.Text, txtDescription.Text, userID);
 
                             if(result == 1)
                             {
                                 //User profile created successfully
+                                Session.Add("RequestedProfile", Session["Username"].ToString());
                                 Response.Redirect("Profile.aspx"); //redirect to member only search page or profile page?
                             }
                         }

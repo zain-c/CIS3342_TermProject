@@ -11,6 +11,7 @@ using DatingSiteLibrary;
 using System.Web.Script.Serialization;  // needed for JSON serializers
 using System.IO;                        // needed for Stream and Stream Reader
 using System.Net;                       // needed for the Web Request
+using System.Drawing.Imaging;
 
 namespace TermProject
 {
@@ -31,10 +32,57 @@ namespace TermProject
         
         private void loadProfile(string username)
         {
-            string url = "http://cis-iis2.temple.edu/Spring2020/CIS3342_tug85523/WebAPITest/api/DatingService/Profiles/LoadUserProfile/" + username;
+            string url = "https://localhost:44369/api/DatingService/Profiles/LoadUserProfile/" + username;
 
             WebRequest request = WebRequest.Create(url);
-            we
+            WebResponse response = request.GetResponse();
+
+            Stream theDataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(theDataStream);
+            string data = reader.ReadToEnd();
+            reader.Close();
+            response.Close();
+            
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            UserProfile profileObj = js.Deserialize<UserProfile>(data);
+
+            imgProfilePic.ImageUrl = convertByteArrayToImage(username);
+            lblFirstName.Text = profileObj.FirstName;
+            lblLastName.Text = profileObj.LastName;
+            txtAge.Text = profileObj.Age.ToString();
+            txtHeightFeet.Text = profileObj.Height.Split('|')[0];
+            txtHeightIn.Text = profileObj.Height.Split('|')[1];
+            txtWeight.Text = profileObj.Weight.ToString();
+            txtOccupation.Text = profileObj.Occupation;
+            lblCommitment.Text = profileObj.Commitment;
+            lblHaveKids.Text = profileObj.HaveKids;
+            lblWantKids.Text = profileObj.WantKids;
+            txtInterests.Text = profileObj.Interests;
+            txtDescription.Text = profileObj.Description;
+            txtPhone.Text = profileObj.PhoneNumber;
+            txtEmail.Text = profileObj.Email;
+            txtAddress.Text = profileObj.Address;
+            txtCity.Text = profileObj.City;
+            lblState.Text = profileObj.State;
+            txtZip.Text = profileObj.Zip.ToString();
+        }
+
+        private string convertByteArrayToImage(string username)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_GetProfilePic";
+
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+
+            objCmd.Parameters.AddWithValue("@userID", userID);
+            DataSet profilePicDS = objDB.GetDataSetUsingCmdObj(objCmd);
+            byte[] imageData = (byte[])objDB.GetField("Photo", 0);
+
+            string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String(imageData);
+            return imageUrl;
         }
     }
 }
