@@ -8,6 +8,9 @@ using System.Data;
 using System.Data.SqlClient;
 using Utilities;
 using DatingSiteLibrary;
+using System.Web.Script.Serialization;  // needed for JSON serializers
+using System.IO;                        // needed for Stream and Stream Reader
+using System.Net;                       // needed for the Web Request
 
 namespace TermProject
 {
@@ -15,26 +18,23 @@ namespace TermProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (string.IsNullOrEmpty((string)Session["Username"]))
-            //{
-            //    Response.Redirect("Search.aspx");
-            //}
-            loadProfile("zain");
+            if (string.IsNullOrEmpty((string)Session["Username"]))
+            {
+                Response.Redirect("Search.aspx");
+            }
+            else
+            {
+                loadProfile(Session["RequestedProfile"].ToString());
+            }
+            
         }
         
         private void loadProfile(string username)
         {
-            DBConnect objDB = new DBConnect();
-            SqlCommand objCmd = new SqlCommand();
-            objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "TP_LoadProfile";
+            string url = "http://cis-iis2.temple.edu/Spring2020/CIS3342_tug85523/WebAPITest/api/DatingService/Profiles/LoadUserProfile/" + username;
 
-            User tempUser = new User();
-            int userID = tempUser.getUserID(username);
-
-            objCmd.Parameters.AddWithValue("@userID", userID);
-            GridView1.DataSource = objDB.GetDataSetUsingCmdObj(objCmd);
-            GridView1.DataBind();
+            WebRequest request = WebRequest.Create(url);
+            we
         }
     }
 }

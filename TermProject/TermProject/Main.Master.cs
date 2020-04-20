@@ -19,5 +19,10 @@ namespace TermProject
             Session.Abandon();
             Response.Redirect("Search.aspx");
         }
+
+        protected void btnProfile_Click(object sender, EventArgs e)
+        {
+            Session["RequestedProfile"] = Session["Username"].ToString();
+        }
     }
 }

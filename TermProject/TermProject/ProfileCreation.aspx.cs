@@ -80,6 +80,7 @@ namespace TermProject
                         if (result == 1)
                         {
                             //User profile created successfully
+                            Session.Add("RequestedProfile", Session["Username"].ToString());
                             Response.Redirect("Profile.aspx"); //redirect to member only search page or profile page?
                         }
                     }
