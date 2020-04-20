@@ -82,24 +82,44 @@
                                 <asp:ListItem Value="Select">Select Gender</asp:ListItem>
                                 <asp:ListItem Value="Male">Male</asp:ListItem>
                                 <asp:ListItem Value="Female">Female</asp:ListItem>
+                                <asp:ListItem Value="N/A">N/A</asp:ListItem>
                             </asp:DropDownList>
                         </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>
                 <asp:Table ID="tblPrivateSearchFilter" runat="server" HorizontalAlign="Center" Width="75%" CellPadding="10">
                     <asp:TableHeaderRow>
-                        <asp:TableHeaderCell>criteria 3</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>criteria 4</asp:TableHeaderCell>
+                        <asp:TableHeaderCell ToolTip="What level of commitment are you looking for?">Commitment</asp:TableHeaderCell>
+                        <asp:TableHeaderCell ToolTip="Would you like your matches to have kids?">Kids</asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     <asp:TableRow>
-                        <asp:TableCell>criteria 3</asp:TableCell>
-                        <asp:TableCell>criteria 4</asp:TableCell>
+                        <asp:TableCell>
+                            Commitment &nbsp
+                            <asp:DropDownList ID="ddCommitmentFilter" ToolTip="What level of commitment are you looking for?" runat="server">
+                                <asp:ListItem Value="Select">Select Commitment</asp:ListItem>
+                                <asp:ListItem Value="Casual">Casual</asp:ListItem>
+                                <asp:ListItem Value="Relationship">Relationship</asp:ListItem>
+                                <asp:ListItem Value="Marriage">Marriage</asp:ListItem>
+                            </asp:DropDownList>
+                        </asp:TableCell>
+                        <asp:TableCell>
+                            Have Kids &nbsp
+                            <asp:DropDownList ID="ddHaveKidsFilter" ToolTip="Would you like your matches to have kids?" runat="server">
+                                <asp:ListItem Value="Select">Select</asp:ListItem>
+                                <asp:ListItem Value="Yes">Yes</asp:ListItem>
+                                <asp:ListItem Value="No">No</asp:ListItem>
+                                <asp:ListItem Value="N/A">N/A</asp:ListItem>
+                            </asp:DropDownList>
+                        </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableHeaderRow>
-                        <asp:TableHeaderCell>criteria 5</asp:TableHeaderCell>
+                        <asp:TableHeaderCell>Interests</asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     <asp:TableRow>
-                        <asp:TableCell>criteria 5</asp:TableCell>
+                        <asp:TableCell>
+                            Interests &nbsp
+                            <asp:TextBox ID="txtInterestsFilter" ToolTip="Enter your desired interests, separated by commas." placeholder="Interests" runat="server"></asp:TextBox>
+                        </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>
                 <br />

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Serialization;
 
 namespace TP_WebAPI
 {
@@ -36,7 +37,10 @@ namespace TP_WebAPI
                 //options.Cookie.HttpOnly = true;
             }); //end of AddSession() method
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()//.SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(Options =>
+                    Options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+                .AddXmlSerializerFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
