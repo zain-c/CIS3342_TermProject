@@ -16,7 +16,6 @@ namespace TermProject
             //    Response.Redirect("Search.aspx");
             //}
         }
-
-
+        
     }
 }
