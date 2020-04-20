@@ -28,7 +28,8 @@ namespace TP_WebAPI.Controllers
             User tempUser = new User();
             int userID = tempUser.getUserID(username);
 
-            UserProfile profile = new UserProfile();
+            UserProfile profile = new UserProfile(); 
+
             return profile.retreiveUserProfileFromDB(userID);
         }
 

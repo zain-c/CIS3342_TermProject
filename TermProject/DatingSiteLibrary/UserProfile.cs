@@ -92,11 +92,10 @@ namespace DatingSiteLibrary
                 profile.HaveKids = profileDT.Rows[0]["wantKids"].ToString();
                 profile.WantKids = profileDT.Rows[0]["haveKids"].ToString();
                 profile.Title = profileDT.Rows[0]["Title"].ToString();
+
             }
             return profile;
         }
-
-
 
 
         public string FirstName
@@ -110,6 +109,7 @@ namespace DatingSiteLibrary
             get { return lastName; }
             set { lastName = value; }
         }
+
 
         public string Address
         {

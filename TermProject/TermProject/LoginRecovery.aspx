@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Access.Master" AutoEventWireup="true" CodeBehind="LoginRecovery.aspx.cs" Inherits="TermProject.LoginRecovery" %>
+﻿<%@ Page Title="Login Recovery" Language="C#" MasterPageFile="~/Access.Master" AutoEventWireup="true" CodeBehind="LoginRecovery.aspx.cs" Inherits="TermProject.LoginRecovery" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="Stylesheets/LoginRecoveryStyle.css" />
