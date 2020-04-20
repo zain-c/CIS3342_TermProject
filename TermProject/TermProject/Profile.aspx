@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="TermProject.Profile1" %>
+﻿<%@ Page Title="Profile" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="TermProject.Profile1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -8,6 +8,7 @@
         <div class="row">
             <div class="col text-center">
                 <br />
+                <asp:GridView ID="GridView1" runat="server"></asp:GridView><br />
                 <asp:Button ID="btnEditProfile" runat="server" class="btn btn-outline-primary" Text="Edit Profile" />
                 &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="btnMemberView" runat="server" class="btn btn-outline-primary" Text="View profile as other members would see it" />
@@ -15,8 +16,10 @@
                 <asp:Button ID="btnNormalView" runat="server" class="btn btn-outline-primary" Text="Return to normal view" Visible="false" />
                 <br />
                 <br />
-                <asp:Image ID="imgProfilePic" runat="server" Height="300px" Width="300px" /><br />
-                <asp:Label ID="lblName" runat="server" Text="Name" Font-Size="28px"></asp:Label>
+                <asp:Image ID="imgProfilePic" runat="server" Height="300px" Width="300px" />
+                <br />
+                <asp:Label ID="lblFirstName" runat="server" Text="First" Font-Size="28px"></asp:Label>
+                <asp:Label ID="lblLastName" runat="server" Text="Last" Font-Size="28px"></asp:Label>
                 <br />
                 <br />
                 <asp:TextBox ID="txtTitle" runat="server" class="col-5 text-center" MaxLength="50" BackColor="White" BorderStyle="None" ReadOnly="True" Text="This is my title"></asp:TextBox>

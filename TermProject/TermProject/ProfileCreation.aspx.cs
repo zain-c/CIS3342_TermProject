@@ -39,7 +39,7 @@ namespace TermProject
                 string kids = drpHaveKids.SelectedValue + "|" + drpWantKids.SelectedValue;
                 string commitment = drpCommitment.SelectedValue;
                 int userID = tempUser.getUserID(Session["Username"].ToString());
-                string height = txtHeightFeet.Text + "'" + txtHeightIn.Text + '"';
+                string height = txtHeightFeet.Text + "|" + txtHeightIn.Text;
 
                 try
                 {

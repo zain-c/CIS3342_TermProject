@@ -22,10 +22,14 @@ namespace TP_WebAPI.Controllers
             return "value: " + value;
         }
 
-        [HttpGet("/LoadUserProfile")]
-        public void loadProfile(string username)
+        [HttpGet("LoadUserProfile/{username}")]
+        public UserProfile loadProfile(string username)
         {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
 
+            UserProfile profile = new UserProfile();  
+            return profile.retreiveUserProfileFromDB(userID);
         }
     }
 }
