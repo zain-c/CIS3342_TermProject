@@ -34,6 +34,8 @@ namespace TermProject
                 SqlCommand objCmd = new SqlCommand();
                 User tempUser = new User();
                 UserProfile profile = new UserProfile();
+                UserPrivacySettings privacySettings = new UserPrivacySettings();
+                string defaultPrivacySetting = "Visible";
                 int result = 0, imageSize;
                 string fileExt, imageName;
                 string haveKids = drpHaveKids.SelectedValue; 
@@ -57,12 +59,14 @@ namespace TermProject
 
                         //string imageDataAsString = System.Text.Encoding.Default.GetString(imageData);
 
-                        if(fileExt == ".jpg" || fileExt == ".jpeg" || fileExt == ".png")
+                        if(fileExt == ".jpg")
                         {                          
                             result = profile.addUserProfileToDB(txtPhone.Text, imageData, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
                                                        txtTitle.Text, commitment, haveKids, wantKids,txtInterests.Text, txtDescription.Text, userID);
-
-                            if(result == 1)
+                            result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
+                                                            defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
+                                                            defaultPrivacySetting, defaultPrivacySetting, userID);
+                            if(result == 2)
                             {
                                 //User profile created successfully
                                 Session.Add("RequestedProfile", Session["Username"].ToString());
@@ -71,7 +75,7 @@ namespace TermProject
                         }
                         else
                         {
-                            lblErrorMsg.Text += "*Only jpg, jpeg, and png file types supported. <br />";
+                            lblErrorMsg.Text += "*Only jpg file types supported. <br />";
                             lblErrorMsg.Visible = true;
                         }
                     }
@@ -80,8 +84,10 @@ namespace TermProject
                         //inserts 'null' for the imageData field
                         result = profile.addUserProfileToDB(txtPhone.Text, null, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
                                                    txtTitle.Text, commitment, haveKids, wantKids, txtInterests.Text, txtDescription.Text, userID);
-
-                        if (result == 1)
+                        result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
+                                                            defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
+                                                            defaultPrivacySetting, defaultPrivacySetting, userID);
+                        if (result == 2)
                         {
                             //User profile created successfully
                             Session.Add("RequestedProfile", Session["Username"].ToString());
