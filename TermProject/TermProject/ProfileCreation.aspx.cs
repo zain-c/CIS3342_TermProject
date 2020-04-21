@@ -17,10 +17,10 @@ namespace TermProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty((string)Session["Username"]))
-            {
-                Response.Redirect("Search.aspx");
-            }
+            //if (string.IsNullOrEmpty((string)Session["Username"]))
+            //{
+            //    Response.Redirect("Search.aspx");
+            //}
         }
 
         protected void btnSaveProfile_Click(object sender, EventArgs e)
@@ -120,22 +120,22 @@ namespace TermProject
                 lblErrorMsg.Visible = true;
             }
             int age;
-            if (string.IsNullOrWhiteSpace(txtAge.Text) || !int.TryParse(txtAge.Text, out age))
+            if (string.IsNullOrWhiteSpace(txtAge.Text) || !int.TryParse(txtAge.Text, out age) || age <= 0)
             {
                 valid = false;
-                lblErrorMsg.Text += "*Please enter your age. <br />";
+                lblErrorMsg.Text += "*Please enter a valid age. <br />";
                 lblErrorMsg.Visible = true;
             }
             int heightFt, heightIn;
             if(string.IsNullOrWhiteSpace(txtHeightFeet.Text) || string.IsNullOrWhiteSpace(txtHeightIn.Text) || !int.TryParse(txtHeightFeet.Text, out heightFt) || 
-               !int.TryParse(txtHeightIn.Text, out heightIn))
+               !int.TryParse(txtHeightIn.Text, out heightIn) || heightIn > 11 || heightIn < 0)
             {
                 valid = false;
                 lblErrorMsg.Text += "*Please enter a valid height. <br />";
                 lblErrorMsg.Visible = true;
             }
             int weight;
-            if(string.IsNullOrWhiteSpace(txtWeight.Text) || !int.TryParse(txtWeight.Text, out weight))
+            if(string.IsNullOrWhiteSpace(txtWeight.Text) || !int.TryParse(txtWeight.Text, out weight) || weight <= 0)
             {
                 valid = false;
                 lblErrorMsg.Text += "*Please enter a valid weight. <br />";

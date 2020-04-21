@@ -201,13 +201,151 @@ namespace TermProject
 
         protected void btnSaveChanges_Click(object sender, EventArgs e)
         {
-             
+            lblErrorMsg.Text = string.Empty;
+            lblErrorMsg.Visible = false;
+                        
+            if (validateFields())
+            {
+                UserProfile profileObj = new UserProfile();
+                profileObj.FirstName = lblFirstName.Text;
+                profileObj.LastName = lblLastName.Text;
+                profileObj.Title = txtTitle.Text;
+                profileObj.Age = int.Parse(txtAge.Text);
+                profileObj.Height = txtHeightFeet.Text + "|" + txtHeightIn.Text;
+                profileObj.Weight = int.Parse(txtWeight.Text);
+                profileObj.Occupation = txtOccupation.Text;
+                profileObj.Commitment = drpCommitment.SelectedValue;
+                profileObj.HaveKids = drpHaveKids.SelectedValue;
+                profileObj.WantKids = drpWantKids.SelectedValue;
+                profileObj.Interests = txtInterests.Text;
+                profileObj.Description = txtDescription.Text;
+                profileObj.PhoneNumber = txtPhone.Text;
+                profileObj.Email = txtEmail.Text;
+                profileObj.Address = txtAddress.Text;
+                profileObj.City = txtCity.Text;
+                profileObj.State = ddState.SelectedValue;
+                profileObj.Zip = int.Parse(txtZip.Text);
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                string jsonProfileObj = js.Serialize(profileObj);
+
+                try
+                {
+
+                }
+                catch
+                {
+
+                }
+            }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             disableEdit();
             loadProfile(Session["RequestedProfile"].ToString());
+        }
+
+        private bool validateFields()
+        {
+            bool valid = true;            
+            if (string.IsNullOrWhiteSpace(txtTitle.Text))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a title. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            int age;
+            if (string.IsNullOrWhiteSpace(txtAge.Text) || !int.TryParse(txtAge.Text, out age) || age <= 0)
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a valid age. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            int heightFt, heightIn;
+            if (string.IsNullOrWhiteSpace(txtHeightFeet.Text) || string.IsNullOrWhiteSpace(txtHeightIn.Text) || !int.TryParse(txtHeightFeet.Text, out heightFt) ||
+               !int.TryParse(txtHeightIn.Text, out heightIn) || heightIn > 11 || heightIn < 0)
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a valid height. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            int weight;
+            if (string.IsNullOrWhiteSpace(txtWeight.Text) || !int.TryParse(txtWeight.Text, out weight) || weight <= 0)
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a valid weight. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if (string.IsNullOrWhiteSpace(txtOccupation.Text))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter an occupation. <br />";
+                lblErrorMsg.Visible = true;
+            }            
+            if (drpCommitment.SelectedIndex == 0)
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please select your commitment preference. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if ((drpHaveKids.SelectedIndex == 0) || (drpWantKids.SelectedIndex == 0))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please select your kids preference. <br />";
+            }
+            if (string.IsNullOrWhiteSpace(txtInterests.Text))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter your interests. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if (string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a description. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            Int64 i;
+            if (string.IsNullOrWhiteSpace(txtPhone.Text) || (txtPhone.Text.Length != 10) || !Int64.TryParse(txtPhone.Text, out i))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a valid phone number. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if(string.IsNullOrWhiteSpace(txtEmail.Text) || !txtEmail.Text.Contains("@") || !txtEmail.Text.Split('@')[1].Contains("."))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a valid email. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if (string.IsNullOrWhiteSpace(txtAddress.Text))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter an address. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if (string.IsNullOrWhiteSpace(txtCity.Text))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a city. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if(ddState.SelectedIndex == 0)
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please select a state. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            int zip;
+            if(string.IsNullOrWhiteSpace(txtZip.Text) || !int.TryParse(txtZip.Text, out zip) || txtZip.Text.Length != 5)
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a valid zip code. <br />";
+                lblErrorMsg.Visible = true;
+            }
+
+            return valid;
         }
     }
 }

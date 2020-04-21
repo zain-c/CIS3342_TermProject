@@ -20,8 +20,8 @@
                         <asp:Button ID="btnNormalView" runat="server" class="btn btn-outline-primary" Text="Return to normal view" Visible="false" OnClick="btnNormalView_Click" />
                         <br />
                         <br />
-                <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-                    <ContentTemplate>--%>
+                        <asp:Label ID="lblErrorMsg" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
+                        <br />
                         <asp:Image ID="imgProfilePic" runat="server" Height="300px" Width="300px" />
                         <br />
                         <asp:FileUpload ID="fileProfilePic" runat="server" Visible="false" />
