@@ -21,6 +21,11 @@
                 <asp:FileUpload ID="fileProfilePic" runat="server" accept=".png, .jpeg, .jpg" />
                 <br />
                 <br />
+                Gender: <asp:DropDownList ID="drpGender" runat="server">
+                    <asp:ListItem Value="Select" Selected="True">Select</asp:ListItem>
+                    <asp:ListItem>Male</asp:ListItem>
+                    <asp:ListItem>Female</asp:ListItem>
+                </asp:DropDownList>
                 Phone: <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone Number" TextMode="Phone"></asp:TextBox>  
                 Occupation: <asp:TextBox ID="txtOccupation" runat="server" placeholder="Occupation" MaxLength="50"></asp:TextBox>
                 <br />

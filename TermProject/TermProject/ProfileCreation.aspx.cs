@@ -41,6 +41,7 @@ namespace TermProject
                 string haveKids = drpHaveKids.SelectedValue; 
                 string wantKids = drpWantKids.SelectedValue;
                 string commitment = drpCommitment.SelectedValue;
+                string gender = drpGender.SelectedValue;
                 int userID = tempUser.getUserID(Session["Username"].ToString());
                 string height = txtHeightFeet.Text + "|" + txtHeightIn.Text;
 
@@ -153,7 +154,13 @@ namespace TermProject
                 lblErrorMsg.Text += "*Please select your commitment preference. <br />";
                 lblErrorMsg.Visible = true;
             }
-            if((drpHaveKids.SelectedIndex == 0) || (drpWantKids.SelectedIndex == 0))
+            if (drpGender.SelectedIndex == 0)
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please select your gender. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if ((drpHaveKids.SelectedIndex == 0) || (drpWantKids.SelectedIndex == 0))
             {
                 valid = false;
                 lblErrorMsg.Text += "*Please select your kids preference. <br />";
