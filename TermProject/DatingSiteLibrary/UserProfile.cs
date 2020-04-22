@@ -32,6 +32,7 @@ namespace DatingSiteLibrary
         string wantKids;
         string interests;
         string description;
+        string gender;
 
         public UserProfile()
         {
@@ -39,7 +40,7 @@ namespace DatingSiteLibrary
         }
 
         public int addUserProfileToDB(string _phoneNumber, byte[] _imageData, string _occupation, int _age, string _height, int _weight, string _title,
-                                       string _commitment, string _haveKids, string _wantKids, string _interests, string _description, int _userID)
+                                       string _commitment, string _haveKids, string _wantKids, string _interests, string _description, int _userID, string gender)
         {
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();
@@ -59,6 +60,7 @@ namespace DatingSiteLibrary
             objCmd.Parameters.AddWithValue("@haveKids", _haveKids);
             objCmd.Parameters.AddWithValue("@title", _title);
             objCmd.Parameters.AddWithValue("@userID", _userID);
+            objCmd.Parameters.AddWithValue("@gender", gender);
 
             int result = objDB.DoUpdateUsingCmdObj(objCmd);
             return result;
@@ -96,6 +98,7 @@ namespace DatingSiteLibrary
                 profile.HaveKids = profileDT.Rows[0]["haveKids"].ToString();
                 profile.WantKids = profileDT.Rows[0]["wantKids"].ToString();
                 profile.Title = profileDT.Rows[0]["Title"].ToString();
+                profile.Gender = profileDT.Rows[0]["Gender"].ToString();
 
             }
             return profile;
@@ -219,6 +222,12 @@ namespace DatingSiteLibrary
         {
             get { return description; }
             set { description = value; }
+        }
+
+        public string Gender
+        {
+            get { return gender; }
+            set { gender = value; }
         }
     }
 }
