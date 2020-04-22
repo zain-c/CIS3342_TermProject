@@ -63,7 +63,7 @@ namespace TermProject
                         if(fileExt == ".jpg")
                         {                          
                             result = profile.addUserProfileToDB(txtPhone.Text, imageData, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
-                                                       txtTitle.Text, commitment, haveKids, wantKids,txtInterests.Text, txtDescription.Text, userID);
+                                                       txtTitle.Text, commitment, haveKids, wantKids,txtInterests.Text, txtDescription.Text, userID, gender);
                             result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
                                                             defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
                                                             defaultPrivacySetting, defaultPrivacySetting, userID);
@@ -84,7 +84,7 @@ namespace TermProject
                     {
                         //inserts 'null' for the imageData field
                         result = profile.addUserProfileToDB(txtPhone.Text, null, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
-                                                   txtTitle.Text, commitment, haveKids, wantKids, txtInterests.Text, txtDescription.Text, userID);
+                                                   txtTitle.Text, commitment, haveKids, wantKids, txtInterests.Text, txtDescription.Text, userID, gender);
                         result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
                                                             defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
                                                             defaultPrivacySetting, defaultPrivacySetting, userID);
