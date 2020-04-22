@@ -113,6 +113,7 @@
   <ItemGroup>
     <Content Include="Login.aspx" />
     <Content Include="LoginRecovery.aspx" />
+    <Content Include="NonMemberSearch.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="Stylesheets\LoginRecoveryStyle.css" />
     <Content Include="Stylesheets\LoginStyle.css" />
@@ -120,7 +121,7 @@
     <Content Include="ProfileDisplay.ascx" />
     <Content Include="Registration.aspx" />
     <Content Include="Stylesheets\RegistrationStyle.css" />
-    <Content Include="Search.aspx" />
+    <Content Include="MemberSearch.aspx" />
     <Content Include="Stylesheets\SearchStyle.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -153,6 +154,13 @@
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
+    <Compile Include="NonMemberSearch.aspx.cs">
+      <DependentUpon>NonMemberSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NonMemberSearch.aspx.designer.cs">
+      <DependentUpon>NonMemberSearch.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -182,12 +190,12 @@
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Search.aspx.cs">
-      <DependentUpon>Search.aspx</DependentUpon>
+    <Compile Include="MemberSearch.aspx.cs">
+      <DependentUpon>MemberSearch.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Search.aspx.designer.cs">
-      <DependentUpon>Search.aspx</DependentUpon>
+    <Compile Include="MemberSearch.aspx.designer.cs">
+      <DependentUpon>MemberSearch.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

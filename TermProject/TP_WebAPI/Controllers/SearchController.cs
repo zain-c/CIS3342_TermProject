@@ -26,8 +26,8 @@ namespace TP_WebAPI.Controllers
             List<UserProfile> profiles = new List<UserProfile>();
 
             string[] searchArray = searchParameters.Split('|');
-            User tempUser = new User();
-            int userID = tempUser.getUserID(username);
+
+            
 
             UserProfile profile = new UserProfile();
              
@@ -35,18 +35,41 @@ namespace TP_WebAPI.Controllers
             return profiles;
         }
 
-        [HttpGet("LoadSearchResults/Nonmember")]
-        public UserProfile loadNonmemberSearch(string searchParameters)
+        [HttpGet("LoadSearchResults/Nonmember/{searchParameters}")]
+        public List<UserProfile> loadNonmemberSearch(string searchParameters)
         {
             //Parameters: City|State|Gender
+            List<UserProfile> profiles = new List<UserProfile>();
+            UserProfile profile;
 
             string[] searchArray = searchParameters.Split('|');
-            User tempUser = new User();
-            int userID = tempUser.getUserID(username);
 
-            UserProfile profile = new UserProfile();
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_NonMemberSearch";
 
-            return profile.retreiveUserProfileFromDB(userID);
+            objCmd.Parameters.AddWithValue("@city", searchArray[0]);
+            objCmd.Parameters.AddWithValue("@state", searchArray[1]);
+            objCmd.Parameters.AddWithValue("@gender", searchArray[2]);
+
+            DataSet searchResultsDS = objDB.GetDataSetUsingCmdObj(objCmd);
+            
+            foreach(DataRow result in searchResultsDS.Tables[0].Rows)
+            {
+                profile = new UserProfile();
+                profile.FirstName = result["FirstName"].ToString();
+                profile.LastName = result["LastName"].ToString();
+                profile.City = result["HomeCity"].ToString();
+                profile.State = result["HomeState"].ToString();
+                profile.Gender = result["Gender"].ToString();
+                //add photo
+                profiles.Add(profile);
+            }
+
+
+
+            return profiles;
         }
     }
 }
