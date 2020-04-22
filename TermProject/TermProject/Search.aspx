@@ -79,10 +79,11 @@
                         <asp:TableCell>
                             Gender &nbsp
                             <asp:DropDownList ID="ddGenderFilter" runat="server">
-                                <asp:ListItem Value="Select">Select Gender</asp:ListItem>
+                                <%--<asp:ListItem Value="Select">Select Gender</asp:ListItem>--%>
+                                <asp:ListItem Value="N/A">N/A</asp:ListItem>
                                 <asp:ListItem Value="Male">Male</asp:ListItem>
                                 <asp:ListItem Value="Female">Female</asp:ListItem>
-                                <asp:ListItem Value="N/A">N/A</asp:ListItem>
+
                             </asp:DropDownList>
                         </asp:TableCell>
                     </asp:TableRow>
@@ -96,7 +97,7 @@
                         <asp:TableCell>
                             Commitment &nbsp
                             <asp:DropDownList ID="ddCommitmentFilter" ToolTip="What level of commitment are you looking for?" runat="server">
-                                <asp:ListItem Value="Select">Select Commitment</asp:ListItem>
+                                <%--<asp:ListItem Value="Select">Select Commitment</asp:ListItem>--%>
                                 <asp:ListItem Value="Casual">Casual</asp:ListItem>
                                 <asp:ListItem Value="Relationship">Relationship</asp:ListItem>
                                 <asp:ListItem Value="Marriage">Marriage</asp:ListItem>
@@ -105,10 +106,19 @@
                         <asp:TableCell>
                             Have Kids &nbsp
                             <asp:DropDownList ID="ddHaveKidsFilter" ToolTip="Would you like your matches to have kids?" runat="server">
-                                <asp:ListItem Value="Select">Select</asp:ListItem>
+                                <%--<asp:ListItem Value="Select">Select</asp:ListItem>--%>
+                                <asp:ListItem Value="N/A">N/A</asp:ListItem>
                                 <asp:ListItem Value="Yes">Yes</asp:ListItem>
                                 <asp:ListItem Value="No">No</asp:ListItem>
+                            </asp:DropDownList>
+                        </asp:TableCell>
+                        <asp:TableCell>
+                            Want Kids &nbsp
+                            <asp:DropDownList ID="ddWantKidsFilter" ToolTip="Do you want your matches to be interested in having children now or in the future?" runat="server">
+                                <%--<asp:ListItem Value="Select">Select</asp:ListItem>--%>
                                 <asp:ListItem Value="N/A">N/A</asp:ListItem>
+                                <asp:ListItem Value="Yes">Yes</asp:ListItem>
+                                <asp:ListItem Value="No">No</asp:ListItem>
                             </asp:DropDownList>
                         </asp:TableCell>
                     </asp:TableRow>
