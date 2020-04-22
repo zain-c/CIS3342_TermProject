@@ -74,8 +74,9 @@ namespace TermProject
                 else
                 {
                     Session.Add("Username", txtLoginUsername.Text);
+                    Session.Add("RequestedProfile", Session["Username"].ToString());
                     //Successful login attempt
-                    Response.Redirect("Search.aspx"); //redirect to search page?
+                    Response.Redirect("Profile.aspx"); //redirect to search page?
                 }
                 
             }

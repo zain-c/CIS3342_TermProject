@@ -17,10 +17,10 @@ namespace TermProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty((string)Session["Username"]))
-            {
-                Response.Redirect("Search.aspx");
-            }
+            //if (string.IsNullOrEmpty((string)Session["Username"]))
+            //{
+            //    Response.Redirect("Search.aspx");
+            //}
         }
 
         protected void btnSaveProfile_Click(object sender, EventArgs e)
@@ -34,6 +34,8 @@ namespace TermProject
                 SqlCommand objCmd = new SqlCommand();
                 User tempUser = new User();
                 UserProfile profile = new UserProfile();
+                UserPrivacySettings privacySettings = new UserPrivacySettings();
+                string defaultPrivacySetting = "Visible";
                 int result = 0, imageSize;
                 string fileExt, imageName;
                 string haveKids = drpHaveKids.SelectedValue; 
@@ -55,20 +57,25 @@ namespace TermProject
                         fileExt = imageName.Substring(imageName.LastIndexOf("."));
                         fileExt = fileExt.ToLower();
 
-                        if(fileExt == ".jpg" || fileExt == ".jpeg" || fileExt == ".png")
+                        //string imageDataAsString = System.Text.Encoding.Default.GetString(imageData);
+
+                        if(fileExt == ".jpg")
                         {                          
                             result = profile.addUserProfileToDB(txtPhone.Text, imageData, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
-                                                       txtTitle.Text, commitment, wantKids, haveKids, txtInterests.Text, txtDescription.Text, userID);
-
-                            if(result == 1)
+                                                       txtTitle.Text, commitment, haveKids, wantKids,txtInterests.Text, txtDescription.Text, userID);
+                            result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
+                                                            defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
+                                                            defaultPrivacySetting, defaultPrivacySetting, userID);
+                            if(result == 2)
                             {
                                 //User profile created successfully
+                                Session.Add("RequestedProfile", Session["Username"].ToString());
                                 Response.Redirect("Profile.aspx"); //redirect to member only search page or profile page?
                             }
                         }
                         else
                         {
-                            lblErrorMsg.Text += "*Only jpg, jpeg, and png file types supported. <br />";
+                            lblErrorMsg.Text += "*Only jpg file types supported. <br />";
                             lblErrorMsg.Visible = true;
                         }
                     }
@@ -77,8 +84,10 @@ namespace TermProject
                         //inserts 'null' for the imageData field
                         result = profile.addUserProfileToDB(txtPhone.Text, null, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
                                                    txtTitle.Text, commitment, haveKids, wantKids, txtInterests.Text, txtDescription.Text, userID);
-
-                        if (result == 1)
+                        result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
+                                                            defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
+                                                            defaultPrivacySetting, defaultPrivacySetting, userID);
+                        if (result == 2)
                         {
                             //User profile created successfully
                             Session.Add("RequestedProfile", Session["Username"].ToString());
@@ -111,22 +120,22 @@ namespace TermProject
                 lblErrorMsg.Visible = true;
             }
             int age;
-            if (string.IsNullOrWhiteSpace(txtAge.Text) || !int.TryParse(txtAge.Text, out age))
+            if (string.IsNullOrWhiteSpace(txtAge.Text) || !int.TryParse(txtAge.Text, out age) || age <= 0)
             {
                 valid = false;
-                lblErrorMsg.Text += "*Please enter your age. <br />";
+                lblErrorMsg.Text += "*Please enter a valid age. <br />";
                 lblErrorMsg.Visible = true;
             }
             int heightFt, heightIn;
             if(string.IsNullOrWhiteSpace(txtHeightFeet.Text) || string.IsNullOrWhiteSpace(txtHeightIn.Text) || !int.TryParse(txtHeightFeet.Text, out heightFt) || 
-               !int.TryParse(txtHeightIn.Text, out heightIn))
+               !int.TryParse(txtHeightIn.Text, out heightIn) || heightIn > 11 || heightIn < 0)
             {
                 valid = false;
                 lblErrorMsg.Text += "*Please enter a valid height. <br />";
                 lblErrorMsg.Visible = true;
             }
             int weight;
-            if(string.IsNullOrWhiteSpace(txtWeight.Text) || !int.TryParse(txtWeight.Text, out weight))
+            if(string.IsNullOrWhiteSpace(txtWeight.Text) || !int.TryParse(txtWeight.Text, out weight) || weight <= 0)
             {
                 valid = false;
                 lblErrorMsg.Text += "*Please enter a valid weight. <br />";
