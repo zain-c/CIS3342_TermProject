@@ -33,5 +33,23 @@ namespace TP_WebAPI.Controllers
             return profile.retreiveUserProfileFromDB(userID);
         }
 
+        [HttpGet("LoadPrivacySettings/{username}")]
+        public UserPrivacySettings loadPrivacySettings(string username)
+        {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+
+            UserPrivacySettings privacySettings = new UserPrivacySettings();
+            return privacySettings.retrievePrivacySettings(userID);
+        }
+
+        [HttpPut("UpdateProfile")]
+        public void updateProfile()
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "";
+        }
     }
 }
