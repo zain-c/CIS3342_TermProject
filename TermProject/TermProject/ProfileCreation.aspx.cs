@@ -66,7 +66,7 @@ namespace TermProject
                                                        txtTitle.Text, commitment, haveKids, wantKids,txtInterests.Text, txtDescription.Text, userID, gender);
                             result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
                                                             defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
-                                                            defaultPrivacySetting, defaultPrivacySetting, userID);
+                                                            defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, userID);
                             if(result == 2)
                             {
                                 //User profile created successfully
@@ -87,7 +87,7 @@ namespace TermProject
                                                    txtTitle.Text, commitment, haveKids, wantKids, txtInterests.Text, txtDescription.Text, userID, gender);
                         result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
                                                             defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
-                                                            defaultPrivacySetting, defaultPrivacySetting, userID);
+                                                            defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, userID);
                         if (result == 2)
                         {
                             //User profile created successfully

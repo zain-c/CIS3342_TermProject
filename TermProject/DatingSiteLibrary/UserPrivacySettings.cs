@@ -25,6 +25,7 @@ namespace DatingSiteLibrary
         string wantKids;
         string interests;
         string description;
+        string gender;
 
         public UserPrivacySettings()
         {
@@ -32,7 +33,8 @@ namespace DatingSiteLibrary
         }
 
         public int addUserSettingsToDB(string _profilePic, string _firstName, string _lastName, string _title, string _age, string _height, string _weight,
-                                       string _occupation, string _commitment, string _haveKids, string _wantKids, string _interests, string _description, int userID)
+                                       string _occupation, string _commitment, string _haveKids, string _wantKids, string _interests, string _description, string gender,
+                                       int userID)
         {
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();
@@ -52,6 +54,7 @@ namespace DatingSiteLibrary
             objCmd.Parameters.AddWithValue("@wantKids", _wantKids);
             objCmd.Parameters.AddWithValue("@interests", _interests);
             objCmd.Parameters.AddWithValue("@description", _description);
+            objCmd.Parameters.AddWithValue("@gender", gender);
             objCmd.Parameters.AddWithValue("@userID", userID);
 
             int result = objDB.DoUpdateUsingCmdObj(objCmd);
@@ -84,6 +87,7 @@ namespace DatingSiteLibrary
                 privacySettings.WantKids = privacyDT.Rows[0]["WantKids"].ToString();
                 privacySettings.Interests = privacyDT.Rows[0]["Interests"].ToString();
                 privacySettings.Description = privacyDT.Rows[0]["Description"].ToString();
+                privacySettings.Gender = privacyDT.Rows[0]["Gender"].ToString();
             }
             return privacySettings;
         }
@@ -163,6 +167,12 @@ namespace DatingSiteLibrary
         {
             get { return description; }
             set { description = value; }
+        }
+
+        public string Gender
+        {
+            get { return gender; }
+            set { gender = value; }
         }
     }
 }
