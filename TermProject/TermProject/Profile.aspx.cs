@@ -28,14 +28,16 @@ namespace TermProject
             else
             {
                 if (!IsPostBack)
-                {
-                    if (Session["RequestedProfile"].ToString() != Session["Username"].ToString())
-                    {
-                        btnEditProfile.Visible = false;
-                        btnMemberView.Visible = false;
-                    }
+                {                    
                     loadProfile(Session["RequestedProfile"].ToString());
                     loadPrivacySettings(Session["RequestedProfile"].ToString());
+
+                    if (Session["RequestedProfile"].ToString() != Session["Username"].ToString())
+                    {
+                        //if the profile selected is from the search results 
+                        //then display the profile layout for other members
+                        otherMemberView();
+                    }
                 }
             }
             
@@ -251,9 +253,14 @@ namespace TermProject
 
         protected void btnMemberView_Click(object sender, EventArgs e)
         {
-            btnMemberView.Visible = false;
-            btnEditProfile.Visible = false;
             btnNormalView.Visible = true;
+            otherMemberView();
+        }
+
+        private void otherMemberView()
+        {
+            btnMemberView.Visible = false;
+            btnEditProfile.Visible = false;            
             contactInfo.Visible = false;
             if (ddPrivacyProfilePic.SelectedValue == "Nonvisible")
             {

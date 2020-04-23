@@ -17,7 +17,6 @@
                         &nbsp;&nbsp;&nbsp;
                         <asp:Button ID="btnCancel" runat="server" class="btn btn-outline-primary" Text="Cancel" Visible="false" OnClick="btnCancel_Click" />
                         <asp:Button ID="btnMemberView" runat="server" class="btn btn-outline-primary" Text="View profile as other members would see it" OnClick="btnMemberView_Click" />
-                        &nbsp;&nbsp;&nbsp;
                         <asp:Button ID="btnNormalView" runat="server" class="btn btn-outline-primary" Text="Return to normal view" Visible="false" OnClick="btnNormalView_Click" />
                         <br />
                         <br />

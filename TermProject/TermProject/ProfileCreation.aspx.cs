@@ -19,7 +19,7 @@ namespace TermProject
         {
             if (string.IsNullOrEmpty((string)Session["Username"]))
             {
-                Response.Redirect("Search.aspx");
+                Response.Redirect("Login.aspx");
             }
         }
 
