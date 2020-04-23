@@ -251,12 +251,115 @@ namespace TermProject
 
         protected void btnMemberView_Click(object sender, EventArgs e)
         {
-
+            btnMemberView.Visible = false;
+            btnEditProfile.Visible = false;
+            btnNormalView.Visible = true;
+            contactInfo.Visible = false;
+            if (ddPrivacyProfilePic.SelectedValue == "Nonvisible")
+            {
+                imgProfilePic.Visible = false;
+            }
+            if (ddPrivacyFirstName.SelectedValue == "Nonvisible")
+            {
+                txtFirstName.Visible = false;
+            }
+            if (ddPrivacyLastName.SelectedValue == "Nonvisible")
+            {
+                txtLastName.Visible = false;
+            }
+            if (ddPrivacyTitle.SelectedValue == "Nonvisible")
+            {
+                txtTitle.Visible = false;
+            }
+            if (ddPrivacyGender.SelectedValue == "Nonvisible")
+            {
+                lblGender1.Visible = false;
+                lblGender.Visible = false;
+            }
+            if (ddPrivacyAge.SelectedValue == "Nonvisible")
+            {
+                lblAge.Visible = false;
+                txtAge.Visible = false;
+            }
+            if (ddPrivacyHeight.SelectedValue == "Nonvisible")
+            {
+                lblHeight.Visible = false;
+                lblFeet.Visible = false;
+                lblInches.Visible = false;
+                txtHeightFeet.Visible = false;
+                txtHeightIn.Visible = false;
+            }
+            if (ddPrivacyWeight.SelectedValue == "Nonvisible")
+            {
+                lblWeight.Visible = false;
+                txtWeight.Visible = false;
+            }
+            if (ddPrivacyOccupation.SelectedValue == "Nonvisible")
+            {
+                lblOccupation.Visible = false;
+                txtOccupation.Visible = false;
+            }
+            if (ddPrivacyCommitment.SelectedValue == "Nonvisible")
+            {
+                lblCommitment1.Visible = false;
+                lblCommitment.Visible = false;
+            }
+            if (ddPrivacyHaveKids.SelectedValue == "Nonvisible")
+            {
+                lblHaveKids1.Visible = false;
+                lblHaveKids.Visible = false;
+            }
+            if (ddPrivacyWantKids.SelectedValue == "Nonvisible")
+            {
+                lblWantKids1.Visible = false;
+                lblWantKids.Visible = false;
+            }
+            if (ddPrivacyInterests.SelectedValue == "Nonvisible")
+            {
+                lblInterests.Visible = false;
+                txtInterests.Visible = false;
+            }
+            if (ddPrivacyDescription.SelectedValue == "Nonvisible")
+            {
+                lblDescription.Visible = false;
+                txtDescription.Visible = false;
+            }
         }
 
         protected void btnNormalView_Click(object sender, EventArgs e)
         {
+            btnMemberView.Visible = true;
+            btnEditProfile.Visible = true;
+            btnNormalView.Visible = false;
+            contactInfo.Visible = true;
 
+            imgProfilePic.Visible = true;
+            txtFirstName.Visible = true;
+            txtLastName.Visible = true;
+            txtTitle.Visible = true;
+            lblGender1.Visible = true;
+            lblGender.Visible = true;
+            lblAge.Visible = true;
+            txtAge.Visible = true;
+            lblHeight.Visible = true;
+            lblFeet.Visible = true;
+            lblInches.Visible = true;
+            txtHeightFeet.Visible = true;
+            txtHeightIn.Visible = true;
+            lblWeight.Visible = true;
+            txtWeight.Visible = true;
+            lblOccupation.Visible = true;
+            txtOccupation.Visible = true;
+            lblCommitment1.Visible = true;
+            lblCommitment.Visible = true;
+            lblHaveKids1.Visible = true;
+            lblHaveKids.Visible = true;
+            lblWantKids1.Visible = true;
+            lblWantKids.Visible = true;
+            lblInterests.Visible = true;
+            txtInterests.Visible = true;
+            lblDescription.Visible = true;
+            txtDescription.Visible = true;
         }
 
         protected void btnSaveChanges_Click(object sender, EventArgs e)
