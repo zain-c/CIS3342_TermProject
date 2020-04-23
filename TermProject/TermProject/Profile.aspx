@@ -4,12 +4,13 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
     <div id="container" class="container" runat="server" style="margin-bottom: 10%">
         <div class="row">
             <div class="col text-center">
                 <br />
                 <%--<asp:GridView ID="GridView1" runat="server"></asp:GridView><br />--%>
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="True" UpdateMode="Conditional">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                     <ContentTemplate>
                         <asp:Button ID="btnEditProfile" runat="server" class="btn btn-outline-primary" Text="Edit Profile" OnClick="btnEditProfile_Click" />
                         <asp:Button ID="btnSaveChanges" runat="server" class="btn btn-outline-primary" Text="Save Changes" Visible="false" OnClick="btnSaveChanges_Click" />
@@ -24,7 +25,7 @@
                         <br />
                         <asp:Image ID="imgProfilePic" runat="server" Height="300px" Width="300px" />
                         <br />
-                        <asp:FileUpload ID="fileProfilePic" runat="server" Visible="false" />
+                        <asp:FileUpload ID="fileProfilePic" runat="server" accept=".png, .jpeg, .jpg" Visible="false" />
                         <br />
                         <asp:TextBox ID="txtFirstName" ReadOnly="true" runat="server" CssClass="text-center" BackColor="White" BorderStyle="None" Font-Size="28px"></asp:TextBox>
                         <asp:TextBox ID="txtLastName" ReadOnly="true" runat="server" CssClass="text-center" BackColor="White" BorderStyle="None" Font-Size="28px"></asp:TextBox>
@@ -52,7 +53,7 @@
                         <br />
                         <br />
                         Occupation:
-                        <asp:TextBox ID="txtOccupation" runat="server" CssClass="text-center" MaxLength="50" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox>
+                        <asp:TextBox ID="txtOccupation" runat="server" MaxLength="50" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox>
                         <br />
                         <br />
                         Commitment:
@@ -91,7 +92,7 @@
                         <asp:TextBox ID="txtDescription" runat="server" placeholder="Description" class="col-5 text-center" TextMode="MultiLine" MaxLength="250" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
                     </ContentTemplate>
                     <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnSaveChanges" EventName="Click" />
+                        <asp:PostBackTrigger ControlID="btnSaveChanges" />
                         <asp:AsyncPostBackTrigger ControlID="btnEditProfile" EventName="Click" />
                         <asp:AsyncPostBackTrigger ControlID="btnCancel" EventName="Click" />
                     </Triggers>
@@ -174,7 +175,7 @@
                             <br />
                         </ContentTemplate>
                         <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="btnSaveChanges" EventName="Click" />
+                            <asp:PostBackTrigger ControlID="btnSaveChanges" />
                             <asp:AsyncPostBackTrigger ControlID="btnCancel" EventName="Click" />
                             <asp:AsyncPostBackTrigger ControlID="btnEditProfile" EventName="Click" />
                         </Triggers>
@@ -183,7 +184,7 @@
             </div>
         </div>
         <br />
-        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel3" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
             <ContentTemplate>
                 <div id="privacySettings" runat="server" visible="false">
                     <div class="row">
@@ -314,7 +315,7 @@
                 </div>
             </ContentTemplate>
             <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="btnSaveChanges" EventName="Click" />
+                <asp:PostBackTrigger ControlID="btnSaveChanges" />
                 <asp:AsyncPostBackTrigger ControlID="btnCancel" EventName="Click" />
                 <asp:AsyncPostBackTrigger ControlID="btnEditProfile" EventName="Click" />
             </Triggers>

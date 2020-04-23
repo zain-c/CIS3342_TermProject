@@ -19,19 +19,24 @@ namespace TermProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.Form.Attributes.Add("enctype", "multipart/form-data");
+
             if (string.IsNullOrEmpty((string)Session["Username"]))
             {
                 Response.Redirect("Login.aspx");
             }
             else
             {
-                if (Session["RequestedProfile"].ToString() != Session["Username"].ToString())
+                if (!IsPostBack)
                 {
-                    btnEditProfile.Visible = false;
-                    btnMemberView.Visible = false;
+                    if (Session["RequestedProfile"].ToString() != Session["Username"].ToString())
+                    {
+                        btnEditProfile.Visible = false;
+                        btnMemberView.Visible = false;
+                    }
+                    loadProfile(Session["RequestedProfile"].ToString());
+                    loadPrivacySettings(Session["RequestedProfile"].ToString());
                 }
-                loadProfile(Session["RequestedProfile"].ToString());
-                loadPrivacySettings(Session["RequestedProfile"].ToString());
             }
             
         }
@@ -62,6 +67,7 @@ namespace TermProject
             width = 28 * (txtLastName.Text.Length + 1) / 2;
             txtLastName.Style.Add("width", width + "px");
 
+            txtTitle.Text = profileObj.Title;         
             lblGender.Text = profileObj.Gender;
 
             txtAge.Text = profileObj.Age.ToString();
@@ -81,9 +87,6 @@ namespace TermProject
             txtWeight.Style.Add("width", width + "px");
 
             txtOccupation.Text = profileObj.Occupation;
-            width = 16 * (txtOccupation.Text.Length + 1) / 2;
-            txtOccupation.Style.Add("width", width + "px");
-
             lblCommitment.Text = profileObj.Commitment;
             lblHaveKids.Text = profileObj.HaveKids;
             lblWantKids.Text = profileObj.WantKids;
@@ -260,13 +263,64 @@ namespace TermProject
         {
             lblErrorMsg.Text = string.Empty;
             lblErrorMsg.Visible = false;
+
             if (validateFields())
             {
                 disableEdit();
+                modifyProfilePic();
                 modifyProfile();
                 modifyPrivacy();
                 loadProfile(Session["RequestedProfile"].ToString());
                 loadPrivacySettings(Session["RequestedProfile"].ToString());
+                btnEditProfile.Visible = true;
+                btnMemberView.Visible = true;
+                btnSaveChanges.Visible = false;
+                btnCancel.Visible = false;
+            }
+            
+        }
+
+        private void modifyProfilePic()
+        {
+            if (IsPostBack)
+            {
+                if (fileProfilePic.HasFile)
+                {
+                    int result = 0, imageSize;
+                    string fileExt, imageName;
+                    User tempUser = new User();
+                    int userID = tempUser.getUserID(Session["Username"].ToString());
+
+                    imageSize = fileProfilePic.PostedFile.ContentLength;
+                    byte[] imageData = new byte[imageSize];
+                    fileProfilePic.PostedFile.InputStream.Read(imageData, 0, imageSize);
+                    imageName = fileProfilePic.PostedFile.FileName;
+                    fileExt = imageName.Substring(imageName.LastIndexOf("."));
+                    fileExt = fileExt.ToLower();
+
+                    if (fileExt == ".jpg")
+                    {
+                        DBConnect objDB = new DBConnect();
+                        SqlCommand objCmd = new SqlCommand();
+                        objCmd.CommandType = CommandType.StoredProcedure;
+                        objCmd.CommandText = "TP_ModifyProfilePic";
+                        objCmd.Parameters.AddWithValue("@imageData", imageData);
+                        objCmd.Parameters.AddWithValue("@userID", userID);
+
+                        result = objDB.DoUpdateUsingCmdObj(objCmd);
+
+                        if (result != 1)
+                        {
+                            lblErrorMsg.Text += "*There was an error updating your profile picture. <br />";
+                            lblErrorMsg.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        lblErrorMsg.Text += "*Only jpg file types supported. <br />";
+                        lblErrorMsg.Visible = true;
+                    }
+                }
             }
         }
 
@@ -300,7 +354,7 @@ namespace TermProject
             {
                 string url = "https://localhost:44369/api/DatingService/Profiles/ModifyProfile/" + Session["Username"].ToString();
                 WebRequest request = WebRequest.Create(url);
-                request.Method = "PUT";
+                request.Method = "POST";
                 request.ContentLength = jsonProfileObj.Length;
                 request.ContentType = "application/json";
 
@@ -354,7 +408,7 @@ namespace TermProject
             {
                 string url = "https://localhost:44369/api/DatingService/Profiles/ModifyPrivacySettings/" + Session["Username"].ToString();
                 WebRequest request = WebRequest.Create(url);
-                request.Method = "PUT";
+                request.Method = "POST";
                 request.ContentLength = jsonPrivacyObj.Length;
                 request.ContentType = "application/json";
 

@@ -43,7 +43,7 @@ namespace TP_WebAPI.Controllers
             return privacySettings.retrievePrivacySettings(userID);
         }
 
-        [HttpPut("ModifyProfile/{username}")]
+        [HttpPost("ModifyProfile/{username}")]
         public bool modifyProfile(string username, [FromBody] UserProfile profile)
         {
             if (profile != null)
@@ -59,7 +59,7 @@ namespace TP_WebAPI.Controllers
             }
         }
 
-        [HttpPut("ModifyPrivacySettings/{username}")]
+        [HttpPost("ModifyPrivacySettings/{username}")]
         public bool modifyPrivacySettings([FromBody] UserPrivacySettings settings, string username)
         {
             if(settings != null)
