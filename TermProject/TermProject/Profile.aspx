@@ -4,12 +4,12 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="container" class="container" runat="server" style="margin-bottom: 10%">        
+    <div id="container" class="container" runat="server" style="margin-bottom: 10%">
         <div class="row">
             <div class="col text-center">
                 <br />
                 <%--<asp:GridView ID="GridView1" runat="server"></asp:GridView><br />--%>
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="True" UpdateMode="Conditional">
                     <ContentTemplate>
                         <asp:Button ID="btnEditProfile" runat="server" class="btn btn-outline-primary" Text="Edit Profile" OnClick="btnEditProfile_Click" />
                         <asp:Button ID="btnSaveChanges" runat="server" class="btn btn-outline-primary" Text="Save Changes" Visible="false" OnClick="btnSaveChanges_Click" />
@@ -26,24 +26,33 @@
                         <br />
                         <asp:FileUpload ID="fileProfilePic" runat="server" Visible="false" />
                         <br />
-                        <asp:Label ID="lblFirstName" runat="server" Text="First" Font-Size="28px"></asp:Label>
-                        <asp:Label ID="lblLastName" runat="server" Text="Last" Font-Size="28px"></asp:Label>
+                        <asp:TextBox ID="txtFirstName" ReadOnly="true" runat="server" CssClass="text-center" BackColor="White" BorderStyle="None" Font-Size="28px"></asp:TextBox>
+                        <asp:TextBox ID="txtLastName" ReadOnly="true" runat="server" CssClass="text-center" BackColor="White" BorderStyle="None" Font-Size="28px"></asp:TextBox>
                         <br />
                         <br />
                         <asp:TextBox ID="txtTitle" runat="server" class="col-5 text-center" MaxLength="50" BackColor="White" BorderStyle="None" ReadOnly="True" Text="This is my title"></asp:TextBox>
                         <br />
                         <br />
+                        Gender:
+                        <asp:Label ID="lblGender" class="col-1 text-center" runat="server" Text=""></asp:Label>
+                        <asp:DropDownList ID="drpGender" runat="server" Visible="false">
+                            <asp:ListItem Value="Select" Selected="True">Select</asp:ListItem>
+                            <asp:ListItem>Male</asp:ListItem>
+                            <asp:ListItem>Female</asp:ListItem>
+                        </asp:DropDownList>
                         Age:
-                        <asp:TextBox ID="txtAge" runat="server" class="col-1 text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
+                        <asp:TextBox ID="txtAge" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox>
+                        &nbsp;&nbsp;&nbsp;
                         Height:
-                        <asp:TextBox ID="txtHeightFeet" runat="server" class="col-1 text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>ft
-                        <asp:TextBox ID="txtHeightIn" runat="server" class="col-1 text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>in.
+                        <asp:TextBox ID="txtHeightFeet" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox>&nbsp;ft
+                        <asp:TextBox ID="txtHeightIn" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox>&nbsp;in.
+                        &nbsp;&nbsp;&nbsp;
                         Weight:
-                        <asp:TextBox ID="txtWeight" runat="server" class="col-1 text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
+                        <asp:TextBox ID="txtWeight" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox>
                         <br />
                         <br />
                         Occupation:
-                        <asp:TextBox ID="txtOccupation" runat="server" MaxLength="50" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
+                        <asp:TextBox ID="txtOccupation" runat="server" CssClass="text-center" MaxLength="50" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox>
                         <br />
                         <br />
                         Commitment:
@@ -83,8 +92,8 @@
                     </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="btnSaveChanges" EventName="Click" />
-                        <asp:AsyncPostBackTrigger ControlID="btnCancel" EventName="Click" />
                         <asp:AsyncPostBackTrigger ControlID="btnEditProfile" EventName="Click" />
+                        <asp:AsyncPostBackTrigger ControlID="btnCancel" EventName="Click" />
                     </Triggers>
                 </asp:UpdatePanel>
             </div>
@@ -97,14 +106,15 @@
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                         <ContentTemplate>
                             Phone:
-                            <asp:TextBox ID="txtPhone" runat="server" MaxLength="10" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
+                            <asp:TextBox ID="txtPhone" runat="server" CssClass="text-center" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox>
+                            &nbsp;&nbsp; 
                             Email:
-                            <asp:TextBox ID="txtEmail" runat="server" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
+                            <asp:TextBox ID="txtEmail" runat="server" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox>
                             <br />
                             <br />
-                            Address: <br />
-                            <asp:TextBox ID="txtAddress" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox><br />
-                            <asp:TextBox ID="txtCity" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox>
+                            <h5>Address</h5>
+                            <asp:TextBox ID="txtAddress" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox><br />
+                            <asp:TextBox ID="txtCity" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox>
                             <asp:Label ID="lblState" class="text-center" runat="server" Text=""></asp:Label>
                             <asp:DropDownList ID="ddState" runat="server" Visible="false">
                                 <asp:ListItem Value="Select">Select State</asp:ListItem>
@@ -160,7 +170,7 @@
                                 <asp:ListItem>WY</asp:ListItem>
                             </asp:DropDownList>
                             <br />
-                            <asp:TextBox ID="txtZip" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True"></asp:TextBox><br />
+                            <asp:TextBox ID="txtZip" runat="server" class="text-center" BackColor="White" BorderStyle="None" ReadOnly="True" Font-Size="16px"></asp:TextBox><br />
                             <br />
                         </ContentTemplate>
                         <Triggers>
@@ -182,7 +192,7 @@
                             <br />
                             Select the visibility of the information on your profile
                             <br />
-                            <asp:Label ID="lblPrivacyNotice" runat="server" ForeColor="Red" 
+                            <asp:Label ID="lblPrivacyNotice" runat="server" ForeColor="Red"
                                 Text="*Your contact information will always stay hidden from others. It will only be visible to another member once you've accepted their date request.">
                             </asp:Label>
                             <br />
@@ -214,6 +224,14 @@
                             Title:
                             &nbsp;&nbsp;&nbsp;
                             <asp:DropDownList ID="ddPrivacyTitle" runat="server">
+                                <asp:ListItem Value="Visible" Selected="True">Visible</asp:ListItem>
+                                <asp:ListItem Value="Nonvisible">Not Visible</asp:ListItem>
+                            </asp:DropDownList>
+                            <br />
+                            <br />
+                            Gender:
+                            &nbsp;&nbsp;&nbsp;
+                            <asp:DropDownList ID="ddPrivacyGender" runat="server">
                                 <asp:ListItem Value="Visible" Selected="True">Visible</asp:ListItem>
                                 <asp:ListItem Value="Nonvisible">Not Visible</asp:ListItem>
                             </asp:DropDownList>
@@ -290,7 +308,7 @@
                                 <asp:ListItem Value="Nonvisible">Not Visible</asp:ListItem>
                             </asp:DropDownList>
                             <br />
-                            <br />                            
+                            <br />
                         </div>
                     </div>
                 </div>

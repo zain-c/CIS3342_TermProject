@@ -104,6 +104,65 @@ namespace DatingSiteLibrary
             return profile;
         }
 
+        public bool modifyUserProfile(UserProfile profile, int userID)
+        {
+            if (profile != null)
+            {
+                int result = 0;
+                DBConnect objDB = new DBConnect();
+
+                SqlCommand profileCmd = new SqlCommand();
+                profileCmd.CommandType = CommandType.StoredProcedure;
+                profileCmd.CommandText = "TP_ModifyProfile";
+                profileCmd.Parameters.AddWithValue("@userID", userID);
+                profileCmd.Parameters.AddWithValue("@phone", profile.PhoneNumber);
+                profileCmd.Parameters.AddWithValue("@occupation", profile.Occupation);
+                profileCmd.Parameters.AddWithValue("@age", profile.Age);
+                profileCmd.Parameters.AddWithValue("@height", profile.Height);
+                profileCmd.Parameters.AddWithValue("@weight", profile.Weight);
+                profileCmd.Parameters.AddWithValue("@interests", profile.Interests);
+                profileCmd.Parameters.AddWithValue("@description", profile.Description);
+                profileCmd.Parameters.AddWithValue("@commitment", profile.Commitment);
+                profileCmd.Parameters.AddWithValue("@wantKids", profile.WantKids);
+                profileCmd.Parameters.AddWithValue("@haveKids", profile.HaveKids);
+                profileCmd.Parameters.AddWithValue("@title", profile.Title);
+                profileCmd.Parameters.AddWithValue("@gender", profile.Gender);
+                result += objDB.DoUpdateUsingCmdObj(profileCmd);
+
+                SqlCommand userCmd = new SqlCommand();
+                userCmd.CommandType = CommandType.StoredProcedure;
+                userCmd.CommandText = "TP_ModifyUser";
+                userCmd.Parameters.AddWithValue("@userID", userID);
+                userCmd.Parameters.AddWithValue("@firstName", profile.FirstName);
+                userCmd.Parameters.AddWithValue("@lastName", profile.LastName);
+                userCmd.Parameters.AddWithValue("@email", profile.Email);
+                result += objDB.DoUpdateUsingCmdObj(userCmd);
+
+                SqlCommand addressCmd = new SqlCommand();
+                addressCmd.CommandType = CommandType.StoredProcedure;
+                addressCmd.CommandText = "TP_ModifyAddress";
+                addressCmd.Parameters.AddWithValue("@userID", userID); 
+                addressCmd.Parameters.AddWithValue("@address", profile.Address);
+                addressCmd.Parameters.AddWithValue("@city", profile.City);
+                addressCmd.Parameters.AddWithValue("@state", profile.State);
+                addressCmd.Parameters.AddWithValue("@zip", profile.Zip);
+                result += objDB.DoUpdateUsingCmdObj(addressCmd);
+
+                if (result == 3)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public string FirstName
         {
             get { return firstName; }

@@ -25,7 +25,13 @@ namespace TermProject
             }
             else
             {
+                if (Session["RequestedProfile"].ToString() != Session["Username"].ToString())
+                {
+                    btnEditProfile.Visible = false;
+                    btnMemberView.Visible = false;
+                }
                 loadProfile(Session["RequestedProfile"].ToString());
+                loadPrivacySettings(Session["RequestedProfile"].ToString());
             }
             
         }
@@ -47,24 +53,64 @@ namespace TermProject
             UserProfile profileObj = js.Deserialize<UserProfile>(data);
 
             imgProfilePic.ImageUrl = convertByteArrayToImage(username);
-            lblFirstName.Text = profileObj.FirstName;
-            lblLastName.Text = profileObj.LastName;
+
+            txtFirstName.Text = profileObj.FirstName;
+            int width = 28 * (txtFirstName.Text.Length + 1) / 2;
+            txtFirstName.Style.Add("width", width + "px");
+            
+            txtLastName.Text = profileObj.LastName;
+            width = 28 * (txtLastName.Text.Length + 1) / 2;
+            txtLastName.Style.Add("width", width + "px");
+
+            lblGender.Text = profileObj.Gender;
+
             txtAge.Text = profileObj.Age.ToString();
+            width = 16 * (txtAge.Text.Length + 1) / 2;
+            txtAge.Style.Add("width", width + "px");
+
             txtHeightFeet.Text = profileObj.Height.Split('|')[0];
+            width = 16 * (txtHeightFeet.Text.Length + 1) / 2;
+            txtHeightFeet.Style.Add("width", width + "px");
+
             txtHeightIn.Text = profileObj.Height.Split('|')[1];
+            width = 16 * (txtHeightIn.Text.Length + 1) / 2;
+            txtHeightIn.Style.Add("width", width + "px");
+
             txtWeight.Text = profileObj.Weight.ToString();
+            width = 16 * (txtWeight.Text.Length + 1) / 2;
+            txtWeight.Style.Add("width", width + "px");
+
             txtOccupation.Text = profileObj.Occupation;
+            width = 16 * (txtOccupation.Text.Length + 1) / 2;
+            txtOccupation.Style.Add("width", width + "px");
+
             lblCommitment.Text = profileObj.Commitment;
             lblHaveKids.Text = profileObj.HaveKids;
             lblWantKids.Text = profileObj.WantKids;
             txtInterests.Text = profileObj.Interests;
             txtDescription.Text = profileObj.Description;
+
             txtPhone.Text = profileObj.PhoneNumber;
+            width = 16 * (txtPhone.Text.Length + 1) / 2;
+            txtPhone.Style.Add("width", width + "px");
+
             txtEmail.Text = profileObj.Email;
+            width = 16 * (txtEmail.Text.Length + 1) / 2;
+            txtEmail.Style.Add("width", width + "px");
+
             txtAddress.Text = profileObj.Address;
+            width = 16 * (txtAddress.Text.Length + 1) / 2;
+            txtAddress.Style.Add("width", width + "px");
+
             txtCity.Text = profileObj.City;
+            width = 16 * (txtCity.Text.Length + 1) / 2;
+            txtCity.Style.Add("width", width + "px");
+
             lblState.Text = profileObj.State;
+
             txtZip.Text = profileObj.Zip.ToString();
+            width = 16 * (txtZip.Text.Length + 1) / 2;
+            txtZip.Style.Add("width", width + "px");
         }
 
         private void loadPrivacySettings(string username)
@@ -87,6 +133,7 @@ namespace TermProject
             ddPrivacyFirstName.SelectedValue = privacyObj.FirstName;
             ddPrivacyLastName.SelectedValue = privacyObj.LastName;
             ddPrivacyTitle.SelectedValue = privacyObj.Title;
+            ddPrivacyGender.SelectedValue = privacyObj.Gender;
             ddPrivacyAge.SelectedValue = privacyObj.Age;
             ddPrivacyHeight.SelectedValue = privacyObj.Height;
             ddPrivacyWeight.SelectedValue = privacyObj.Weight;
@@ -97,7 +144,7 @@ namespace TermProject
             ddPrivacyInterests.SelectedValue = privacyObj.Interests;
             ddPrivacyDescription.SelectedValue = privacyObj.Description;
         }
-
+        
         private string convertByteArrayToImage(string username)
         {
             DBConnect objDB = new DBConnect();
@@ -129,12 +176,18 @@ namespace TermProject
         private void enableEdit()
         {
             fileProfilePic.Visible = true;
+            txtFirstName.ReadOnly = false;
+            txtLastName.ReadOnly = false;
             txtTitle.ReadOnly = false;
             txtAge.ReadOnly = false;
             txtHeightFeet.ReadOnly = false;
             txtHeightIn.ReadOnly = false;
             txtWeight.ReadOnly = false;
             txtOccupation.ReadOnly = false;
+
+            lblGender.Visible = false;
+            drpGender.Visible = true;
+            drpGender.SelectedValue = lblGender.Text;
 
             lblCommitment.Visible = false;
             drpCommitment.Visible = true;
@@ -165,12 +218,16 @@ namespace TermProject
         private void disableEdit()
         {
             fileProfilePic.Visible = false;
+            txtFirstName.ReadOnly = true;
+            txtLastName.ReadOnly = true;
             txtTitle.ReadOnly = true;
             txtAge.ReadOnly = true;
             txtHeightFeet.ReadOnly = true;
             txtHeightIn.ReadOnly = true;
             txtWeight.ReadOnly = true;
             txtOccupation.ReadOnly = true;
+            lblGender.Visible = true;
+            drpGender.Visible = false;
             lblCommitment.Visible = true;
             drpCommitment.Visible = false;
             lblHaveKids.Visible = true;
@@ -203,56 +260,159 @@ namespace TermProject
         {
             lblErrorMsg.Text = string.Empty;
             lblErrorMsg.Visible = false;
-                        
             if (validateFields())
             {
-                UserProfile profileObj = new UserProfile();
-                profileObj.FirstName = lblFirstName.Text;
-                profileObj.LastName = lblLastName.Text;
-                profileObj.Title = txtTitle.Text;
-                profileObj.Age = int.Parse(txtAge.Text);
-                profileObj.Height = txtHeightFeet.Text + "|" + txtHeightIn.Text;
-                profileObj.Weight = int.Parse(txtWeight.Text);
-                profileObj.Occupation = txtOccupation.Text;
-                profileObj.Commitment = drpCommitment.SelectedValue;
-                profileObj.HaveKids = drpHaveKids.SelectedValue;
-                profileObj.WantKids = drpWantKids.SelectedValue;
-                profileObj.Interests = txtInterests.Text;
-                profileObj.Description = txtDescription.Text;
-                profileObj.PhoneNumber = txtPhone.Text;
-                profileObj.Email = txtEmail.Text;
-                profileObj.Address = txtAddress.Text;
-                profileObj.City = txtCity.Text;
-                profileObj.State = ddState.SelectedValue;
-                profileObj.Zip = int.Parse(txtZip.Text);
+                disableEdit();
+                modifyProfile();
+                modifyPrivacy();
+                loadProfile(Session["RequestedProfile"].ToString());
+                loadPrivacySettings(Session["RequestedProfile"].ToString());
+            }
+        }
 
-                JavaScriptSerializer js = new JavaScriptSerializer();
-                string jsonProfileObj = js.Serialize(profileObj);
+        private void modifyProfile()
+        {
+            UserProfile profileObj = new UserProfile();
+            profileObj.FirstName = txtFirstName.Text;
+            profileObj.LastName = txtLastName.Text;
+            profileObj.Title = txtTitle.Text;
+            profileObj.Gender = drpGender.SelectedValue;
+            profileObj.Age = int.Parse(txtAge.Text);
+            profileObj.Height = txtHeightFeet.Text + "|" + txtHeightIn.Text;
+            profileObj.Weight = int.Parse(txtWeight.Text);
+            profileObj.Occupation = txtOccupation.Text;
+            profileObj.Commitment = drpCommitment.SelectedValue;
+            profileObj.HaveKids = drpHaveKids.SelectedValue;
+            profileObj.WantKids = drpWantKids.SelectedValue;
+            profileObj.Interests = txtInterests.Text;
+            profileObj.Description = txtDescription.Text;
+            profileObj.PhoneNumber = txtPhone.Text;
+            profileObj.Email = txtEmail.Text;
+            profileObj.Address = txtAddress.Text;
+            profileObj.City = txtCity.Text;
+            profileObj.State = ddState.SelectedValue;
+            profileObj.Zip = int.Parse(txtZip.Text);
 
-                try
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            string jsonProfileObj = js.Serialize(profileObj);
+
+            try
+            {
+                string url = "https://localhost:44369/api/DatingService/Profiles/ModifyProfile/" + Session["Username"].ToString();
+                WebRequest request = WebRequest.Create(url);
+                request.Method = "PUT";
+                request.ContentLength = jsonProfileObj.Length;
+                request.ContentType = "application/json";
+
+                //Write the JSON data to the Web Request
+                StreamWriter writer = new StreamWriter(request.GetRequestStream());
+                writer.Write(jsonProfileObj);
+                writer.Flush();
+                writer.Close();
+
+                //Read the data from the Web Response
+                WebResponse response = request.GetResponse();
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                string data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                if (data != "true")
                 {
-
+                    lblErrorMsg.Text += "*A problem occured while updating your profile. <br />";
                 }
-                catch
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text += "*Error: " + ex.Message + "<br />";
+            }
+        }
+
+        private void modifyPrivacy()
+        {
+            UserPrivacySettings settings = new UserPrivacySettings();
+            settings.ProfilePic = ddPrivacyProfilePic.SelectedValue;
+            settings.FirstName = ddPrivacyFirstName.SelectedValue;
+            settings.LastName = ddPrivacyLastName.SelectedValue;
+            settings.Title = ddPrivacyTitle.SelectedValue;
+            settings.Age = ddPrivacyAge.SelectedValue;
+            settings.Height = ddPrivacyHeight.SelectedValue;
+            settings.Weight = ddPrivacyWeight.SelectedValue;
+            settings.Occupation = ddPrivacyOccupation.SelectedValue;
+            settings.Commitment = ddPrivacyCommitment.SelectedValue;
+            settings.HaveKids = ddPrivacyHaveKids.SelectedValue;
+            settings.WantKids = ddPrivacyWantKids.SelectedValue;
+            settings.Interests = ddPrivacyInterests.SelectedValue;
+            settings.Description = ddPrivacyDescription.SelectedValue;
+            settings.Gender = ddPrivacyGender.SelectedValue;
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            string jsonPrivacyObj = js.Serialize(settings);
+
+            try
+            {
+                string url = "https://localhost:44369/api/DatingService/Profiles/ModifyPrivacySettings/" + Session["Username"].ToString();
+                WebRequest request = WebRequest.Create(url);
+                request.Method = "PUT";
+                request.ContentLength = jsonPrivacyObj.Length;
+                request.ContentType = "application/json";
+
+                //Write the JSON data to the Web Request
+                StreamWriter writer = new StreamWriter(request.GetRequestStream());
+                writer.Write(jsonPrivacyObj);
+                writer.Flush();
+                writer.Close();
+
+                //Read the data from the Web Response
+                WebResponse response = request.GetResponse();
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                string data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                if (data != "true")
                 {
-
+                    lblErrorMsg.Text += "*A problem occured while updating your privacy settings. <br />";
                 }
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text += "*Error: " + ex.Message + "<br />";
             }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
+            btnEditProfile.Visible = true;
+            btnMemberView.Visible = true;
+            btnSaveChanges.Visible = false;
+            btnCancel.Visible = false;
             disableEdit();
             loadProfile(Session["RequestedProfile"].ToString());
+            loadPrivacySettings(Session["RequestedProfile"].ToString());
         }
 
         private bool validateFields()
         {
-            bool valid = true;            
+            bool valid = true;
+            if(string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a valid name. <br />";
+                lblErrorMsg.Visible = true;
+            }
             if (string.IsNullOrWhiteSpace(txtTitle.Text))
             {
                 valid = false;
                 lblErrorMsg.Text += "*Please enter a title. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if(drpGender.SelectedIndex == 0)
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please select a gender. <br />";
                 lblErrorMsg.Visible = true;
             }
             int age;

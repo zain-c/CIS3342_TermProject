@@ -27,7 +27,7 @@ namespace TP_WebAPI.Controllers
 
             string[] searchArray = searchParameters.Split('|');
             User tempUser = new User();
-            int userID = tempUser.getUserID(username);
+            //int userID = tempUser.getUserID(username);
 
             UserProfile profile = new UserProfile();
              
@@ -42,7 +42,7 @@ namespace TP_WebAPI.Controllers
 
             string[] searchArray = searchParameters.Split('|');
             User tempUser = new User();
-            int userID = tempUser.getUserID(username);
+            int userID = tempUser.getUserID("");
 
             UserProfile profile = new UserProfile();
 
