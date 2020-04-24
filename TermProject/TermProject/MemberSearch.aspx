@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Search" Language="C#" MasterPageFile="~/Access.Master" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="TermProject.Search" %>
+﻿<%@ Page Title="Search" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="MemberSearch.aspx.cs" Inherits="TermProject.Search" %>
 
 <%@ Register Src="~/ProfileDisplay.ascx" TagName="ProfileDisplay" TagPrefix="uc1" %>
 
