@@ -13,5 +13,12 @@ namespace TermProject
         {
 
         }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string searchParameters = txtLocationFilter.Text + "|" + ddStateFilter.SelectedValue + "|" + ddGenderFilter.SelectedValue;
+
+
+        }
     }
 }

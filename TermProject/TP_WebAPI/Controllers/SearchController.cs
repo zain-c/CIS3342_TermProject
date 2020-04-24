@@ -15,10 +15,17 @@ namespace TP_WebAPI.Controllers
     [ApiController]
     public class SearchController : Controller
     {
+        
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value" + id;
+        }
         //searchParameters are passed in as a bar (|) delimited string. Search fields are 
         //ordered from left to right, top to bottom.
 
 
+        
         [HttpGet("LoadSearchResults/Member")]
         public List<UserProfile> loadMemberSearch(string searchParameters)
         {
@@ -36,22 +43,22 @@ namespace TP_WebAPI.Controllers
         }
 
         [HttpGet("LoadSearchResults/Nonmember/{searchParameters}")]
-        public List<UserProfile> loadNonmemberSearch(string searchParameters)
+        public List<UserProfile> loadNonmemberSearch(string city, string state, string gender)
         {
             //Parameters: City|State|Gender
             List<UserProfile> profiles = new List<UserProfile>();
             UserProfile profile;
 
-            string[] searchArray = searchParameters.Split('|');
+            
 
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "TP_NonMemberSearch";
 
-            objCmd.Parameters.AddWithValue("@city", searchArray[0]);
-            objCmd.Parameters.AddWithValue("@state", searchArray[1]);
-            objCmd.Parameters.AddWithValue("@gender", searchArray[2]);
+            objCmd.Parameters.AddWithValue("@city", city);
+            objCmd.Parameters.AddWithValue("@state", state);
+            objCmd.Parameters.AddWithValue("@gender", gender);
 
             DataSet searchResultsDS = objDB.GetDataSetUsingCmdObj(objCmd);
             

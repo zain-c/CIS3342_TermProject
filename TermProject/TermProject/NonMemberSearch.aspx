@@ -88,7 +88,7 @@
                         </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>
-                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="searchButton" /> <br /><br />
+                <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="searchButton" /> <br /><br />
              </div>
              <div id="results">
                   <asp:GridView ID="gvSearchResults" runat="server" HorizontalAlign="Center" AutoGenerateColumns="false" GridLines="Both" AllowPaging="True" PageSize="6">

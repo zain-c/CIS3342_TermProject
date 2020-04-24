@@ -15,12 +15,12 @@ namespace TP_WebAPI.Controllers
     [ApiController]
     public class DatingProfileController : ControllerBase
     {
-        //[HttpGet]
-        //public string Test()
-        //{
-        //    int value = 10;
-        //    return "value: " + value;
-        //}
+        [HttpGet]
+        public string Test()
+        {
+            int value = 10;
+            return "value: " + value;
+        }
 
         [HttpGet("LoadUserProfile/{username}")]
         public UserProfile loadProfile(string username)
@@ -43,16 +43,6 @@ namespace TP_WebAPI.Controllers
             return privacySettings.retrievePrivacySettings(userID);
         }
 
-        [HttpPut("ModifyProfile/{username}")]
-        public bool modifyProfile(string username, [FromBody] UserProfile profile)
-        {
-            if (profile != null)
-            {
-                DBConnect objDB = new DBConnect();
-                SqlCommand objCmd = new SqlCommand();
-                objCmd.CommandType = CommandType.StoredProcedure;
-                objCmd.CommandText = "";
-            }
-        }
+        
     }
 }
