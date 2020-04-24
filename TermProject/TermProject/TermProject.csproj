@@ -111,6 +111,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="LikedPassList.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="LoginRecovery.aspx" />
     <Content Include="NonMemberSearch.aspx" />
@@ -132,6 +133,13 @@
     </Compile>
     <Compile Include="Access.Master.designer.cs">
       <DependentUpon>Access.Master</DependentUpon>
+    </Compile>
+    <Compile Include="LikedPassList.aspx.cs">
+      <DependentUpon>LikedPassList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LikedPassList.aspx.designer.cs">
+      <DependentUpon>LikedPassList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

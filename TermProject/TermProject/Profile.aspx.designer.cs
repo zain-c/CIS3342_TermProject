@@ -103,22 +103,22 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.FileUpload fileProfilePic;
         
         /// <summary>
-        /// lblFirstName control.
+        /// txtFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFirstName;
+        protected global::System.Web.UI.WebControls.TextBox txtFirstName;
         
         /// <summary>
-        /// lblLastName control.
+        /// txtLastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLastName;
+        protected global::System.Web.UI.WebControls.TextBox txtLastName;
         
         /// <summary>
         /// txtTitle control.
@@ -130,6 +130,42 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.TextBox txtTitle;
         
         /// <summary>
+        /// lblGender1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGender1;
+        
+        /// <summary>
+        /// lblGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGender;
+        
+        /// <summary>
+        /// drpGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpGender;
+        
+        /// <summary>
+        /// lblAge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAge;
+        
+        /// <summary>
         /// txtAge control.
         /// </summary>
         /// <remarks>
@@ -137,6 +173,15 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAge;
+        
+        /// <summary>
+        /// lblHeight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHeight;
         
         /// <summary>
         /// txtHeightFeet control.
@@ -148,6 +193,15 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.TextBox txtHeightFeet;
         
         /// <summary>
+        /// lblFeet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFeet;
+        
+        /// <summary>
         /// txtHeightIn control.
         /// </summary>
         /// <remarks>
@@ -155,6 +209,24 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtHeightIn;
+        
+        /// <summary>
+        /// lblInches control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblInches;
+        
+        /// <summary>
+        /// lblWeight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblWeight;
         
         /// <summary>
         /// txtWeight control.
@@ -166,6 +238,15 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.TextBox txtWeight;
         
         /// <summary>
+        /// lblOccupation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOccupation;
+        
+        /// <summary>
         /// txtOccupation control.
         /// </summary>
         /// <remarks>
@@ -173,6 +254,15 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtOccupation;
+        
+        /// <summary>
+        /// lblCommitment1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCommitment1;
         
         /// <summary>
         /// lblCommitment control.
@@ -193,6 +283,15 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.DropDownList drpCommitment;
         
         /// <summary>
+        /// lblHaveKids1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHaveKids1;
+        
+        /// <summary>
         /// lblHaveKids control.
         /// </summary>
         /// <remarks>
@@ -209,6 +308,15 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpHaveKids;
+        
+        /// <summary>
+        /// lblWantKids1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblWantKids1;
         
         /// <summary>
         /// lblWantKids control.
@@ -229,6 +337,15 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.DropDownList drpWantKids;
         
         /// <summary>
+        /// lblInterests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblInterests;
+        
+        /// <summary>
         /// txtInterests control.
         /// </summary>
         /// <remarks>
@@ -236,6 +353,15 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInterests;
+        
+        /// <summary>
+        /// lblDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDescription;
         
         /// <summary>
         /// txtDescription control.
@@ -247,15 +373,6 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
         
         /// <summary>
-        /// contactInfo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl contactInfo;
-        
-        /// <summary>
         /// UpdatePanel2 control.
         /// </summary>
         /// <remarks>
@@ -263,6 +380,15 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        
+        /// <summary>
+        /// contactInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl contactInfo;
         
         /// <summary>
         /// txtPhone control.
@@ -389,6 +515,15 @@ namespace TermProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddPrivacyTitle;
+        
+        /// <summary>
+        /// ddPrivacyGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddPrivacyGender;
         
         /// <summary>
         /// ddPrivacyAge control.

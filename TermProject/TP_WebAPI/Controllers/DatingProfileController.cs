@@ -43,6 +43,36 @@ namespace TP_WebAPI.Controllers
             return privacySettings.retrievePrivacySettings(userID);
         }
 
-        
+        [HttpPost("ModifyProfile/{username}")]
+        public bool modifyProfile(string username, [FromBody] UserProfile profile)
+        {
+            if (profile != null)
+            {
+                User tempUser = new User();
+                int userID = tempUser.getUserID(username);
+                UserProfile tempProfile = new UserProfile();
+                return tempProfile.modifyUserProfile(profile, userID);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        [HttpPost("ModifyPrivacySettings/{username}")]
+        public bool modifyPrivacySettings([FromBody] UserPrivacySettings settings, string username)
+        {
+            if(settings != null)
+            {
+                User tempUser = new User();
+                int userID = tempUser.getUserID(username);
+                UserPrivacySettings tempSettings = new UserPrivacySettings();
+                return tempSettings.modifyPrivacySettings(settings, userID);
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
