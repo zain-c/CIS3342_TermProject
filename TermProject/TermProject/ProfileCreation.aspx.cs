@@ -17,10 +17,10 @@ namespace TermProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (string.IsNullOrEmpty((string)Session["Username"]))
-            //{
-            //    Response.Redirect("Search.aspx");
-            //}
+            if (string.IsNullOrEmpty((string)Session["Username"]))
+            {
+                Response.Redirect("Login.aspx");
+            }
         }
 
         protected void btnSaveProfile_Click(object sender, EventArgs e)
@@ -66,7 +66,7 @@ namespace TermProject
                                                        txtTitle.Text, commitment, haveKids, wantKids,txtInterests.Text, txtDescription.Text, userID, gender);
                             result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
                                                             defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
-                                                            defaultPrivacySetting, defaultPrivacySetting, userID);
+                                                            defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, userID);
                             if(result == 2)
                             {
                                 //User profile created successfully
@@ -87,7 +87,7 @@ namespace TermProject
                                                    txtTitle.Text, commitment, haveKids, wantKids, txtInterests.Text, txtDescription.Text, userID, gender);
                         result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
                                                             defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
-                                                            defaultPrivacySetting, defaultPrivacySetting, userID);
+                                                            defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, userID);
                         if (result == 2)
                         {
                             //User profile created successfully

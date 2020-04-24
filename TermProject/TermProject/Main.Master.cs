@@ -17,7 +17,7 @@ namespace TermProject
         protected void btnLogOut_Click(object sender, EventArgs e)
         {
             Session.Abandon();
-            Response.Redirect("Search.aspx");
+            Response.Redirect("Login.aspx");
         }
 
         protected void btnProfile_Click(object sender, EventArgs e)

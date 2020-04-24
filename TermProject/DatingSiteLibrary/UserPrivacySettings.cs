@@ -25,6 +25,7 @@ namespace DatingSiteLibrary
         string wantKids;
         string interests;
         string description;
+        string gender;
 
         public UserPrivacySettings()
         {
@@ -32,7 +33,8 @@ namespace DatingSiteLibrary
         }
 
         public int addUserSettingsToDB(string _profilePic, string _firstName, string _lastName, string _title, string _age, string _height, string _weight,
-                                       string _occupation, string _commitment, string _haveKids, string _wantKids, string _interests, string _description, int userID)
+                                       string _occupation, string _commitment, string _haveKids, string _wantKids, string _interests, string _description, string gender,
+                                       int userID)
         {
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();
@@ -52,6 +54,7 @@ namespace DatingSiteLibrary
             objCmd.Parameters.AddWithValue("@wantKids", _wantKids);
             objCmd.Parameters.AddWithValue("@interests", _interests);
             objCmd.Parameters.AddWithValue("@description", _description);
+            objCmd.Parameters.AddWithValue("@gender", gender);
             objCmd.Parameters.AddWithValue("@userID", userID);
 
             int result = objDB.DoUpdateUsingCmdObj(objCmd);
@@ -84,8 +87,51 @@ namespace DatingSiteLibrary
                 privacySettings.WantKids = privacyDT.Rows[0]["WantKids"].ToString();
                 privacySettings.Interests = privacyDT.Rows[0]["Interests"].ToString();
                 privacySettings.Description = privacyDT.Rows[0]["Description"].ToString();
+                privacySettings.Gender = privacyDT.Rows[0]["Gender"].ToString();
             }
             return privacySettings;
+        }
+
+        public bool modifyPrivacySettings(UserPrivacySettings privacySettings, int userID)
+        {
+            if(privacySettings != null)
+            {
+                int result = 0;
+                DBConnect objDB = new DBConnect();
+                SqlCommand objCmd = new SqlCommand();
+                objCmd.CommandType = CommandType.StoredProcedure;
+                objCmd.CommandText = "TP_ModifyPrivacySettings";
+
+                objCmd.Parameters.AddWithValue("@profilePic", privacySettings.ProfilePic);
+                objCmd.Parameters.AddWithValue("@firstName", privacySettings.FirstName);
+                objCmd.Parameters.AddWithValue("@lastName", privacySettings.LastName);
+                objCmd.Parameters.AddWithValue("@title", privacySettings.Title);
+                objCmd.Parameters.AddWithValue("@age", privacySettings.Age);
+                objCmd.Parameters.AddWithValue("@height", privacySettings.Height);
+                objCmd.Parameters.AddWithValue("@weight", privacySettings.Weight);
+                objCmd.Parameters.AddWithValue("@occupation", privacySettings.Occupation);
+                objCmd.Parameters.AddWithValue("@commitment", privacySettings.Commitment);
+                objCmd.Parameters.AddWithValue("@haveKids", privacySettings.HaveKids);
+                objCmd.Parameters.AddWithValue("@wantKids", privacySettings.WantKids);
+                objCmd.Parameters.AddWithValue("@interests", privacySettings.Interests);
+                objCmd.Parameters.AddWithValue("@description", privacySettings.Description);
+                objCmd.Parameters.AddWithValue("@gender", privacySettings.Gender);
+                objCmd.Parameters.AddWithValue("@userID", userID);
+
+                result += objDB.DoUpdateUsingCmdObj(objCmd);
+                if(result == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public string ProfilePic
@@ -163,6 +209,12 @@ namespace DatingSiteLibrary
         {
             get { return description; }
             set { description = value; }
+        }
+
+        public string Gender
+        {
+            get { return gender; }
+            set { gender = value; }
         }
     }
 }

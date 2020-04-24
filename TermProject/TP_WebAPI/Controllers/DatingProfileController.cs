@@ -15,12 +15,12 @@ namespace TP_WebAPI.Controllers
     [ApiController]
     public class DatingProfileController : ControllerBase
     {
-        //[HttpGet]
-        //public string Test()
-        //{
-        //    int value = 10;
-        //    return "value: " + value;
-        //}
+        [HttpGet]
+        public string Test()
+        {
+            int value = 10;
+            return "value: " + value;
+        }
 
         [HttpGet("LoadUserProfile/{username}")]
         public UserProfile loadProfile(string username)
@@ -43,15 +43,35 @@ namespace TP_WebAPI.Controllers
             return privacySettings.retrievePrivacySettings(userID);
         }
 
-        [HttpPut("ModifyProfile/{username}")]
+        [HttpPost("ModifyProfile/{username}")]
         public bool modifyProfile(string username, [FromBody] UserProfile profile)
         {
             if (profile != null)
             {
-                DBConnect objDB = new DBConnect();
-                SqlCommand objCmd = new SqlCommand();
-                objCmd.CommandType = CommandType.StoredProcedure;
-                objCmd.CommandText = "";
+                User tempUser = new User();
+                int userID = tempUser.getUserID(username);
+                UserProfile tempProfile = new UserProfile();
+                return tempProfile.modifyUserProfile(profile, userID);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        [HttpPost("ModifyPrivacySettings/{username}")]
+        public bool modifyPrivacySettings([FromBody] UserPrivacySettings settings, string username)
+        {
+            if(settings != null)
+            {
+                User tempUser = new User();
+                int userID = tempUser.getUserID(username);
+                UserPrivacySettings tempSettings = new UserPrivacySettings();
+                return tempSettings.modifyPrivacySettings(settings, userID);
+            }
+            else
+            {
+                return false;
             }
         }
     }

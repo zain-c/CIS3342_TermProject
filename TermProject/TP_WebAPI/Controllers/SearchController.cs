@@ -29,6 +29,8 @@ namespace TP_WebAPI.Controllers
 
             
 
+            
+
             UserProfile profile = new UserProfile();
              
 
@@ -43,6 +45,7 @@ namespace TP_WebAPI.Controllers
             UserProfile profile;
 
             string[] searchArray = searchParameters.Split('|');
+
 
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();
