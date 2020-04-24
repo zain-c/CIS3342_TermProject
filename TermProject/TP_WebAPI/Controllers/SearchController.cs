@@ -44,15 +44,18 @@ namespace TP_WebAPI.Controllers
             return profiles;
         }
 
-        [HttpGet("LoadSearchResults/Nonmember/{searchParameters}")]
+        [HttpGet("LoadSearchResults/Nonmember/{city}/{state}/{gender}")]
         public List<UserProfile> loadNonmemberSearch(string city, string state, string gender)
         {
             //Parameters: City|State|Gender
             List<UserProfile> profiles = new List<UserProfile>();
             UserProfile profile;
 
-            
-
+           
+            if (gender.CompareTo("Both") == 0)
+            {
+                gender = "e";
+            }
 
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();

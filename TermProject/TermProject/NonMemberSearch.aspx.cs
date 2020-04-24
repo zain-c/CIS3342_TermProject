@@ -16,9 +16,32 @@ namespace TermProject
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            string searchParameters = txtLocationFilter.Text + "|" + ddStateFilter.SelectedValue + "|" + ddGenderFilter.SelectedValue;
+            
 
 
+        }
+
+        protected void validateFields()
+        {
+            bool valid = true;
+            if (string.IsNullOrWhiteSpace(txtLocationFilter.Text) || (txtLocationFilter.Text.Length > 50))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a valid City. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if (ddStateFilter.SelectedIndex == 0)
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please select a state. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if (ddGenderFilter.SelectedIndex == 0)
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please select a gender preference. <br />";
+                lblErrorMsg.Visible = true;
+            }
         }
     }
 }
