@@ -24,6 +24,40 @@ namespace DatingSiteLibrary
             set { list = value; }
         }
 
+        public int addPassToDB(int userID, int passedUserID)
+        {
+            int result = 0;
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+
+
+            PassedList tempPasses = new PassedList();
+            string passList;
+            User tempUser = new User();
+            //int passedUserID = tempUser.getUserID(passedProfile);
+            try
+            {
+                passList = tempPasses.getPasses(userID).List;
+                passList += "|" + passedUserID + "|";
+
+                objCmd.CommandText = "TP_ModifyPasses";
+                objCmd.Parameters.AddWithValue("@passed", passList);
+                objCmd.Parameters.AddWithValue("@passedBy", userID);
+                result = objDB.DoUpdateUsingCmdObj(objCmd);
+            }
+            catch (NullReferenceException)
+            {
+                //list of passed list is empty, so add the first pass
+                passList = passedUserID + "|";
+                objCmd.CommandText = "TP_AddPass";
+                objCmd.Parameters.AddWithValue("@passed", passList);
+                objCmd.Parameters.AddWithValue("@passedBy", userID);
+                result = objDB.DoUpdateUsingCmdObj(objCmd);
+            }
+            return result;
+        }
+
         public PassedList getPasses(int userID)
         {
             DBConnect objDB = new DBConnect();

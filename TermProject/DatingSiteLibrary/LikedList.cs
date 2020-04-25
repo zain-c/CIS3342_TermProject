@@ -23,6 +23,41 @@ namespace DatingSiteLibrary
             get { return list; }
             set { list = value; }
         }
+        
+
+        public int addLikeToDB(int userID, int likedUserID)
+        {
+            int result = 0;
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            
+            
+            LikedList tempLikes = new LikedList();
+            string likeList;
+            User tempUser = new User();
+            //int likedUserID = tempUser.getUserID(likedProfile);
+            try
+            {
+                likeList = tempLikes.getLikes(userID).List;
+                likeList += "|" + likedUserID + "|";
+
+                objCmd.CommandText = "TP_ModifyLikes";
+                objCmd.Parameters.AddWithValue("@liked", likeList);
+                objCmd.Parameters.AddWithValue("@likedBy", userID);
+                result = objDB.DoUpdateUsingCmdObj(objCmd);
+            }
+            catch (NullReferenceException)
+            {
+                //list of likes is empty, so add the first like
+                likeList = likedUserID + "|";
+                objCmd.CommandText = "TP_AddLike";
+                objCmd.Parameters.AddWithValue("@liked", likeList);
+                objCmd.Parameters.AddWithValue("@likedBy", userID);
+                result = objDB.DoUpdateUsingCmdObj(objCmd);
+            }
+            return result;
+        }
 
         public LikedList getLikes(int userID)
         {

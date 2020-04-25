@@ -128,5 +128,27 @@ namespace TP_WebAPI.Controllers
                 return false;
             }
         }
+
+        [HttpPut("AddLikes/{username}/{likedProfileUsername}")]
+        public int addLikes(string username, string likedProfileUsername)
+        {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+            int likedUserID = tempUser.getUserID(likedProfileUsername);
+
+            LikedList tempLikes = new LikedList();
+            return tempLikes.addLikeToDB(userID, likedUserID);
+        }
+
+        [HttpPut("AddPasses/{username}/{passedProfileUsername}")]
+        public int addPasses(string username, string passedProfileUsername)
+        {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+            int passedUserID = tempUser.getUserID(passedProfileUsername);
+
+            PassedList tempPasses = new PassedList();  
+            return tempPasses.addPassToDB(userID, passedUserID);
+        }
     }
 }

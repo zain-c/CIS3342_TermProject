@@ -48,7 +48,7 @@ namespace TermProject
             {
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 List<ProfileDisplayClass> likedUserProfiles = js.Deserialize<List<ProfileDisplayClass>>(data);
-                Table tblLikes = generateProfileListTable(likedUserProfiles);
+                Table tblLikes = generateLikesListTable(likedUserProfiles);
                 likes.Controls.Add(tblLikes);
             }            
         }
@@ -75,7 +75,7 @@ namespace TermProject
             {
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 List<ProfileDisplayClass> passedUserProfiles = js.Deserialize<List<ProfileDisplayClass>>(data);
-                Table tblPasses = generateProfileListTable(passedUserProfiles);
+                Table tblPasses = generatePassesListTable(passedUserProfiles);
                 passes.Controls.Add(tblPasses);
             }
         }
@@ -92,13 +92,21 @@ namespace TermProject
 
             objCmd.Parameters.AddWithValue("@userID", userID);
             DataSet profilePicDS = objDB.GetDataSetUsingCmdObj(objCmd);
-            byte[] imageData = (byte[])objDB.GetField("Photo", 0);
+            string imageUrl;
+            if (objDB.GetField("Photo", 0) == DBNull.Value)
+            {
+                imageUrl = null;
+            }
+            else
+            {
+                byte[] imageData = (byte[])objDB.GetField("Photo", 0);
+                imageUrl = "data:image/jpg;base64," + Convert.ToBase64String(imageData);
 
-            string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String(imageData);
+            }
             return imageUrl;
         }
 
-        private Table generateProfileListTable(List<ProfileDisplayClass> userProfiles)
+        private Table generateLikesListTable(List<ProfileDisplayClass> userProfiles)
         {
             Table tblProfileList = new Table();
             tblProfileList.HorizontalAlign = HorizontalAlign.Center;
@@ -112,7 +120,7 @@ namespace TermProject
                 row = new TableRow();
                 cell = new TableCell();
                 profileDisplay = (ProfileDisplay)LoadControl("ProfileDisplay.ascx");
-                profileDisplay.ID = "pdProfile" + i;
+                profileDisplay.ID = "pdProfileLikes" + i;
                 profileDisplay.Username = userProfiles[i].Username;
                 profileDisplay.FirstName = userProfiles[i].FirstName;
                 profileDisplay.LastName = userProfiles[i].LastName;
@@ -125,6 +133,35 @@ namespace TermProject
                 tblProfileList.Rows.Add(row);
             }
             return tblProfileList;        
+        }
+
+        private Table generatePassesListTable(List<ProfileDisplayClass> userProfiles)
+        {
+            Table tblProfileList = new Table();
+            tblProfileList.HorizontalAlign = HorizontalAlign.Center;
+            tblProfileList.GridLines = GridLines.Horizontal;
+            TableRow row = null;
+            TableCell cell = null;
+            ProfileDisplay profileDisplay = null;
+
+            for (int i = 0; i < userProfiles.Count; i++)
+            {
+                row = new TableRow();
+                cell = new TableCell();
+                profileDisplay = (ProfileDisplay)LoadControl("ProfileDisplay.ascx");
+                profileDisplay.ID = "pdProfilePass" + i;
+                profileDisplay.Username = userProfiles[i].Username;
+                profileDisplay.FirstName = userProfiles[i].FirstName;
+                profileDisplay.LastName = userProfiles[i].LastName;
+                profileDisplay.Title = userProfiles[i].Title;
+                profileDisplay.Age = userProfiles[i].Age;
+                profileDisplay.ImageUrl = convertByteArrayToImage(userProfiles[i].Username);
+                Button viewProfile = (Button)profileDisplay.FindControl("btnViewProfile");
+                cell.Controls.Add(profileDisplay);
+                row.Cells.Add(cell);
+                tblProfileList.Rows.Add(row);
+            }
+            return tblProfileList;
         }
     }
 }
