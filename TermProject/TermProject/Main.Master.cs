@@ -23,6 +23,12 @@ namespace TermProject
         protected void btnProfile_Click(object sender, EventArgs e)
         {
             Session["RequestedProfile"] = Session["Username"].ToString();
+            Response.Redirect("Profile.aspx");
+        }
+
+        protected void btnLikedPassList_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LikedPassList.aspx");
         }
     }
 }

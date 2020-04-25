@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -41,6 +42,59 @@ namespace TP_WebAPI.Controllers
 
             UserPrivacySettings privacySettings = new UserPrivacySettings();
             return privacySettings.retrievePrivacySettings(userID);
+        }
+
+        [HttpGet("LoadLikedList/{username}")]
+        public List<ProfileDisplayClass> loadLikedList(string username)
+        {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+
+            LikedList tempList = new LikedList();
+            try
+            {
+                string listOfLikes = tempList.getLikes(userID).List;
+                int[] likedUserIDs = Array.ConvertAll(listOfLikes.Split('|'), int.Parse);
+
+                List<ProfileDisplayClass> likedUserProfiles = new List<ProfileDisplayClass>();
+                foreach (int id in likedUserIDs)
+                {
+                    ProfileDisplayClass profileDisplay = new ProfileDisplayClass();
+                    likedUserProfiles.Add(profileDisplay.retreiveProfileDisplayFromDB(id));
+                }
+                return likedUserProfiles;
+            }
+            catch(NullReferenceException)
+            {
+                return null;
+            }
+            
+        }
+
+        [HttpGet("LoadPassList/{username}")]
+        public List<ProfileDisplayClass> loadPassList(string username)
+        {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+
+            PassedList tempList = new PassedList();
+            try
+            {
+                string listOfPasses = tempList.getPasses(userID).List;
+                int[] passedUserIDs = Array.ConvertAll(listOfPasses.Split('|'), int.Parse);
+
+                List<ProfileDisplayClass> passedUserProfiles = new List<ProfileDisplayClass>();
+                foreach (int id in passedUserIDs)
+                {
+                    ProfileDisplayClass profileDisplay = new ProfileDisplayClass();
+                    passedUserProfiles.Add(profileDisplay.retreiveProfileDisplayFromDB(id));
+                }
+                return passedUserProfiles;
+            }
+            catch(NullReferenceException)
+            {
+                return null;
+            }
         }
 
         [HttpPost("ModifyProfile/{username}")]
