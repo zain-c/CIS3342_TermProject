@@ -79,8 +79,8 @@
                         <asp:TableCell>
                             Gender &nbsp
                             <asp:DropDownList ID="ddGenderFilter" runat="server">
-                                <%--<asp:ListItem Value="Select">Select Gender</asp:ListItem>--%>
-                                <asp:ListItem Value="N/A">N/A</asp:ListItem>
+                                <asp:ListItem Value="Select">Select Gender</asp:ListItem>
+                                <asp:ListItem Value="Both">Both</asp:ListItem>
                                 <asp:ListItem Value="Male">Male</asp:ListItem>
                                 <asp:ListItem Value="Female">Female</asp:ListItem>
 
@@ -88,7 +88,9 @@
                         </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>
-                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="searchButton" /> <br /><br />
+                <asp:Label ID="lblErrorMsg" runat="server" Text="" Visible="false"></asp:Label>
+                <br />
+                <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="searchButton" /> <br /><br />
              </div>
              <div id="results">
                   <asp:GridView ID="gvSearchResults" runat="server" HorizontalAlign="Center" AutoGenerateColumns="false" GridLines="Both" AllowPaging="True" PageSize="6">

@@ -162,10 +162,19 @@ namespace TermProject
 
             objCmd.Parameters.AddWithValue("@userID", userID);
             DataSet profilePicDS = objDB.GetDataSetUsingCmdObj(objCmd);
-            byte[] imageData = (byte[])objDB.GetField("Photo", 0);
-
-            string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String(imageData);
+            string imageUrl;
+            if (objDB.GetField("Photo", 0) == DBNull.Value)
+            {
+                imageUrl = null;
+            }
+            else
+            {
+                byte[] imageData = (byte[])objDB.GetField("Photo", 0);
+                imageUrl = "data:image/jpg;base64," + Convert.ToBase64String(imageData);
+                
+            }
             return imageUrl;
+
         }        
 
         protected void btnEditProfile_Click(object sender, EventArgs e)

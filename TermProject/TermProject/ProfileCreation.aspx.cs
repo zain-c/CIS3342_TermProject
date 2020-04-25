@@ -82,8 +82,9 @@ namespace TermProject
                     }
                     else //if no profile pic
                     {
+                        byte[] noImage = null;
                         //inserts 'null' for the imageData field
-                        result = profile.addUserProfileToDB(txtPhone.Text, null, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
+                        result = profile.addUserProfileToDB(txtPhone.Text, noImage, txtOccupation.Text, int.Parse(txtAge.Text), height, int.Parse(txtWeight.Text),
                                                    txtTitle.Text, commitment, haveKids, wantKids, txtInterests.Text, txtDescription.Text, userID, gender);
                         result += privacySettings.addUserSettingsToDB(defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
                                                             defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting, defaultPrivacySetting,
