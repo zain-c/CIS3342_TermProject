@@ -54,7 +54,7 @@ namespace TP_WebAPI.Controllers
            
             if (gender.CompareTo("Both") == 0)
             {
-                gender = "e";
+                gender = "e%";
             }
 
             DBConnect objDB = new DBConnect();
