@@ -13,39 +13,39 @@ namespace TermProject {
     public partial class LikedPassList {
         
         /// <summary>
-        /// lbLiked control.
+        /// likes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbLiked;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl likes;
         
         /// <summary>
-        /// lblVertBreak control.
+        /// lblLikes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblVertBreak;
+        protected global::System.Web.UI.WebControls.Label lblLikes;
         
         /// <summary>
-        /// lbPassed control.
+        /// passes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbPassed;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl passes;
         
         /// <summary>
-        /// DataList1 control.
+        /// lblPasses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList DataList1;
+        protected global::System.Web.UI.WebControls.Label lblPasses;
     }
 }

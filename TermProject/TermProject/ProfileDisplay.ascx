@@ -4,7 +4,18 @@
     <asp:Table ID="tblProfle" runat="server" BorderStyle="None" CellPadding="10">
         <asp:TableRow>
             <asp:TableCell RowSpan="4">
-                <asp:Image ID="imgProfilePic" runat="server" Height="160" Width="140" />
+                <asp:Image ID="imgProfilePic" runat="server" Height="180" Width="180" />
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow Visible="false">
+            <asp:TableCell>
+                <asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+            <asp:TableCell ColumnSpan="2">
+                <asp:Label ID="lblFirstName" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lblLastName" runat="server" Text=""></asp:Label>
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow>
@@ -14,7 +25,7 @@
         </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell ColumnSpan="2">
-                <asp:Label ID="lblAge" runat="server" Text="Age: "></asp:Label>
+                Age: <asp:Label ID="lblAge" runat="server" Text=""></asp:Label>
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow>
