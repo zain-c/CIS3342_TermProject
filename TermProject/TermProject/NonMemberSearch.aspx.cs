@@ -35,10 +35,11 @@ namespace TermProject
             if (validateFields())
             {
                 displayedSearchResults = loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue);
+                ShowResults(displayedSearchResults);
+
             }
 
-            ShowResults(displayedSearchResults);
-            
+
 
             /* FOR TESTING */
             /*

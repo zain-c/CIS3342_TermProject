@@ -41,14 +41,16 @@ namespace TermProject
                 if (validateFields())
                 {
                     displayedSearchResults = loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue, ddCommitmentFilter.SelectedValue, ddHaveKidsFilter.SelectedValue, ddWantKidsFilter.SelectedValue, blankOccupation);
+                    ShowResults(displayedSearchResults);
                 }
             }
             else if (validateFields())
             {
                 displayedSearchResults = loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue, ddCommitmentFilter.SelectedValue, ddHaveKidsFilter.SelectedValue, ddWantKidsFilter.SelectedValue, txtOccupationFilter.Text);
+                ShowResults(displayedSearchResults);
             }
 
-            ShowResults(displayedSearchResults);
+            
 
             /* FOR TESTING */
             /*
