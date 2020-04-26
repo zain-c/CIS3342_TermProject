@@ -20,7 +20,7 @@
                     <asp:TableRow>
                         <asp:TableCell>
                             City &nbsp
-                            <asp:TextBox ID="txtLocationFilter" runat="server"></asp:TextBox> <br /><br />
+                            <asp:TextBox ID="txtLocationFilter" MaxLength="50" runat="server"></asp:TextBox> <br /><br />
                             State &nbsp
                             <asp:DropDownList ID="ddStateFilter" runat="server">
                                 <asp:ListItem Value="Select">Select State</asp:ListItem>
@@ -92,17 +92,43 @@
                 <br />
                 <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="searchButton" /> <br /><br />
              </div>
-             <div id="results">
-                  <asp:GridView ID="gvSearchResults" runat="server" HorizontalAlign="Center" AutoGenerateColumns="false" GridLines="Both" AllowPaging="True" PageSize="6">
-                    <Columns>
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <uc1:ProfileDisplay ID="profileDisplay" runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
-             </div>
+             <div id="ResultsContainer" runat="server">
+                <Table id="ResultsTable">
+                    <tr>
+                        <th>UserName</th>                       
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>                        
+                        <th>City</th>
+                        <th>State</th>
+                    </tr>
+                
+                    <asp:Repeater ID="rptSearchResults" runat="server">
+                        <ItemTemplate>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="lblUsername" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "username") %>'></asp:Label>
+                                </td>                             
+                                <td>
+                                    <asp:Label ID="lblFirstName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "firstName") %>'></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:Label ID="lblLastName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "lastName") %>'></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:Label ID="lblGender" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "gender") %>'></asp:Label>
+                                </td>                              
+                                <td>
+                                    <asp:Label ID="lblCity" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "city") %>'></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:Label ID="lblState" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "state") %>'></asp:Label>
+                                </td>  
+                            </tr>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </table>
+                </div>
         </div>
 
 </asp:Content>

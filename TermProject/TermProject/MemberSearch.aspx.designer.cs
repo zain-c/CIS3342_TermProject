@@ -85,13 +85,22 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.DropDownList ddWantKidsFilter;
         
         /// <summary>
-        /// txtInterestsFilter control.
+        /// txtOccupationFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInterestsFilter;
+        protected global::System.Web.UI.WebControls.TextBox txtOccupationFilter;
+        
+        /// <summary>
+        /// lblErrorMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorMsg;
         
         /// <summary>
         /// btnSearch control.
@@ -103,12 +112,21 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// gvSearchResults control.
+        /// ResultsContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvSearchResults;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ResultsContainer;
+        
+        /// <summary>
+        /// rptSearchResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptSearchResults;
     }
 }

@@ -26,36 +26,61 @@ namespace TP_WebAPI.Controllers
 
 
         
-        [HttpGet("LoadSearchResults/Member")]
-        public List<UserProfile> loadMemberSearch(string searchParameters)
+        [HttpGet("LoadSearchResults/Member/{city}/{state}/{gender}/{commitment}/{haveKids}/{wantKids}/{occupation}")]
+        public List<MemberSearchResults> loadMemberSearch(string city, string state, string gender, string commitment, string haveKids, string wantKids, string occupation)
         {
-            //Parameters: City|State|Gender|Commitment|Have Kids|Want Kids|Interests
-            List<UserProfile> profiles = new List<UserProfile>();
+            //Parameters: City|State|Gender|Commitment|Have Kids|Want Kids|Occupation
+            List<MemberSearchResults> profiles = new List<MemberSearchResults>();
+            MemberSearchResults profile;
 
-            string[] searchArray = searchParameters.Split('|');
 
-            
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_MemberSearch";
 
-            
+            objCmd.Parameters.AddWithValue("@city", city);
+            objCmd.Parameters.AddWithValue("@state", state);
+            objCmd.Parameters.AddWithValue("@gender", gender);
+            objCmd.Parameters.AddWithValue("@commitment", commitment);
+            objCmd.Parameters.AddWithValue("@haveKids", haveKids);
+            objCmd.Parameters.AddWithValue("@wantKids", wantKids);
+            objCmd.Parameters.AddWithValue("@occupation", occupation);
 
-            UserProfile profile = new UserProfile();
-             
+            DataSet searchResultsDS = objDB.GetDataSetUsingCmdObj(objCmd);
+
+            foreach (DataRow result in searchResultsDS.Tables[0].Rows)
+            {
+                profile = new MemberSearchResults();
+                profile.Title = result["Title"].ToString();
+                profile.Username = result["Username"].ToString();
+                profile.FirstName = result["FirstName"].ToString();
+                profile.LastName = result["LastName"].ToString();
+                profile.City = result["HomeCity"].ToString();
+                profile.State = result["HomeState"].ToString();
+                profile.Gender = result["Gender"].ToString();
+                profile.Commitment = result["Commitment"].ToString();
+                profile.HaveKids = result["haveKids"].ToString();
+                profile.WantKids = result["wantKids"].ToString();
+                profile.Occupation = result["Occupation"].ToString();
+                //add photo
+                profiles.Add(profile);
+            }
+
+
 
             return profiles;
+
+            
         }
 
         [HttpGet("LoadSearchResults/Nonmember/{city}/{state}/{gender}")]
-        public List<UserProfile> loadNonmemberSearch(string city, string state, string gender)
+        public List<SearchResult> loadNonmemberSearch(string city, string state, string gender)
         {
             //Parameters: City|State|Gender
-            List<UserProfile> profiles = new List<UserProfile>();
-            UserProfile profile;
+            List<SearchResult> profiles = new List<SearchResult>();
+            SearchResult profile;
 
-           
-            if (gender.CompareTo("Both") == 0)
-            {
-                gender = "e%";
-            }
 
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();
@@ -70,7 +95,8 @@ namespace TP_WebAPI.Controllers
             
             foreach(DataRow result in searchResultsDS.Tables[0].Rows)
             {
-                profile = new UserProfile();
+                profile = new SearchResult();
+                profile.Username = result["Username"].ToString();
                 profile.FirstName = result["FirstName"].ToString();
                 profile.LastName = result["LastName"].ToString();
                 profile.City = result["HomeCity"].ToString();
