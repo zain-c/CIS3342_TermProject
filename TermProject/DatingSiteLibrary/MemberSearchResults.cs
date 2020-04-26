@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace DatingSiteLibrary
 {
-    class MemberSearchResults : SearchResult
+    public class MemberSearchResults : SearchResult
     {
         string title;
         string commitment;
         string haveKids;
         string wantKids;
-        string interests;
+        string occupation;
+        
 
         public MemberSearchResults()
         {
@@ -45,10 +46,10 @@ namespace DatingSiteLibrary
             set { wantKids = value; }
         }
 
-        public string Interests
+        public string Occupation
         {
-            get { return interests; }
-            set { interests = value; }
+            get { return occupation; }
+            set { occupation = value; }
         }
 
         
