@@ -703,7 +703,6 @@ namespace TermProject
             request.ContentLength = 0;
 
             WebResponse response = request.GetResponse();
-
             Stream theDataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(theDataStream);
             string data = reader.ReadToEnd();

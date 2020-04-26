@@ -70,8 +70,15 @@ namespace DatingSiteLibrary
             PassedList passedList = new PassedList();
             if (passesDS.Tables[0].Rows.Count > 0)
             {
-                passedList.List = passesDS.Tables[0].Rows[0]["Passed"].ToString().TrimEnd('|');
-                return passedList;
+                if (objDB.GetField("Passed", 0) == DBNull.Value)
+                {
+                    return null;
+                }
+                else
+                {
+                    passedList.List = passesDS.Tables[0].Rows[0]["Passed"].ToString().TrimEnd('|');
+                    return passedList;
+                }
             }
             else
             {

@@ -71,8 +71,15 @@ namespace DatingSiteLibrary
             LikedList likesList = new LikedList();
             if (likesDS.Tables[0].Rows.Count > 0)
             {
-                likesList.List = likesDS.Tables[0].Rows[0]["Liked"].ToString().TrimEnd('|');
-                return likesList;
+                if (objDB.GetField("Liked", 0) == DBNull.Value)
+                {
+                    return null;
+                }
+                else
+                {
+                    likesList.List = likesDS.Tables[0].Rows[0]["Liked"].ToString().TrimEnd('|');
+                    return likesList;
+                }
             }
             else
             {
