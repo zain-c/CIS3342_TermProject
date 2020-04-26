@@ -299,24 +299,40 @@ namespace TP_WebAPI.Controllers
 
             DateRequest tempRequest = new DateRequest();
             List<DateRequest> sentRequestList = tempRequest.getSentRequests(userIDFrom);
-            return sentRequestList;
+            return sentRequestList;            
+        }
 
-            //if (sentRequestList.Count == 0)
-            //{
-            //    return null;
-            //}
-            //else
-            //{
-            //    List<ProfileDisplayClass> sentRequestProfiles = new List<ProfileDisplayClass>();
-            //    foreach (DateRequest request in sentRequestList)
-            //    {
-            //        int userIDTo = request.UserIDTo;
+        [HttpGet("LoadReceivedDateRequests/{usernameTo}")]
+        public List<DateRequest> loadReceivedDateRequests(string usernameTo)
+        {
+            User tempUser = new User();
+            int userIDTo = tempUser.getUserID(usernameTo);
 
-            //        ProfileDisplayClass profileDisplay = new ProfileDisplayClass();
-            //        sentRequestProfiles.Add(profileDisplay.retreiveProfileDisplayFromDB(userIDTo));
-            //    }
-            //    return sentRequestProfiles;
-            //}
+            DateRequest tempRequest = new DateRequest();
+            List<DateRequest> receivedRequestList = tempRequest.getReceivedRequests(userIDTo);
+            return receivedRequestList;
+        }
+
+        [HttpPut("UpdateDateRequestStatus")]
+        public bool updateDateRequestStatus([FromBody]DateRequest dateRequest)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_UpdateDateRequestStatus";
+            objCmd.Parameters.AddWithValue("@status", dateRequest.Status);
+            objCmd.Parameters.AddWithValue("@requestFrom", dateRequest.UserIDFrom);
+            objCmd.Parameters.AddWithValue("@requestTo", dateRequest.UserIDTo);
+
+            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+            if(result == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
     }

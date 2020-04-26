@@ -777,20 +777,5 @@ namespace TermProject
                 lblErrorMsg.Visible = true;
             }
         }
-
-        protected void btnAccept_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnDecline_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnIgnore_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
