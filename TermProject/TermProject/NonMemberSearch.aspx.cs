@@ -60,7 +60,7 @@ namespace TermProject
 
         private void loadResults(string city, string state, string gender)
         {
-            string url = "https://localhost:44369/api/DatingService/Profiles/LoadUserProfile/" + city + "/" + state + "/" + gender;
+            string url = "https://localhost:44369/api/DatingService/Search/LoadSearchResults/Nonmember" + city + "/" + state + "/" + gender;
 
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
@@ -72,10 +72,26 @@ namespace TermProject
             response.Close();
 
             JavaScriptSerializer js = new JavaScriptSerializer();
-            UserProfile[] profileResults = js.Deserialize<UserProfile[]>(data);
+            SearchResult[] profileResults = js.Deserialize<SearchResult[]>(data);
 
-            gvSearchResults.DataSource = profileResults;
-            gvSearchResults.DataBind();
+            List<SearchResult> filteredProfileResults = new List<SearchResult>();
+
+            User currentUser = new User();
+            int currentUserID = currentUser.getUserID(Session["Username"].ToString());
+
+            PassedList currentUserPassedList = new PassedList();
+            currentUserPassedList = currentUserPassedList.getPasses(currentUserID);
+
+            foreach (SearchResult result in profileResults)
+            {
+                User userResult = new User();
+                int resultUserID = userResult.getUserID(Session["Username"].ToString());
+                if (!currentUserPassedList.List.Contains(resultUserID.ToString()))
+                {
+                    filteredProfileResults.Add(result);
+                }
+            }
+            
         }
     }
 }

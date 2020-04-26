@@ -45,17 +45,12 @@ namespace TP_WebAPI.Controllers
         }
 
         [HttpGet("LoadSearchResults/Nonmember/{city}/{state}/{gender}")]
-        public List<UserProfile> loadNonmemberSearch(string city, string state, string gender)
+        public List<SearchResult> loadNonmemberSearch(string city, string state, string gender)
         {
             //Parameters: City|State|Gender
-            List<UserProfile> profiles = new List<UserProfile>();
-            UserProfile profile;
+            List<SearchResult> profiles = new List<SearchResult>();
+            SearchResult profile;
 
-           
-            if (gender.CompareTo("Both") == 0)
-            {
-                gender = "e%";
-            }
 
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();
@@ -70,7 +65,8 @@ namespace TP_WebAPI.Controllers
             
             foreach(DataRow result in searchResultsDS.Tables[0].Rows)
             {
-                profile = new UserProfile();
+                profile = new SearchResult();
+                profile.Username = result["Username"].ToString();
                 profile.FirstName = result["FirstName"].ToString();
                 profile.LastName = result["LastName"].ToString();
                 profile.City = result["HomeCity"].ToString();
