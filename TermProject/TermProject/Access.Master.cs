@@ -16,7 +16,7 @@ namespace TermProject
 
         protected void btnSearchOnLoginPage_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Search.aspx");
+            Response.Redirect("NonMemberSearch.aspx");
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

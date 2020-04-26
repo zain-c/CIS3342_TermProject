@@ -30,5 +30,10 @@ namespace TermProject
         {
             Response.Redirect("LikedPassList.aspx");
         }
+
+        protected void btnSearchOnMainPage_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("MemberSearch.aspx");
+        }
     }
 }
