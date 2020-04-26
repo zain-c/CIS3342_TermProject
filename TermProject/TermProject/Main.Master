@@ -28,6 +28,7 @@
             <asp:Button ID="btnSearchOnMainPage" runat="server" class="btn btn-outline-primary my-2 my-sm-0" Text="Search Profiles" OnClick="btnSearchOnMainPage_Click"/>
             <asp:Button ID="btnProfile" runat="server" class="btn btn-outline-primary my-2 my-sm-0" Text="My Profile" OnClick="btnProfile_Click" />
             <asp:Button ID="btnLikedPassList" runat="server" class="btn btn-outline-primary my-2 my-sm-0" Text="Manage Likes and Pass Lists" OnClick="btnLikedPassList_Click" />
+            <asp:Button ID="btnDateRequests" runat="server" class="btn btn-outline-primary my-2 my-sm-0" Text="Date Requests" OnClick="btnDateRequests_Click" />
             <asp:Button ID="btnLogOut" runat="server" class="btn btn-outline-primary my-2 my-sm-0" Text="Log Out" OnClick="btnLogOut_Click" />
         </nav>
         

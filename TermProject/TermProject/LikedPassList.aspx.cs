@@ -247,30 +247,38 @@ namespace TermProject
             removeReader.Close();
             removeResponse.Close();
 
-            //Now add that profile to Likes List
-            string likeUrl = "https://localhost:44369/api/DatingService/Profiles/AddLikes/" + Session["Username"].ToString() + "/" + usernameToTransfer;
-            WebRequest likeRequest = WebRequest.Create(likeUrl);
-            likeRequest.Method = "PUT";
-            likeRequest.ContentLength = 0;
-
-            WebResponse likeResponse = likeRequest.GetResponse();
-            Stream likeDataStream = likeResponse.GetResponseStream();
-            StreamReader likeReader = new StreamReader(likeDataStream);
-            string likeData = likeReader.ReadToEnd();
-            likeReader.Close();
-            likeResponse.Close();
-                        
-            if(removeData == "true" && likeData == "1") //if the transfer works, then reload Likes and Passes Lists
+            if (removeData == "true") //if the removal from Passes is successful
             {
-                likes.Controls.RemoveAt(likes.Controls.Count - 1);
-                loadLikes();
+                //Now add that profile to Likes List
+                string likeUrl = "https://localhost:44369/api/DatingService/Profiles/AddLikes/" + Session["Username"].ToString() + "/" + usernameToTransfer;
+                WebRequest likeRequest = WebRequest.Create(likeUrl);
+                likeRequest.Method = "PUT";
+                likeRequest.ContentLength = 0;
 
-                passes.Controls.RemoveAt(passes.Controls.Count - 1);
-                loadPasses();
+                WebResponse likeResponse = likeRequest.GetResponse();
+                Stream likeDataStream = likeResponse.GetResponseStream();
+                StreamReader likeReader = new StreamReader(likeDataStream);
+                string likeData = likeReader.ReadToEnd();
+                likeReader.Close();
+                likeResponse.Close();
+
+                if (likeData == "1") //if the transfer works, then reload Likes and Passes Lists
+                {
+                    likes.Controls.RemoveAt(likes.Controls.Count - 1);
+                    loadLikes();
+
+                    passes.Controls.RemoveAt(passes.Controls.Count - 1);
+                    loadPasses();
+                }
+                else
+                {
+                    lblErrorMsg.Text += "*There was an error moving this user to your Likes. <br />";
+                    lblErrorMsg.Visible = true;
+                }
             }
             else
             {
-                lblErrorMsg.Text += "*There was an error moving this user to your Likes. <br />";
+                lblErrorMsg.Text += "*There was an error removing this user from your Passes. <br />";
                 lblErrorMsg.Visible = true;
             }
         }

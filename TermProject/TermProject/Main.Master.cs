@@ -35,5 +35,10 @@ namespace TermProject
         {
             Response.Redirect("MemberSearch.aspx");
         }
+
+        protected void btnDateRequests_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DateRequests.aspx");
+        }
     }
 }
