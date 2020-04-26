@@ -254,11 +254,44 @@ namespace DatingSiteLibrary
 
         public bool checkIfUserSentDateRequest(string usernameFrom, string usernameTo)
         {
+            bool check = false;
+
+            User tempUser = new User();
+            int userIDFrom = tempUser.getUserID(usernameFrom);
+            int userIDTo = tempUser.getUserID(usernameTo);
+            
+            DateRequest tempRequest = new DateRequest();
+            List<DateRequest> sent = tempRequest.getSentRequests(userIDFrom);
+            foreach(DateRequest request in sent)
+            {
+                if(request.UserIDTo == userIDTo)
+                {
+                    check = true;
+                }                
+            }
+
+            return check;
+        }
+
+        public bool checkIfUserReceivedDateRequest(string usernameFrom, string usernameTo)
+        {
+            bool check = false;
+
             User tempUser = new User();
             int userIDFrom = tempUser.getUserID(usernameFrom);
             int userIDTo = tempUser.getUserID(usernameTo);
 
-            return true;
+            DateRequest tempRequest = new DateRequest();
+            List<DateRequest> sent = tempRequest.getReceivedRequests(userIDTo);
+            foreach (DateRequest request in sent)
+            {
+                if (request.UserIDFrom == userIDFrom)
+                {
+                    check = true;
+                }
+            }
+
+            return check;
         }
 
         public string FirstName
