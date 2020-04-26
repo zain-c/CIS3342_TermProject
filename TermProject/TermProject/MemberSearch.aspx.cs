@@ -19,10 +19,11 @@ namespace TermProject
     public partial class Search : System.Web.UI.Page
     {
         /* FOR TESTING */
-        //ArrayList testSearchResults = new ArrayList();
-        //MemberSearchResults testAcct1 = new MemberSearchResults();
-        //MemberSearchResults testAcct2 = new MemberSearchResults();
-
+        
+        ArrayList testSearchResults = new ArrayList();
+        MemberSearchResults testAcct1 = new MemberSearchResults();
+        MemberSearchResults testAcct2 = new MemberSearchResults();
+        
 
 
 
@@ -35,7 +36,7 @@ namespace TermProject
         {
             ArrayList displayedSearchResults = new ArrayList();
             lblErrorMsg.Text = "";
-
+            /*
             if (txtOccupationFilter.Text.CompareTo("") == 0)
             {
                 string blankOccupation = "BLANKNONE";
@@ -50,11 +51,11 @@ namespace TermProject
                 displayedSearchResults = loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue, ddCommitmentFilter.SelectedValue, ddHaveKidsFilter.SelectedValue, ddWantKidsFilter.SelectedValue, txtOccupationFilter.Text);
                 ShowResults(displayedSearchResults);
             }
-            
+            */
             
 
             /* FOR TESTING */
-            /*
+            
             testAcct1.City = "Havertown";
             testAcct1.Commitment = "Casual";
             testAcct1.FirstName = "Alex";
@@ -82,7 +83,7 @@ namespace TermProject
             testSearchResults.Add(testAcct1);
             testSearchResults.Add(testAcct2);
             ShowResults(testSearchResults);
-            */  
+             
 
         }
 
@@ -187,6 +188,14 @@ namespace TermProject
 
         }
 
+        protected void rptSearchResults_ResultCommand(Object sender, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        {
+            int rowIndex = e.Item.ItemIndex;
 
+            Label lblSelectedProfileUserName = (Label)rptSearchResults.Items[rowIndex].FindControl("lblUsername");
+            String selectedProductUsername = lblSelectedProfileUserName.Text;
+            Session["RequestedProfile"] = selectedProductUsername;
+            Response.Redirect("Profile.aspx");
+        }
     }
 }
