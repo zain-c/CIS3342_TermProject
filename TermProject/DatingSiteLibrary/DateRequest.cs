@@ -48,6 +48,34 @@ namespace DatingSiteLibrary
             }
         }
 
+        public List<DateRequest> getReceivedRequests(int userIDTo)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_GetReceivedDateRequests";
+            objCmd.Parameters.AddWithValue("@requestTo", userIDTo);
+            DataSet requestsDS = objDB.GetDataSetUsingCmdObj(objCmd);
+
+            List<DateRequest> requestsList = new List<DateRequest>();
+            if (requestsDS.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in requestsDS.Tables[0].Rows)
+                {
+                    DateRequest dateRequest = new DateRequest();
+                    dateRequest.UserIDTo = userIDTo;
+                    dateRequest.UserIDFrom = int.Parse(row["RequestFrom"].ToString());
+                    dateRequest.Status = requestsDS.Tables[0].Rows[0]["Status"].ToString();
+                    requestsList.Add(dateRequest);
+                }
+                return requestsList;
+            }
+            else
+            {
+                return requestsList;
+            }
+        }
+
         public int UserIDTo
         {
             get { return userIDTo; }
