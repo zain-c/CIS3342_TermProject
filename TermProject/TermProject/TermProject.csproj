@@ -111,6 +111,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DateRequests.aspx" />
     <Content Include="LikedPassList.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="LoginRecovery.aspx" />
@@ -133,6 +134,13 @@
     </Compile>
     <Compile Include="Access.Master.designer.cs">
       <DependentUpon>Access.Master</DependentUpon>
+    </Compile>
+    <Compile Include="DateRequests.aspx.cs">
+      <DependentUpon>DateRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DateRequests.aspx.designer.cs">
+      <DependentUpon>DateRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="LikedPassList.aspx.cs">
       <DependentUpon>LikedPassList.aspx</DependentUpon>

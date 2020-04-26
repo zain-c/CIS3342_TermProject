@@ -167,30 +167,45 @@ namespace TP_WebAPI.Controllers
             string newLikesList;
             if (likes.Count == 1)
             {
-                newLikesList = null;
+                //newLikesList = null;
+
+                DBConnect objDB = new DBConnect();
+                SqlCommand objCmd = new SqlCommand();
+                objCmd.CommandType = CommandType.StoredProcedure;
+                objCmd.CommandText = "TP_RemoveLikes";
+                objCmd.Parameters.AddWithValue("@likedBy", userID);
+                int result = objDB.DoUpdateUsingCmdObj(objCmd);
+                if (result == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
                 int index = likes.IndexOf(userIDToRemove);
                 likes.RemoveAt(index);
                 newLikesList = string.Join('|', likes);
-            }
 
-            DBConnect objDB = new DBConnect();
-            SqlCommand objCmd = new SqlCommand();
-            objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "TP_ModifyLikes";
-            objCmd.Parameters.AddWithValue("@liked", newLikesList);
-            objCmd.Parameters.AddWithValue("@likedBy", userID);
-            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+                DBConnect objDB = new DBConnect();
+                SqlCommand objCmd = new SqlCommand();
+                objCmd.CommandType = CommandType.StoredProcedure;
+                objCmd.CommandText = "TP_ModifyLikes";
+                objCmd.Parameters.AddWithValue("@liked", newLikesList);
+                objCmd.Parameters.AddWithValue("@likedBy", userID);
+                int result = objDB.DoUpdateUsingCmdObj(objCmd);
 
-            if (result == 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
+                if (result == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -209,24 +224,64 @@ namespace TP_WebAPI.Controllers
             string newPassesList;
             if (passes.Count == 1)
             {
-                newPassesList = null;
+                //newPassesList = null;
+
+                DBConnect objDB = new DBConnect();
+                SqlCommand objCmd = new SqlCommand();
+                objCmd.CommandType = CommandType.StoredProcedure;
+                objCmd.CommandText = "TP_RemovePasses";
+                objCmd.Parameters.AddWithValue("@passedBy", userID);
+                int result = objDB.DoUpdateUsingCmdObj(objCmd);
+                if(result == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
                 int index = passes.IndexOf(userIDToRemove);
                 passes.RemoveAt(index);
                 newPassesList = string.Join('|', passes) + "|";
+
+                DBConnect objDB = new DBConnect();
+                SqlCommand objCmd = new SqlCommand();
+                objCmd.CommandType = CommandType.StoredProcedure;
+                objCmd.CommandText = "TP_ModifyPasses";
+                objCmd.Parameters.AddWithValue("@passed", newPassesList);
+                objCmd.Parameters.AddWithValue("@passedBy", userID);
+                int result = objDB.DoUpdateUsingCmdObj(objCmd);
+
+                if (result == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
+        }
+        
+        [HttpPost("SendDateRequest/{usernameFrom}/{usernameTo}")]
+        public bool sendDateRequest(string usernameFrom, string usernameTo)
+        {
+            User tempUser = new User();
+            int userIDFrom = tempUser.getUserID(usernameFrom);
+            int userIDTo = tempUser.getUserID(usernameTo);
 
             DBConnect objDB = new DBConnect();
             SqlCommand objCmd = new SqlCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "TP_ModifyPasses";
-            objCmd.Parameters.AddWithValue("@passed", newPassesList);
-            objCmd.Parameters.AddWithValue("@passedBy", userID);
-            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+            objCmd.CommandText = "TP_SendDateRequest";
+            objCmd.Parameters.AddWithValue("@requestTo", userIDTo);
+            objCmd.Parameters.AddWithValue("@requestFrom", userIDFrom);
 
-            if (result == 1)
+            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+            if(result == 1)
             {
                 return true;
             }
@@ -235,5 +290,34 @@ namespace TP_WebAPI.Controllers
                 return false;
             }
         }
+
+        [HttpGet("LoadSentDateRequests/{usernameFrom}")]
+        public List<DateRequest> loadSentDateRequests(string usernameFrom)
+        {
+            User tempUser = new User();
+            int userIDFrom = tempUser.getUserID(usernameFrom);
+
+            DateRequest tempRequest = new DateRequest();
+            List<DateRequest> sentRequestList = tempRequest.getSentRequests(userIDFrom);
+            return sentRequestList;
+
+            //if (sentRequestList.Count == 0)
+            //{
+            //    return null;
+            //}
+            //else
+            //{
+            //    List<ProfileDisplayClass> sentRequestProfiles = new List<ProfileDisplayClass>();
+            //    foreach (DateRequest request in sentRequestList)
+            //    {
+            //        int userIDTo = request.UserIDTo;
+
+            //        ProfileDisplayClass profileDisplay = new ProfileDisplayClass();
+            //        sentRequestProfiles.Add(profileDisplay.retreiveProfileDisplayFromDB(userIDTo));
+            //    }
+            //    return sentRequestProfiles;
+            //}
+        }
+        
     }
 }

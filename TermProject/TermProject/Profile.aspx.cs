@@ -46,6 +46,17 @@ namespace TermProject
                         {
                             btnLike.Visible = true;
                             btnPass.Visible = true;
+
+                            if (tempProfile.checkIfUserLikesOtherUser(Session["Username"].ToString(), Session["RequestedProfile"].ToString()) ||
+                                tempProfile.checkIfUserPassedOtherUser(Session["Username"].ToString(), Session["RequestedProfile"].ToString()))
+                            {
+                                btnLike.Enabled = false;
+                                btnLike.ToolTip = "See Manage Likes and Pass Lists to manage your likes and passes.";
+
+                                btnPass.Enabled = false;
+                                btnPass.ToolTip = "See Manage Likes and Pass Lists to manage your likes and passes.";
+                            }
+                            
                         }
                     }
                 }
@@ -707,7 +718,14 @@ namespace TermProject
             StreamReader reader = new StreamReader(theDataStream);
             string data = reader.ReadToEnd();
             reader.Close();
-            response.Close();            
+            response.Close();
+            
+            if(data == "1")
+            {
+                lblErrorMsg.Text += "User successfully added to Likes. <br />";
+                lblErrorMsg.Visible = true;
+
+            }
         }
 
         protected void btnPass_Click(object sender, EventArgs e)
@@ -724,9 +742,53 @@ namespace TermProject
             string data = reader.ReadToEnd();
             reader.Close();
             response.Close();
+
+            if (data == "1")
+            {
+                lblErrorMsg.Text += "User successfully added to Passes. <br />";
+                lblErrorMsg.Visible = true;
+            }
         }
 
         protected void btnDateRequest_Click(object sender, EventArgs e)
+        {
+            
+            string url = "https://localhost:44369/api/DatingService/Profiles/SendDateRequest/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
+            WebRequest request = WebRequest.Create(url);
+            request.Method = "POST";
+            request.ContentLength = 0;
+
+            WebResponse response = request.GetResponse();
+            Stream theDataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(theDataStream);
+            string data = reader.ReadToEnd();
+            reader.Close();
+            response.Close();
+
+            if(data == "true")
+            {
+                lblErrorMsg.Text += "Date Request Sent <br />";
+                lblErrorMsg.Visible = true;
+                btnDateRequest.Enabled = false;
+            }
+            else
+            {
+                lblErrorMsg.Text += "*There was an error sending a date request. <br />";
+                lblErrorMsg.Visible = true;
+            }
+        }
+
+        protected void btnAccept_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnDecline_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnIgnore_Click(object sender, EventArgs e)
         {
 
         }

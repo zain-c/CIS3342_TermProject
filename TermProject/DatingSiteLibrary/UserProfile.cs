@@ -163,6 +163,62 @@ namespace DatingSiteLibrary
             }
         }
 
+        public bool checkIfUserLikesOtherUser(string username1, string username2)
+        {
+
+            User tempUser = new User();
+            int userID1 = tempUser.getUserID(username1);
+            int userID2 = tempUser.getUserID(username2);
+
+            LikedList tempList = new LikedList();
+            try
+            {
+                string likedProfiles1 = tempList.getLikes(userID1).List;
+                int[] likedUserIDs1 = Array.ConvertAll(likedProfiles1.Split('|'), int.Parse);
+
+                if (likedUserIDs1.Contains(userID2))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }                
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
+        }
+
+        public bool checkIfUserPassedOtherUser(string username1, string username2)
+        {
+
+            User tempUser = new User();
+            int userID1 = tempUser.getUserID(username1);
+            int userID2 = tempUser.getUserID(username2);
+
+            PassedList tempList = new PassedList();
+            try
+            {
+                string passedProfiles1 = tempList.getPasses(userID1).List;
+                int[] passedUserIDs1 = Array.ConvertAll(passedProfiles1.Split('|'), int.Parse);
+
+                if (passedUserIDs1.Contains(userID2))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
+        }
+
         public bool checkIfUsersLikeEachOther(string username1, string username2)
         {            
             User tempUser = new User();
@@ -194,6 +250,15 @@ namespace DatingSiteLibrary
             {
                 return false;
             }
+        }
+
+        public bool checkIfUserSentDateRequest(string usernameFrom, string usernameTo)
+        {
+            User tempUser = new User();
+            int userIDFrom = tempUser.getUserID(usernameFrom);
+            int userIDTo = tempUser.getUserID(usernameTo);
+
+            return true;
         }
 
         public string FirstName
