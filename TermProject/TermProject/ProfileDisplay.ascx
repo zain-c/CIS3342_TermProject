@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProfileDisplay.ascx.cs" Inherits="TermProject.ProfileDisplay" %>
-
+   
 
     <asp:Table ID="tblProfle" runat="server" BorderStyle="None" CellPadding="10">
         <asp:TableRow>
@@ -30,7 +30,7 @@
         </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell>
-                <asp:Button ID="btnViewProfile" runat="server" Text="View Profile" OnClick="btnViewProfile_Click" />
+                <asp:Button ID="btnViewProfile" CssClass="btn btn-outline-primary" runat="server" Text="View Profile" OnClick="btnViewProfile_Click" />
             </asp:TableCell>
         </asp:TableRow>
     </asp:Table>

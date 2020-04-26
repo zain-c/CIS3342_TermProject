@@ -53,7 +53,7 @@ namespace TP_WebAPI.Controllers
             LikedList tempList = new LikedList();
             try
             {
-                string listOfLikes = tempList.getLikes(userID).List;
+                string listOfLikes = tempList.getLikes(userID).List;                
                 int[] likedUserIDs = Array.ConvertAll(listOfLikes.Split('|'), int.Parse);
 
                 List<ProfileDisplayClass> likedUserProfiles = new List<ProfileDisplayClass>();
@@ -63,6 +63,7 @@ namespace TP_WebAPI.Controllers
                     likedUserProfiles.Add(profileDisplay.retreiveProfileDisplayFromDB(id));
                 }
                 return likedUserProfiles;
+                
             }
             catch(NullReferenceException)
             {
@@ -122,6 +123,112 @@ namespace TP_WebAPI.Controllers
                 int userID = tempUser.getUserID(username);
                 UserPrivacySettings tempSettings = new UserPrivacySettings();
                 return tempSettings.modifyPrivacySettings(settings, userID);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        [HttpPut("AddLikes/{username}/{likedProfileUsername}")]
+        public int addLikes(string username, string likedProfileUsername)
+        {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+            int likedUserID = tempUser.getUserID(likedProfileUsername);
+
+            LikedList tempLikes = new LikedList();
+            return tempLikes.addLikeToDB(userID, likedUserID);
+        }
+
+        [HttpPut("AddPasses/{username}/{passedProfileUsername}")]
+        public int addPasses(string username, string passedProfileUsername)
+        {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+            int passedUserID = tempUser.getUserID(passedProfileUsername);
+
+            PassedList tempPasses = new PassedList();  
+            return tempPasses.addPassToDB(userID, passedUserID);
+        }
+
+        [HttpDelete("RemoveFromLikes/{username}/{usernameToRemove}")]
+        public bool removeFromLikes(string username, string usernameToRemove)
+        {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+            int userIDToRemove = tempUser.getUserID(usernameToRemove);
+
+            LikedList tempList = new LikedList();
+            string likesList = tempList.getLikes(userID).List;
+            int[] likedUserIDs = Array.ConvertAll(likesList.Split('|'), int.Parse);
+
+            List<int> likes = new List<int>(likedUserIDs);            
+            string newLikesList;
+            if (likes.Count == 1)
+            {
+                newLikesList = null;
+            }
+            else
+            {
+                int index = likes.IndexOf(userIDToRemove);
+                likes.RemoveAt(index);
+                newLikesList = string.Join('|', likes);
+            }
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_ModifyLikes";
+            objCmd.Parameters.AddWithValue("@liked", newLikesList);
+            objCmd.Parameters.AddWithValue("@likedBy", userID);
+            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+
+            if (result == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        [HttpDelete("RemoveFromPasses/{username}/{usernameToRemove}")]
+        public bool removeFromPasses(string username, string usernameToRemove)
+        {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+            int userIDToRemove = tempUser.getUserID(usernameToRemove);
+
+            PassedList tempList = new PassedList();
+            string passesList = tempList.getPasses(userID).List;
+            int[] passedUserIDs = Array.ConvertAll(passesList.Split('|'), int.Parse);
+
+            List<int> passes = new List<int>(passedUserIDs);
+            string newPassesList;
+            if (passes.Count == 1)
+            {
+                newPassesList = null;
+            }
+            else
+            {
+                int index = passes.IndexOf(userIDToRemove);
+                passes.RemoveAt(index);
+                newPassesList = string.Join('|', passes) + "|";
+            }
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_ModifyPasses";
+            objCmd.Parameters.AddWithValue("@passed", newPassesList);
+            objCmd.Parameters.AddWithValue("@passedBy", userID);
+            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+
+            if (result == 1)
+            {
+                return true;
             }
             else
             {

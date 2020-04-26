@@ -10,16 +10,18 @@
         <br />
         <h3>Manage your Likes and Passed Lists</h3>
         <br />
+        <asp:Label ID="lblErrorMsg" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
+        <br />
         <div class="row">
             <div id="likes" class="col" runat="server">
                 <asp:Label ID="lblLikes" runat="server" Text="Likes" ForeColor="Black" Font-Size="24px"></asp:Label>
-                <hr style="border-top: 1px solid black; width: 90%" />
+                <hr style="border-top: 1px solid black; width: 100%" />
                 <br />
             </div>
 
             <div id="passes" class="col" runat="server">
                 <asp:Label ID="lblPasses" runat="server" Text="Passes" ForeColor="Black" Font-Size="24px"></asp:Label>
-                <hr style="border-top: 1px solid black; width: 90%" />
+                <hr style="border-top: 1px solid black; width: 100%" />
                 <br />
             </div>
         </div>

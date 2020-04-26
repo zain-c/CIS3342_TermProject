@@ -163,6 +163,39 @@ namespace DatingSiteLibrary
             }
         }
 
+        public bool checkIfUsersLikeEachOther(string username1, string username2)
+        {            
+            User tempUser = new User();
+            int userID1 = tempUser.getUserID(username1);
+            int userID2 = tempUser.getUserID(username2);
+            bool check = true;
+
+            LikedList tempList = new LikedList();
+            try
+            {
+                string likedProfiles1 = tempList.getLikes(userID1).List;
+                int[] likedUserIDs1 = Array.ConvertAll(likedProfiles1.Split('|'), int.Parse);
+
+                string likedProfiles2 = tempList.getLikes(userID2).List;
+                int[] likedUserIDs2 = Array.ConvertAll(likedProfiles2.Split('|'), int.Parse);
+
+                if (!likedUserIDs1.Contains(userID2))
+                {
+                    check = false;
+                }
+                if (!likedUserIDs2.Contains(userID1))
+                {
+                    check = false;
+                }
+
+                return check;
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
+        }
+
         public string FirstName
         {
             get { return firstName; }

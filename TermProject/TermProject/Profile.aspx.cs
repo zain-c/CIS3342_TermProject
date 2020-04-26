@@ -37,6 +37,16 @@ namespace TermProject
                         //if the profile selected is from the search results 
                         //then display the profile layout for other members
                         otherMemberView();
+                        UserProfile tempProfile = new UserProfile();
+                        if(tempProfile.checkIfUsersLikeEachOther(Session["Username"].ToString(), Session["RequestedProfile"].ToString()))
+                        {
+                            btnDateRequest.Visible = true;
+                        }
+                        else
+                        {
+                            btnLike.Visible = true;
+                            btnPass.Visible = true;
+                        }
                     }
                 }
             }
@@ -175,7 +185,7 @@ namespace TermProject
             }
             return imageUrl;
 
-        }        
+        }
 
         protected void btnEditProfile_Click(object sender, EventArgs e)
         {
@@ -494,11 +504,13 @@ namespace TermProject
                 if (data != "true")
                 {
                     lblErrorMsg.Text += "*A problem occured while updating your profile. <br />";
+                    lblErrorMsg.Visible = true;
                 }
             }
             catch (Exception ex)
             {
                 lblErrorMsg.Text += "*Error: " + ex.Message + "<br />";
+                lblErrorMsg.Visible = true;
             }
         }
 
@@ -548,11 +560,13 @@ namespace TermProject
                 if (data != "true")
                 {
                     lblErrorMsg.Text += "*A problem occured while updating your privacy settings. <br />";
+                    lblErrorMsg.Visible = true;
                 }
             }
             catch (Exception ex)
             {
                 lblErrorMsg.Text += "*Error: " + ex.Message + "<br />";
+                lblErrorMsg.Visible = true;
             }
         }
 
@@ -679,6 +693,42 @@ namespace TermProject
             }
 
             return valid;
+        }
+
+        protected void btnLike_Click(object sender, EventArgs e)
+        {
+            string url = "https://localhost:44369/api/DatingService/Profiles/AddLikes/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
+            WebRequest request = WebRequest.Create(url);
+            request.Method = "PUT";
+            request.ContentLength = 0;
+
+            WebResponse response = request.GetResponse();
+            Stream theDataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(theDataStream);
+            string data = reader.ReadToEnd();
+            reader.Close();
+            response.Close();            
+        }
+
+        protected void btnPass_Click(object sender, EventArgs e)
+        {
+            string url = "https://localhost:44369/api/DatingService/Profiles/AddPasses/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
+            WebRequest request = WebRequest.Create(url);
+            request.Method = "PUT";
+            request.ContentLength = 0;
+
+            WebResponse response = request.GetResponse();
+
+            Stream theDataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(theDataStream);
+            string data = reader.ReadToEnd();
+            reader.Close();
+            response.Close();
+        }
+
+        protected void btnDateRequest_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -23,6 +23,41 @@ namespace DatingSiteLibrary
             get { return list; }
             set { list = value; }
         }
+        
+
+        public int addLikeToDB(int userID, int likedUserID)
+        {
+            int result = 0;
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            
+            
+            LikedList tempLikes = new LikedList();
+            string likeList;
+            User tempUser = new User();
+            //int likedUserID = tempUser.getUserID(likedProfile);
+            try
+            {
+                likeList = tempLikes.getLikes(userID).List;
+                likeList += "|" + likedUserID + "|";
+
+                objCmd.CommandText = "TP_ModifyLikes";
+                objCmd.Parameters.AddWithValue("@liked", likeList);
+                objCmd.Parameters.AddWithValue("@likedBy", userID);
+                result = objDB.DoUpdateUsingCmdObj(objCmd);
+            }
+            catch (NullReferenceException)
+            {
+                //list of likes is empty, so add the first like
+                likeList = likedUserID + "|";
+                objCmd.CommandText = "TP_AddLike";
+                objCmd.Parameters.AddWithValue("@liked", likeList);
+                objCmd.Parameters.AddWithValue("@likedBy", userID);
+                result = objDB.DoUpdateUsingCmdObj(objCmd);
+            }
+            return result;
+        }
 
         public LikedList getLikes(int userID)
         {
@@ -36,8 +71,15 @@ namespace DatingSiteLibrary
             LikedList likesList = new LikedList();
             if (likesDS.Tables[0].Rows.Count > 0)
             {
-                likesList.List = likesDS.Tables[0].Rows[0]["Liked"].ToString().TrimEnd('|');
-                return likesList;
+                if (objDB.GetField("Liked", 0) == DBNull.Value)
+                {
+                    return null;
+                }
+                else
+                {
+                    likesList.List = likesDS.Tables[0].Rows[0]["Liked"].ToString().TrimEnd('|');
+                    return likesList;
+                }
             }
             else
             {
