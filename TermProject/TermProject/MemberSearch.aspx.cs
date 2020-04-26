@@ -21,6 +21,7 @@ namespace TermProject
         /* FOR TESTING */
         //ArrayList testSearchResults = new ArrayList();
         //MemberSearchResults testAcct1 = new MemberSearchResults();
+        //MemberSearchResults testAcct2 = new MemberSearchResults();
 
 
 
@@ -49,7 +50,7 @@ namespace TermProject
                 displayedSearchResults = loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue, ddCommitmentFilter.SelectedValue, ddHaveKidsFilter.SelectedValue, ddWantKidsFilter.SelectedValue, txtOccupationFilter.Text);
                 ShowResults(displayedSearchResults);
             }
-
+            
             
 
             /* FOR TESTING */
@@ -65,9 +66,23 @@ namespace TermProject
             testAcct1.Title = "Sup";
             testAcct1.Username = "aderbs7";
             testAcct1.WantKids = "No";
+
+            testAcct2.City = "Havertown";
+            testAcct2.Commitment = "Casual";
+            testAcct2.FirstName = "Alex";
+            testAcct2.Gender = "Male";
+            testAcct2.HaveKids = "No";
+            testAcct2.LastName = "Derbs";
+            testAcct2.Occupation = "Student";
+            testAcct2.State = "PA";
+            testAcct2.Title = "Sup";
+            testAcct2.Username = "aderbs7";
+            testAcct2.WantKids = "No";
+
             testSearchResults.Add(testAcct1);
+            testSearchResults.Add(testAcct2);
             ShowResults(testSearchResults);
-            */
+            */  
 
         }
 
