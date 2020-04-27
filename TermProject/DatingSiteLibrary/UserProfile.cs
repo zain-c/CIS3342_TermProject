@@ -294,6 +294,54 @@ namespace DatingSiteLibrary
             return check;
         }
 
+        public bool checkIfSentRequestAccepted(string usernameFrom, string usernameTo)
+        {
+            bool check = false;
+
+            User tempUser = new User();
+            int userIDFrom = tempUser.getUserID(usernameFrom);
+            int userIDTo = tempUser.getUserID(usernameTo);
+
+            DateRequest tempRequest = new DateRequest();
+            List<DateRequest> sent = tempRequest.getSentRequests(userIDFrom);
+            foreach (DateRequest request in sent)
+            {
+                if (request.UserIDTo == userIDTo)
+                {
+                    if (request.Status.Equals("Accepted"))
+                    {
+                        check = true;
+                    }
+                }
+            }
+
+            return check;
+        }
+
+        public bool checkIfReceivedRequestAccepted(string usernameFrom, string usernameTo)
+        {
+            bool check = false;
+
+            User tempUser = new User();
+            int userIDFrom = tempUser.getUserID(usernameFrom);
+            int userIDTo = tempUser.getUserID(usernameTo);
+
+            DateRequest tempRequest = new DateRequest();
+            List<DateRequest> sent = tempRequest.getReceivedRequests(userIDTo);
+            foreach (DateRequest request in sent)
+            {
+                if (request.UserIDFrom == userIDFrom)
+                {
+                    if (request.Status.Equals("Accepted"))
+                    {
+                        check = true;
+                    }
+                }
+            }
+
+            return check;
+        }
+
         public string FirstName
         {
             get { return firstName; }
