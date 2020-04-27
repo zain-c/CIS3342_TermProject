@@ -54,6 +54,7 @@ namespace TermProject
                         {
                             btnLike.Visible = true;
                             btnPass.Visible = true;
+                            btnBlock.Visible = true;
 
                             if (tempProfile.checkIfUserLikesOtherUser(Session["Username"].ToString(), Session["RequestedProfile"].ToString()) ||
                                 tempProfile.checkIfUserPassedOtherUser(Session["Username"].ToString(), Session["RequestedProfile"].ToString()))
@@ -782,6 +783,28 @@ namespace TermProject
             else
             {
                 lblErrorMsg.Text += "*There was an error sending a date request. <br />";
+                lblErrorMsg.Visible = true;
+            }
+        }
+
+        protected void btnBlock_Click(object sender, EventArgs e)
+        {
+            string url = "https://localhost:44369/api/DatingService/Profiles/AddBlock/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
+            WebRequest request = WebRequest.Create(url);
+            request.Method = "PUT";
+            request.ContentLength = 0;
+
+            WebResponse response = request.GetResponse();
+
+            Stream theDataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(theDataStream);
+            string data = reader.ReadToEnd();
+            reader.Close();
+            response.Close();
+
+            if (data == "1")
+            {
+                lblErrorMsg.Text += "User successfully added to Blocked List. <br />";
                 lblErrorMsg.Visible = true;
             }
         }

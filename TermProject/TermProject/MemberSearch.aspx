@@ -138,7 +138,10 @@
             
                 
                 <div id="ResultsContainer" class="container text-center" runat="server">
-                <Table id="ResultsTable" class="border-primary">
+                <div class="row">
+                <div class="col">
+                <div class="table-responsive">
+                <Table id="ResultsTable" class="table-hover">
                     <tr>
                         <th>UserName</th>
                         <th>Title</th>
@@ -197,6 +200,9 @@
                         </ItemTemplate>
                     </asp:Repeater>
                 </table>
+                </div>  
+                </div><!--End Col-->
+                </div><!--End Row-->
                 </div>
             </div>
         </div>
