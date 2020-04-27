@@ -50,6 +50,7 @@ namespace TermProject
                     else
                     {
                         lblErrorMsg.Text = "*No profiles meet that criteria. Try searching again.";
+                        lblErrorMsg.Visible = true;
                     }
                     
                 }
