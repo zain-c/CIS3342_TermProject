@@ -124,6 +124,26 @@ namespace DatingSiteLibrary
             return userID;
         }
 
+        public bool verifyAccount(string username)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_VerifyAccount";
+            objCmd.Parameters.AddWithValue("@username", username);
+            objCmd.Parameters.AddWithValue("@verified", "Yes");
+
+            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+            if(result == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public string Username
         {
             get { return username; }
