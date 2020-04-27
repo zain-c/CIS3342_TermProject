@@ -202,7 +202,23 @@ namespace TermProject
 
         private void BtnPlanDate_Click(object sender, EventArgs e)
         {
-            
+            Button btnPlanDate = (Button)sender;
+            int rowNum = int.Parse(btnPlanDate.ID.Split('_')[1]);
+
+            ProfileDisplay profileDisplay;
+            if (btnPlanDate.ID.Equals("btnPlanDateSent_" + rowNum))
+            {
+                profileDisplay = ((ProfileDisplay)sent.FindControl("pdProfileSent_" + rowNum));
+                Session.Add("PlanDateUsernameTo", profileDisplay.Username);
+                Session.Add("PlanDateUsernameFrom", Session["Username"].ToString());
+            }
+            else if(btnPlanDate.ID.Equals("btnPlanDateReceived_" + rowNum))
+            {
+                profileDisplay = ((ProfileDisplay)received.FindControl("pdProfileReceived_" + rowNum));
+                Session.Add("PlanDateUsernameFrom", profileDisplay.Username);
+                Session.Add("PlanDateUsernameTo", Session["Username"].ToString());
+            }
+            Response.Redirect("");
         }
 
         private Table generateReceivedRequestsTable(List<DateRequest> receivedDateRequests, List<ProfileDisplayClass> userProfiles)
