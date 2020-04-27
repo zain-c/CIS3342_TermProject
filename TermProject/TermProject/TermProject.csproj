@@ -115,6 +115,8 @@
     <Content Include="LikedPassList.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="LoginRecovery.aspx" />
+    <Content Include="Messaging.aspx" />
+    <Content Include="MessagingDisplay.ascx" />
     <Content Include="NonMemberSearch.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="Stylesheets\LoginRecoveryStyle.css" />
@@ -169,6 +171,20 @@
     </Compile>
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Messaging.aspx.cs">
+      <DependentUpon>Messaging.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Messaging.aspx.designer.cs">
+      <DependentUpon>Messaging.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MessagingDisplay.ascx.cs">
+      <DependentUpon>MessagingDisplay.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MessagingDisplay.ascx.designer.cs">
+      <DependentUpon>MessagingDisplay.ascx</DependentUpon>
     </Compile>
     <Compile Include="NonMemberSearch.aspx.cs">
       <DependentUpon>NonMemberSearch.aspx</DependentUpon>

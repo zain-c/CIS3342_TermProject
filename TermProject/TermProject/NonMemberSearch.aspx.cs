@@ -35,7 +35,16 @@ namespace TermProject
             if (validateFields())
             {
                 displayedSearchResults = loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue);
-                ShowResults(displayedSearchResults);
+                if (displayedSearchResults.Count != 0)
+                {
+                    ShowResults(displayedSearchResults);
+                }
+                else
+                {
+                    lblErrorMsg.Text = "*No profiles meet that criteria. Try searching again.";
+                    lblErrorMsg.Visible = true;
+                }
+                
 
             }
 
@@ -82,7 +91,7 @@ namespace TermProject
 
         private ArrayList loadResults(string city, string state, string gender)
         {
-            string url = "https://localhost:44369/api/DatingService/Search/LoadSearchResults/Nonmember" + city + "/" + state + "/" + gender;
+            string url = "https://localhost:44369/api/DatingService/Search/LoadSearchResults/Nonmember/" + city + "/" + state + "/" + gender;
 
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
