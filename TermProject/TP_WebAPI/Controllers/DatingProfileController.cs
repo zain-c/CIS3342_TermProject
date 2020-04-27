@@ -346,5 +346,57 @@ namespace TP_WebAPI.Controllers
             }
         }
         
+        [HttpGet("GetDatePlanDetails/{userIDFrom}/{userIDTo}")]
+        public PlanDate getDatePlanDetails(int userIDFrom, int userIDTo)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_GetDatePlanDetails";
+            objCmd.Parameters.AddWithValue("@requestTo", userIDTo);
+            objCmd.Parameters.AddWithValue("@requestFrom", userIDFrom);
+            DataSet detailsDS = objDB.GetDataSetUsingCmdObj(objCmd);
+
+            PlanDate planDate = new PlanDate();
+            if(detailsDS.Tables[0].Rows.Count > 0)
+            {
+                planDate.Date = detailsDS.Tables[0].Rows[0]["Date"].ToString();
+                planDate.Time = detailsDS.Tables[0].Rows[0]["Time"].ToString();
+                planDate.Description = detailsDS.Tables[0].Rows[0]["Description"].ToString();
+                return planDate;
+            }
+            else
+            {
+                return planDate;
+            }
+        }
+
+        [HttpPut("ModifyDatePlan/{usernameTo}/{usernameFrom}")]
+        public bool modifyDatePlan(string usernameTo, string usernameFrom, [FromBody]PlanDate planDate)
+        {
+            User tempUser = new User();
+            int userIDTo = tempUser.getUserID(usernameTo);
+            int userIDFrom = tempUser.getUserID(usernameFrom);
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_ModifyDatePlan";
+            objCmd.Parameters.AddWithValue("@date", planDate.Date);
+            objCmd.Parameters.AddWithValue("@time", planDate.Time);
+            objCmd.Parameters.AddWithValue("@description", planDate.Description);
+            objCmd.Parameters.AddWithValue("@requestFrom", userIDFrom);
+            objCmd.Parameters.AddWithValue("@requestTo", userIDTo);
+
+            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+            if(result == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

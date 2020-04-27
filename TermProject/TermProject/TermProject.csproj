@@ -116,7 +116,6 @@
     <Content Include="Login.aspx" />
     <Content Include="LoginRecovery.aspx" />
     <Content Include="NonMemberSearch.aspx" />
-    <Content Include="PlanDate.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="Stylesheets\LoginRecoveryStyle.css" />
     <Content Include="Stylesheets\LoginStyle.css" />
@@ -177,13 +176,6 @@
     </Compile>
     <Compile Include="NonMemberSearch.aspx.designer.cs">
       <DependentUpon>NonMemberSearch.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PlanDate.aspx.cs">
-      <DependentUpon>PlanDate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PlanDate.aspx.designer.cs">
-      <DependentUpon>PlanDate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
