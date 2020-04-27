@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BlockedList.cs" />
     <Compile Include="DateRequest.cs" />
+    <Compile Include="Email.cs" />
     <Compile Include="GlobalData.cs" />
     <Compile Include="LikedList.cs" />
     <Compile Include="MemberSearchResults.cs" />

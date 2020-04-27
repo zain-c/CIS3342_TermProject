@@ -43,9 +43,13 @@ namespace TermProject
                             btnDateRequest.Visible = true;
 
                             if (tempProfile.checkIfUserSentDateRequest(Session["Username"].ToString(), Session["RequestedProfile"].ToString()) ||
-                               tempProfile.checkIfUserReceivedDateRequest(Session["RequestedProfile"].ToString(), Session["Username"].ToString()))
+                                tempProfile.checkIfUserReceivedDateRequest(Session["RequestedProfile"].ToString(), Session["Username"].ToString()))
                             {
-                                contactInfo.Visible = true;
+                                if(tempProfile.checkIfSentRequestAccepted(Session["Username"].ToString(), Session["RequestedProfile"].ToString()) ||
+                                   tempProfile.checkIfReceivedRequestAccepted(Session["RequestedProfile"].ToString(), Session["Username"].ToString()))
+                                {
+                                    contactInfo.Visible = true;
+                                }                                
                                 btnDateRequest.Enabled = false;
                                 btnDateRequest.ToolTip = "You've already sent or received a date request from this user.";
                             }
