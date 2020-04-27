@@ -153,7 +153,7 @@ namespace TermProject
 
         private ArrayList loadResults(string city, string state, string gender, string commitment, string haveKids, string wantKids, string occupation)
         {
-            string url = "https://localhost:44369/api/DatingService/Search/LoadSearchResults/Member" + city + "/" + state + "/" + gender + "/" + commitment + "/" + haveKids + "/" + wantKids + "/" + occupation;
+            string url = "https://localhost:44369/api/DatingService/Search/LoadSearchResults/Member/" + city + "/" + state + "/" + gender + "/" + commitment + "/" + haveKids + "/" + wantKids + "/" + occupation;
 
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
@@ -179,8 +179,11 @@ namespace TermProject
             {
                 User userResult = new User();
                 int resultUserID = userResult.getUserID(result.Username);
-                
-                if (!currentUserPassedList.List.Contains(resultUserID.ToString()) && (resultUserID != currentUserID))
+
+                if ((currentUserPassedList == null && resultUserID != currentUserID)){
+                    filterPassedProfileResults.Add(result);
+                }
+                else if ((currentUserPassedList != null && !currentUserPassedList.List.Contains(resultUserID.ToString())) && (resultUserID != currentUserID))
                 {
                     filterPassedProfileResults.Add(result);
                 }
@@ -195,7 +198,11 @@ namespace TermProject
                 User userResult = new User();
                 int resultUserID = userResult.getUserID(result.Username);
 
-                if (!currentUserBlockedList.List.Contains(resultUserID.ToString()))
+                if (currentUserBlockedList == null)
+                {
+                    filterUserBlockedProfileResults.Add(result);
+                }
+                else if (!currentUserBlockedList.List.Contains(resultUserID.ToString()))
                 {
                     filterUserBlockedProfileResults.Add(result);
                 }
@@ -203,7 +210,7 @@ namespace TermProject
 
             ArrayList filterBlockedByProfileResults = new ArrayList();
 
-            foreach (MemberSearchResults result in filterUserBlockedProfileResults)//adds search results that do not have the current user blocked
+            foreach (MemberSearchResults result in filterUserBlockedProfileResults.ToArray())//adds search results that do not have the current user blocked
             {
                 User userResult = new User();
                 int resultUserID = userResult.getUserID(result.Username);
@@ -211,9 +218,13 @@ namespace TermProject
                 BlockedList resultBlockedList = new BlockedList();
                 resultBlockedList = resultBlockedList.getBlocked(resultUserID);
 
-                if (!resultBlockedList.List.Contains(resultUserID.ToString()))
+                if (resultBlockedList == null)
                 {
-                    filterUserBlockedProfileResults.Add(result);
+                    filterBlockedByProfileResults.Add(result);
+                }
+                else if (!resultBlockedList.List.Contains(resultUserID.ToString()))
+                {
+                    filterBlockedByProfileResults.Add(result);
                 }
             }
 

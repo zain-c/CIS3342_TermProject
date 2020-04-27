@@ -20,7 +20,7 @@
 </head>
 <body>
     
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" defaultbutton ="btnLogin">
         <nav class="navbar navbar-light sticky-top justify-content-between" style="background-color: #e3f2fd;">
             <a class="navbar-brand text-primary">A to Z Dating</a>            
             
