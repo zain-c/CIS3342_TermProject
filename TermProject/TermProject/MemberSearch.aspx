@@ -137,8 +137,11 @@
                 <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="searchButton" /> <br /><br />
             
                 
-                <div id="ResultsContainer" runat="server">
-                <Table id="ResultsTable">
+                <div id="ResultsContainer" class="container text-center" runat="server">
+                <div class="row">
+                <div class="col">
+                <div class="table-responsive">
+                <Table id="ResultsTable" class="table-hover">
                     <tr>
                         <th>UserName</th>
                         <th>Title</th>
@@ -154,7 +157,7 @@
                         <th>View Profile</th>
                     </tr>
                 
-                    <asp:Repeater ID="rptSearchResults" runat="server">
+                    <asp:Repeater ID="rptSearchResults" runat="server" OnItemCommand="rptSearchResults_ResultCommand">
                         <ItemTemplate>
                             <tr>
                                 <td>
@@ -197,6 +200,9 @@
                         </ItemTemplate>
                     </asp:Repeater>
                 </table>
+                </div>  
+                </div><!--End Col-->
+                </div><!--End Row-->
                 </div>
             </div>
         </div>

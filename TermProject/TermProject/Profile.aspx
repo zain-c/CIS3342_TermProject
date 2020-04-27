@@ -18,9 +18,10 @@
                         &nbsp;&nbsp;&nbsp;
                         <asp:Button ID="btnCancel" runat="server" class="btn btn-outline-primary" Text="Cancel" Visible="false" OnClick="btnCancel_Click" />
                         <asp:Button ID="btnMemberView" runat="server" class="btn btn-outline-primary" Text="View profile as other members would see it" OnClick="btnMemberView_Click" />
-                        <asp:Button ID="btnNormalView" runat="server" class="btn btn-outline-primary" Text="Return to normal view" Visible="false" OnClick="btnNormalView_Click" />
+                        <asp:Button ID="btnNormalView" runat="server" class="btn btn-outline-warning" Text="Return to normal view" Visible="false" OnClick="btnNormalView_Click" />
                         <asp:Button ID="btnPass" runat="server" class="btn btn-outline-danger" Text="Pass" Visible="false" OnClick="btnPass_Click" />
                         <asp:Button ID="btnDateRequest" runat="server" class="btn btn-outline-primary" Text="Send Date Request" Visible="false" OnClick="btnDateRequest_Click" />
+                        <asp:Button ID="btnBlock" runat="server" class="btn btn-outline-danger" Text="Block" Visible="false" OnClick="btnBlock_Click" />
                         <br />
                         <br />
                         <asp:Label ID="lblErrorMsg" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
@@ -104,6 +105,7 @@
                         <asp:AsyncPostBackTrigger ControlID="btnLike" EventName="Click" />
                         <asp:AsyncPostBackTrigger ControlID="btnPass" EventName="Click" />
                         <asp:AsyncPostBackTrigger ControlID="btnDateRequest" EventName="Click" />
+                        <asp:AsyncPostBackTrigger ControlID="btnBlock" EventName="Click" />
                     </Triggers>
                 </asp:UpdatePanel>
             </div>
@@ -197,6 +199,7 @@
                 <asp:AsyncPostBackTrigger ControlID="btnLike" EventName="Click" />
                 <asp:AsyncPostBackTrigger ControlID="btnPass" EventName="Click" />
                 <asp:AsyncPostBackTrigger ControlID="btnDateRequest" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnBlock" EventName="Click" />
             </Triggers>
         </asp:UpdatePanel>
         <br />
@@ -339,6 +342,7 @@
                 <asp:AsyncPostBackTrigger ControlID="btnLike" EventName="Click" />
                 <asp:AsyncPostBackTrigger ControlID="btnPass" EventName="Click" />
                 <asp:AsyncPostBackTrigger ControlID="btnDateRequest" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnBlock" EventName="Click" />
             </Triggers>
         </asp:UpdatePanel>
     </div>

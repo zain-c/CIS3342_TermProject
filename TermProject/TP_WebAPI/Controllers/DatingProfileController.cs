@@ -152,6 +152,17 @@ namespace TP_WebAPI.Controllers
             return tempPasses.addPassToDB(userID, passedUserID);
         }
 
+        [HttpPut("AddBlock/{username}/{blockedProfileUsername}")]
+        public int addBlock(string username, string blockedProfileUsername)
+        {
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+            int blockedUserID = tempUser.getUserID(blockedProfileUsername);
+
+            BlockedList tempBlock = new BlockedList();
+            return tempBlock.addBlockToDB(userID, blockedUserID);
+        }
+
         [HttpDelete("RemoveFromLikes/{username}/{usernameToRemove}")]
         public bool removeFromLikes(string username, string usernameToRemove)
         {

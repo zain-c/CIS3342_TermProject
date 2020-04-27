@@ -19,9 +19,11 @@ namespace TermProject
     public partial class Search : System.Web.UI.Page
     {
         /* FOR TESTING */
-        //ArrayList testSearchResults = new ArrayList();
-        //MemberSearchResults testAcct1 = new MemberSearchResults();
-
+        /*
+        ArrayList testSearchResults = new ArrayList();
+        MemberSearchResults testAcct1 = new MemberSearchResults();
+        MemberSearchResults testAcct2 = new MemberSearchResults();
+        */
 
 
 
@@ -34,22 +36,37 @@ namespace TermProject
         {
             ArrayList displayedSearchResults = new ArrayList();
             lblErrorMsg.Text = "";
-
+            
             if (txtOccupationFilter.Text.CompareTo("") == 0)
             {
                 string blankOccupation = "BLANKNONE";
                 if (validateFields())
                 {
                     displayedSearchResults = loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue, ddCommitmentFilter.SelectedValue, ddHaveKidsFilter.SelectedValue, ddWantKidsFilter.SelectedValue, blankOccupation);
-                    ShowResults(displayedSearchResults);
+                    if (displayedSearchResults.Count != 0)
+                    {
+                        ShowResults(displayedSearchResults);
+                    }
+                    else
+                    {
+                        lblErrorMsg.Text = "*No profiles meet that criteria. Try searching again.";
+                    }
+                    
                 }
             }
             else if (validateFields())
             {
                 displayedSearchResults = loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue, ddCommitmentFilter.SelectedValue, ddHaveKidsFilter.SelectedValue, ddWantKidsFilter.SelectedValue, txtOccupationFilter.Text);
-                ShowResults(displayedSearchResults);
+                if (displayedSearchResults.Count != 0)
+                {
+                    ShowResults(displayedSearchResults);
+                }
+                else
+                {
+                    lblErrorMsg.Text = "*No profiles meet that criteria. Try searching again.";
+                }
             }
-
+            
             
 
             /* FOR TESTING */
@@ -65,9 +82,23 @@ namespace TermProject
             testAcct1.Title = "Sup";
             testAcct1.Username = "aderbs7";
             testAcct1.WantKids = "No";
+
+            testAcct2.City = "Havertown";
+            testAcct2.Commitment = "Casual";
+            testAcct2.FirstName = "Alex";
+            testAcct2.Gender = "Male";
+            testAcct2.HaveKids = "No";
+            testAcct2.LastName = "Derbs";
+            testAcct2.Occupation = "Student";
+            testAcct2.State = "PA";
+            testAcct2.Title = "Sup";
+            testAcct2.Username = "aderbs7";
+            testAcct2.WantKids = "No";
+
             testSearchResults.Add(testAcct1);
+            testSearchResults.Add(testAcct2);
             ShowResults(testSearchResults);
-            */
+            */ 
 
         }
 
@@ -136,7 +167,7 @@ namespace TermProject
             JavaScriptSerializer js = new JavaScriptSerializer();
             MemberSearchResults[] profileResults = js.Deserialize<MemberSearchResults[]>(data);
 
-            ArrayList filteredProfileResults = new ArrayList();
+            ArrayList filterPassedProfileResults = new ArrayList();
 
             User currentUser = new User();
             int currentUserID = currentUser.getUserID(Session["Username"].ToString());
@@ -144,18 +175,49 @@ namespace TermProject
             PassedList currentUserPassedList = new PassedList();
             currentUserPassedList = currentUserPassedList.getPasses(currentUserID);
 
-            foreach (MemberSearchResults result in profileResults)
+            foreach (MemberSearchResults result in profileResults)//adds search results that are not currently in the users passed list
             {
                 User userResult = new User();
-                int resultUserID = userResult.getUserID(Session["Username"].ToString());
+                int resultUserID = userResult.getUserID(result.Username);
                 
                 if (!currentUserPassedList.List.Contains(resultUserID.ToString()) && (resultUserID != currentUserID))
                 {
-                    filteredProfileResults.Add(result);
+                    filterPassedProfileResults.Add(result);
                 }
             }
 
-            return filteredProfileResults;
+            ArrayList filterUserBlockedProfileResults = new ArrayList();
+            BlockedList currentUserBlockedList = new BlockedList();
+            currentUserBlockedList = currentUserBlockedList.getBlocked(currentUserID);
+
+            foreach (MemberSearchResults result in filterPassedProfileResults)//adds search results that are not in the users blocked list
+            {
+                User userResult = new User();
+                int resultUserID = userResult.getUserID(result.Username);
+
+                if (!currentUserBlockedList.List.Contains(resultUserID.ToString()))
+                {
+                    filterUserBlockedProfileResults.Add(result);
+                }
+            }
+
+            ArrayList filterBlockedByProfileResults = new ArrayList();
+
+            foreach (MemberSearchResults result in filterUserBlockedProfileResults)//adds search results that do not have the current user blocked
+            {
+                User userResult = new User();
+                int resultUserID = userResult.getUserID(result.Username);
+
+                BlockedList resultBlockedList = new BlockedList();
+                resultBlockedList = resultBlockedList.getBlocked(resultUserID);
+
+                if (!resultBlockedList.List.Contains(resultUserID.ToString()))
+                {
+                    filterUserBlockedProfileResults.Add(result);
+                }
+            }
+
+            return filterBlockedByProfileResults;
 
            
 
@@ -172,6 +234,14 @@ namespace TermProject
 
         }
 
+        protected void rptSearchResults_ResultCommand(Object sender, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        {
+            int rowIndex = e.Item.ItemIndex;
 
+            Label lblSelectedProfileUserName = (Label)rptSearchResults.Items[rowIndex].FindControl("lblUsername");
+            String selectedProductUsername = lblSelectedProfileUserName.Text;
+            Session["RequestedProfile"] = selectedProductUsername;
+            Response.Redirect("Profile.aspx");
+        }
     }
 }
