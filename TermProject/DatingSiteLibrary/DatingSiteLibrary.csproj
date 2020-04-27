@@ -47,6 +47,7 @@
     <Compile Include="LikedList.cs" />
     <Compile Include="MemberSearchResults.cs" />
     <Compile Include="PassedList.cs" />
+    <Compile Include="PlanDate.cs" />
     <Compile Include="ProfileDisplayClass.cs" />
     <Compile Include="SearchResult.cs" />
     <Compile Include="User.cs" />

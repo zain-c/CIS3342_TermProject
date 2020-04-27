@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Globalization;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
@@ -202,6 +203,84 @@ namespace TermProject
 
         private void BtnPlanDate_Click(object sender, EventArgs e)
         {
+            Button btnPlanDate = (Button)sender;
+            int rowNum = int.Parse(btnPlanDate.ID.Split('_')[1]);
+
+            ProfileDisplay profileDisplay;
+            if (btnPlanDate.ID.Equals("btnPlanDateSent_" + rowNum))
+            {
+                profileDisplay = ((ProfileDisplay)sent.FindControl("pdProfileSent_" + rowNum));
+                Session.Add("PlanDateUsernameTo", profileDisplay.Username);
+                Session.Add("PlanDateUsernameFrom", Session["Username"].ToString());
+
+                string url = "https://localhost:44369/api/DatingService/Profiles/LoadSentDateRequests/" + Session["Username"].ToString();
+                WebRequest request = WebRequest.Create(url);
+                WebResponse response = request.GetResponse();
+
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                string data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                List<DateRequest> sentDateRequests = js.Deserialize<List<DateRequest>>(data);
+
+                loadPlanDate(Session["PlanDateUsernameTo"].ToString(), Session["PlanDateUsernameFrom"].ToString(), sentDateRequests);
+            }
+            else if (btnPlanDate.ID.Equals("btnPlanDateReceived_" + rowNum))
+            {
+                profileDisplay = ((ProfileDisplay)received.FindControl("pdProfileReceived_" + rowNum));
+                Session.Add("PlanDateUsernameFrom", profileDisplay.Username);
+                Session.Add("PlanDateUsernameTo", Session["Username"].ToString());
+
+                string url = "https://localhost:44369/api/DatingService/Profiles/LoadReceivedDateRequests/" + Session["Username"].ToString();
+                WebRequest request = WebRequest.Create(url);
+                WebResponse response = request.GetResponse();
+
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                string data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                List<DateRequest> receivedDateRequests = js.Deserialize<List<DateRequest>>(data);
+
+                loadPlanDate(Session["PlanDateUsernameTo"].ToString(), Session["PlanDateUsernameFrom"].ToString(), receivedDateRequests);
+            }
+        }
+
+        private void loadPlanDate(string usernameTo, string usernameFrom, List<DateRequest> dateRequests)
+        {
+            User tempUser = new User();
+            int userIDTo = tempUser.getUserID(usernameTo);
+            int userIDFrom = tempUser.getUserID(usernameFrom);
+
+            foreach(DateRequest dateRequest in dateRequests)
+            {
+                if(dateRequest.UserIDFrom == userIDFrom && dateRequest.UserIDTo == userIDTo)
+                {
+                    string url = "https://localhost:44369/api/DatingService/Profiles/GetDatePlanDetails/" + userIDFrom + "/" + userIDTo;
+                    WebRequest request = WebRequest.Create(url);
+                    WebResponse response = request.GetResponse();
+
+                    Stream theDataStream = response.GetResponseStream();
+                    StreamReader reader = new StreamReader(theDataStream);
+                    string data = reader.ReadToEnd();
+                    reader.Close();
+                    response.Close();
+
+                    JavaScriptSerializer js = new JavaScriptSerializer();
+                    PlanDate planDateObj = js.Deserialize<PlanDate>(data);
+
+                    txtDate.Text = planDateObj.Date;
+                    txtTime.Text = planDateObj.Time;
+                    txtDescription.Text = planDateObj.Description;
+
+                    planDate.Visible = true;
+                }
+            }
             
         }
 
@@ -374,6 +453,97 @@ namespace TermProject
                 }
             }
             
+        }
+
+        protected void btnSavePlan_Click(object sender, EventArgs e)
+        {
+            lblErrorMsg.Text = string.Empty;
+            lblErrorMsg.Visible = false;
+
+            if (validatePlanDetails())
+            {
+                PlanDate datePlan = new PlanDate();
+                datePlan.Date = txtDate.Text;
+                datePlan.Time = txtTime.Text;
+                datePlan.Description = txtDescription.Text;
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                string jsonDatePlan = js.Serialize(datePlan);
+
+                try
+                {
+                    string url = "https://localhost:44369/api/DatingService/Profiles/ModifyDatePlan/" + Session["PlanDateUsernameTo"].ToString() + "/" + Session["PlanDateUsernameFrom"].ToString();
+                    WebRequest request = WebRequest.Create(url);
+                    request.Method = "PUT";
+                    request.ContentLength = jsonDatePlan.Length;
+                    request.ContentType = "application/json";
+
+                    //Write the JSON data to the Web Request
+                    StreamWriter writer = new StreamWriter(request.GetRequestStream());
+                    writer.Write(jsonDatePlan);
+                    writer.Flush();
+                    writer.Close();
+
+                    //Read the data from the Web Response
+                    WebResponse response = request.GetResponse();
+                    Stream theDataStream = response.GetResponseStream();
+                    StreamReader reader = new StreamReader(theDataStream);
+                    string data = reader.ReadToEnd();
+                    reader.Close();
+                    response.Close();
+
+                    if (data == "true")
+                    {
+                        btnClose.Text = "Close";
+                        lblErrorMsg.Text += "Date Plan saved successfully. <br />";
+                        lblErrorMsg.Visible = true;
+                    }
+                    else
+                    {
+                        lblErrorMsg.Text += "*A problem occured while updating your date plan. <br />";
+                        lblErrorMsg.Visible = true;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    lblErrorMsg.Text += "*Error: " + ex.Message + "<br />";
+                    lblErrorMsg.Visible = true;
+                }
+            }
+        }
+
+        private bool validatePlanDetails()
+        {
+            bool valid = true;
+
+            DateTime tempDateTime;
+            if(string.IsNullOrWhiteSpace(txtDate.Text) || !DateTime.TryParseExact(txtDate.Text,"M/d/y", CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDateTime))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a valid date. <br />";
+                lblErrorMsg.Visible = true;
+            }            
+            if(string.IsNullOrWhiteSpace(txtTime.Text) || !DateTime.TryParseExact(txtTime.Text, "h:mm tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDateTime))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a valid time. <br />";
+                lblErrorMsg.Visible = true;
+            }
+            if (string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                valid = false;
+                lblErrorMsg.Text += "*Please enter a description. <br />";
+                lblErrorMsg.Visible = true;
+            }
+
+            return valid;
+        }
+
+        protected void btnClose_Click(object sender, EventArgs e)
+        {
+            planDate.Visible = false;
+            lblErrorMsg.Text = string.Empty;
+            lblErrorMsg.Visible = false;
         }
     }
 }
