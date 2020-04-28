@@ -31,9 +31,11 @@ namespace TermProject
                 {                    
                     loadProfile(Session["RequestedProfile"].ToString());
                     loadPrivacySettings(Session["RequestedProfile"].ToString());
+                    btnMessage.Visible = false;
 
                     if (Session["RequestedProfile"].ToString() != Session["Username"].ToString())
                     {
+                        btnMessage.Visible = true;
                         //if the profile selected is from the search results 
                         //then display the profile layout for other members
                         otherMemberView();
@@ -155,7 +157,7 @@ namespace TermProject
 
         private void loadPrivacySettings(string username)
         {
-            string url = "https://localhost:44369/api/DatingService/Profiles/LoadPrivacySettings/" + username;
+            string url = "https://localhost:44369/api/DatingService/Profiles/LoadPrivacySettings/" + GlobalData.APIKey + "/" + username;
 
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
@@ -506,7 +508,7 @@ namespace TermProject
 
             try
             {
-                string url = "https://localhost:44369/api/DatingService/Profiles/ModifyProfile/" + Session["Username"].ToString();
+                string url = "https://localhost:44369/api/DatingService/Profiles/ModifyProfile/" + GlobalData.APIKey + "/" + Session["Username"].ToString();
                 WebRequest request = WebRequest.Create(url);
                 request.Method = "POST";
                 request.ContentLength = jsonProfileObj.Length;
@@ -562,7 +564,7 @@ namespace TermProject
 
             try
             {
-                string url = "https://localhost:44369/api/DatingService/Profiles/ModifyPrivacySettings/" + Session["Username"].ToString();
+                string url = "https://localhost:44369/api/DatingService/Profiles/ModifyPrivacySettings/" + GlobalData.APIKey + "/" + Session["Username"].ToString();
                 WebRequest request = WebRequest.Create(url);
                 request.Method = "POST";
                 request.ContentLength = jsonPrivacyObj.Length;
@@ -722,7 +724,7 @@ namespace TermProject
 
         protected void btnLike_Click(object sender, EventArgs e)
         {
-            string url = "https://localhost:44369/api/DatingService/Profiles/AddLikes/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
+            string url = "https://localhost:44369/api/DatingService/Profiles/AddLikes/" + GlobalData.APIKey + "/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
             WebRequest request = WebRequest.Create(url);
             request.Method = "PUT";
             request.ContentLength = 0;
@@ -744,7 +746,7 @@ namespace TermProject
 
         protected void btnPass_Click(object sender, EventArgs e)
         {
-            string url = "https://localhost:44369/api/DatingService/Profiles/AddPasses/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
+            string url = "https://localhost:44369/api/DatingService/Profiles/AddPasses/" + GlobalData.APIKey + "/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
             WebRequest request = WebRequest.Create(url);
             request.Method = "PUT";
             request.ContentLength = 0;
@@ -767,7 +769,7 @@ namespace TermProject
         protected void btnDateRequest_Click(object sender, EventArgs e)
         {
             
-            string url = "https://localhost:44369/api/DatingService/Profiles/SendDateRequest/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
+            string url = "https://localhost:44369/api/DatingService/Profiles/SendDateRequest/" + GlobalData.APIKey + "/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
             WebRequest request = WebRequest.Create(url);
             request.Method = "POST";
             request.ContentLength = 0;
@@ -794,7 +796,7 @@ namespace TermProject
 
         protected void btnBlock_Click(object sender, EventArgs e)
         {
-            string url = "https://localhost:44369/api/DatingService/Profiles/AddBlock/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
+            string url = "https://localhost:44369/api/DatingService/Profiles/AddBlock/" + GlobalData.APIKey + "/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
             WebRequest request = WebRequest.Create(url);
             request.Method = "PUT";
             request.ContentLength = 0;

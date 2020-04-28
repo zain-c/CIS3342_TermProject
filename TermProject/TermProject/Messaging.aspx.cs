@@ -103,11 +103,24 @@ namespace TermProject
                 btnMessage.CssClass = "btn btn-outline-success";
                 messageCell.Controls.Add(btnMessage);
 
+                TableCell deleteCell = new TableCell();
+                Button btnDelete = new Button();
+                btnDelete.ID = "btnDelete_" + i;
+                btnDelete.Click += BtnDelete_Click;
+                btnDelete.Text = "Delete Conversation";
+                btnDelete.CssClass = "btn btn-outline-danger";
+                deleteCell.Controls.Add(btnDelete);
+
                 row.Cells.Add(cell);
                 row.Cells.Add(messageCell);
                 tblProfileList.Rows.Add(row);
             }
             return tblProfileList;
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void BtnMessage_Click(object sender, EventArgs e)
