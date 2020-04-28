@@ -22,7 +22,7 @@ namespace TermProject
             else
             {
                 User tempUser = new User();
-                HttpCookie cookie = Request.Cookies["LoginCookie"];
+                HttpCookie cookie = Request.Cookies["VerifyAccount"];
                 if (tempUser.verifyAccount(cookie.Values["Username"].ToString()))
                 {
                     lblVerify.Text = "Your account has been verified.";
