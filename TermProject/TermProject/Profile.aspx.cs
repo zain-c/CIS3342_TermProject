@@ -80,7 +80,7 @@ namespace TermProject
         
         private void loadProfile(string username)
         {
-            string url = "https://localhost:44369/api/DatingService/Profiles/LoadUserProfile/" + username;
+            string url = "https://localhost:44369/api/DatingService/Profiles/LoadUserProfile/"+ GlobalData.APIKey + "/" + username;
 
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
@@ -811,6 +811,48 @@ namespace TermProject
             {
                 lblErrorMsg.Text += "User successfully added to Blocked List. <br />";
                 lblErrorMsg.Visible = true;
+            }
+        }
+
+        protected void btnMessage_Click(object sender, EventArgs e)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_GetConversation";
+            objCmd.Parameters.AddWithValue("@usernameOne", Session["Username"].ToString());
+            objCmd.Parameters.AddWithValue("@usernameTwo", Session["RequestedProfile"].ToString());
+
+            DataSet conversationDS = objDB.GetDataSetUsingCmdObj(objCmd);
+            if (conversationDS.Tables.Count > 0)
+            {
+                if (conversationDS.Tables[0].Rows.Count > 0)
+                {
+                    Response.Redirect("Messaging.aspx");
+                }
+                else
+                {
+                    newConvo();
+                }
+            }
+            else
+            {
+                newConvo();
+            }
+        }
+
+        private void newConvo()
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_NewConversation";
+            objCmd.Parameters.AddWithValue("@usernameOne", Session["Username"].ToString());
+            objCmd.Parameters.AddWithValue("@usernameTwo", Session["RequestedProfile"].ToString());
+            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+            if (result == 1)
+            {
+                Response.Redirect("Messaging.aspx");
             }
         }
     }

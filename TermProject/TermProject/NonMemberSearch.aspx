@@ -9,19 +9,22 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div id="container" class="mainContainer">
-            <div id="search" class="searchContainer">
-                <h3>Find your match today!</h3> <br />
+        <div id="search" class="searchContainer">
+            <h3>Find your match today!</h3>
+            <br />
 
-                <asp:Table ID="tblPublicSearchFilter" runat="server" HorizontalAlign="Center" Width="75%" CellPadding="10">
-                    <asp:TableHeaderRow>
-                        <asp:TableHeaderCell>Location</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Gender</asp:TableHeaderCell>
-                    </asp:TableHeaderRow>
-                    <asp:TableRow>
-                        <asp:TableCell>
-                            City &nbsp
-                            <asp:TextBox ID="txtLocationFilter" MaxLength="50" runat="server"></asp:TextBox> <br /><br />
-                            State &nbsp
+            <asp:Table ID="tblPublicSearchFilter" runat="server" HorizontalAlign="Center" Width="75%" CellPadding="10">
+                <asp:TableHeaderRow>
+                    <asp:TableHeaderCell>Location</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Gender</asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        City &nbsp
+                            <asp:TextBox ID="txtLocationFilter" MaxLength="50" runat="server"></asp:TextBox>
+                        <br />
+                        <br />
+                        State &nbsp
                             <asp:DropDownList ID="ddStateFilter" runat="server">
                                 <asp:ListItem Value="Select">Select State</asp:ListItem>
                                 <asp:ListItem>AL</asp:ListItem>
@@ -75,9 +78,9 @@
                                 <asp:ListItem>WI</asp:ListItem>
                                 <asp:ListItem>WY</asp:ListItem>
                             </asp:DropDownList>
-                        </asp:TableCell>
-                        <asp:TableCell>
-                            Gender &nbsp
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        Gender &nbsp
                             <asp:DropDownList ID="ddGenderFilter" runat="server">
                                 <asp:ListItem Value="Select">Select Gender</asp:ListItem>
                                 <asp:ListItem Value="Both">Both</asp:ListItem>
@@ -85,50 +88,56 @@
                                 <asp:ListItem Value="Female">Female</asp:ListItem>
 
                             </asp:DropDownList>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                </asp:Table>
-                <asp:Label ID="lblErrorMsg" runat="server" Text="" Visible="false"></asp:Label>
-                <br />
-                <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="searchButton" /> <br /><br />
-             </div>
-             <div id="ResultsContainer" runat="server">
-                <Table id="ResultsTable">
-                    <tr>
-                        <th>UserName</th>                       
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Gender</th>                        
-                        <th>City</th>
-                        <th>State</th>
-                    </tr>
-                
-                    <asp:Repeater ID="rptSearchResults" runat="server">
-                        <ItemTemplate>
-                            <tr>
-                                <td>
-                                    <asp:Label ID="lblUsername" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "username") %>'></asp:Label>
-                                </td>                             
-                                <td>
-                                    <asp:Label ID="lblFirstName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "firstName") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblLastName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "lastName") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblGender" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "gender") %>'></asp:Label>
-                                </td>                              
-                                <td>
-                                    <asp:Label ID="lblCity" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "city") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblState" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "state") %>'></asp:Label>
-                                </td>  
-                            </tr>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </table>
-                </div>
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+            <asp:Label ID="lblErrorMsg" runat="server" Text="" Visible="false"></asp:Label>
+            <br />
+            <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="searchButton" />
+            <br />
+            <br />
         </div>
+        <div id="ResultsContainer" class="container text-center" runat="server">
+            <div class="row">
+                <div class="col">
+                    <table id="ResultsTable">
+                        <tr>
+                            <th>UserName</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>City</th>
+                            <th>State</th>
+                        </tr>
+
+                        <asp:Repeater ID="rptSearchResults" runat="server">
+                            <ItemTemplate>
+                                <tr>
+                                    <td>
+                                        <asp:Label ID="lblUsername" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "username") %>'></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lblFirstName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "firstName") %>'></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lblLastName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "lastName") %>'></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lblGender" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "gender") %>'></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lblCity" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "city") %>'></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lblState" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "state") %>'></asp:Label>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </asp:Content>

@@ -18,18 +18,30 @@ namespace TermProject
 {
     public partial class Search : System.Web.UI.Page
     {
-        /* FOR TESTING */
-        /*
-        ArrayList testSearchResults = new ArrayList();
-        MemberSearchResults testAcct1 = new MemberSearchResults();
-        MemberSearchResults testAcct2 = new MemberSearchResults();
-        */
-
-
-
+       
         protected void Page_Load(object sender, EventArgs e)
         {
-            ResultsContainer.Visible = false;
+            if (string.IsNullOrEmpty((string)Session["Username"]))
+            {
+                Response.Redirect("Login.aspx");
+            }
+            else
+            {
+                resultsContainer.Visible = false;
+
+                if(string.IsNullOrEmpty((string)Session["LocationFilter"]) && string.IsNullOrEmpty((string)Session["StateFilter"]) && string.IsNullOrEmpty((string)Session["GenderFilter"]) && 
+                   string.IsNullOrEmpty((string)Session["CommitmentFilter"]) && string.IsNullOrEmpty((string)Session["HaveKidsWant"]) && string.IsNullOrEmpty((string)Session["WantKidsFilter"]))
+                {
+                    // do nothing
+                }
+                else
+                {
+                    loadResults(Session["LocationFilter"].ToString(), Session["StateFilter"].ToString(), Session["GenderFilter"].ToString(), Session["CommitmentFilter"].ToString(), Session["HaveKidsFilter"].ToString(),
+                                Session["WantKidsFilter"].ToString(), Session["OccupationFilter"].ToString());
+                    
+                    Session["SearchClicked"] = "false";
+                }
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -40,66 +52,44 @@ namespace TermProject
             if (txtOccupationFilter.Text.CompareTo("") == 0)
             {
                 string blankOccupation = "BLANKNONE";
+
+                
                 if (validateFields())
                 {
-                    displayedSearchResults = loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue, ddCommitmentFilter.SelectedValue, ddHaveKidsFilter.SelectedValue, ddWantKidsFilter.SelectedValue, blankOccupation);
-                    if (displayedSearchResults.Count != 0)
-                    {
-                        ShowResults(displayedSearchResults);
-                    }
-                    else
-                    {
-                        lblErrorMsg.Text = "*No profiles meet that criteria. Try searching again.";
-                        lblErrorMsg.Visible = true;
-                    }
+
+                    Session.Add("LocationFilter", txtLocationFilter.Text);
+                    Session.Add("StateFilter", ddStateFilter.SelectedValue);
+                    Session.Add("GenderFilter", ddGenderFilter.SelectedValue);
+                    Session.Add("CommitmentFilter", ddCommitmentFilter.SelectedValue);
+                    Session.Add("HaveKidsFilter", ddHaveKidsFilter.SelectedValue);
+                    Session.Add("WantKidsFilter", ddWantKidsFilter.SelectedValue);
+                    Session.Add("OccupationFilter", blankOccupation);
+
+                    resultsDiv.Controls.RemoveAt(resultsDiv.Controls.Count - 1);
+                    loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue, ddCommitmentFilter.SelectedValue, ddHaveKidsFilter.SelectedValue, ddWantKidsFilter.SelectedValue, blankOccupation);
+                    
                     
                 }
             }
             else if (validateFields())
             {
-                displayedSearchResults = loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue, ddCommitmentFilter.SelectedValue, ddHaveKidsFilter.SelectedValue, ddWantKidsFilter.SelectedValue, txtOccupationFilter.Text);
-                if (displayedSearchResults.Count != 0)
-                {
-                    ShowResults(displayedSearchResults);
-                }
-                else
-                {
-                    lblErrorMsg.Text = "*No profiles meet that criteria. Try searching again.";
-                }
+                Session.Add("LocationFilter", txtLocationFilter.Text);
+                Session.Add("StateFilter", ddStateFilter.SelectedValue);
+                Session.Add("GenderFilter", ddGenderFilter.SelectedValue);
+                Session.Add("CommitmentFilter", ddCommitmentFilter.SelectedValue);
+                Session.Add("HaveKidsFilter", ddHaveKidsFilter.SelectedValue);
+                Session.Add("WantKidsFilter", ddWantKidsFilter.SelectedValue);
+                Session.Add("OccupationFilter", txtOccupationFilter.Text);
+
+                resultsDiv.Controls.RemoveAt(resultsDiv.Controls.Count - 1);
+                loadResults(txtLocationFilter.Text, ddStateFilter.SelectedValue, ddGenderFilter.SelectedValue, ddCommitmentFilter.SelectedValue, ddHaveKidsFilter.SelectedValue, ddWantKidsFilter.SelectedValue, txtOccupationFilter.Text);
+                
             }
+
+
+            Session.Add("SearchClicked", "true");
+
             
-            
-
-            /* FOR TESTING */
-            /*
-            testAcct1.City = "Havertown";
-            testAcct1.Commitment = "Casual";
-            testAcct1.FirstName = "Alex";
-            testAcct1.Gender = "Male";
-            testAcct1.HaveKids = "No";
-            testAcct1.LastName = "Derbs";
-            testAcct1.Occupation = "Student";
-            testAcct1.State = "PA";
-            testAcct1.Title = "Sup";
-            testAcct1.Username = "aderbs7";
-            testAcct1.WantKids = "No";
-
-            testAcct2.City = "Havertown";
-            testAcct2.Commitment = "Casual";
-            testAcct2.FirstName = "Alex";
-            testAcct2.Gender = "Male";
-            testAcct2.HaveKids = "No";
-            testAcct2.LastName = "Derbs";
-            testAcct2.Occupation = "Student";
-            testAcct2.State = "PA";
-            testAcct2.Title = "Sup";
-            testAcct2.Username = "aderbs7";
-            testAcct2.WantKids = "No";
-
-            testSearchResults.Add(testAcct1);
-            testSearchResults.Add(testAcct2);
-            ShowResults(testSearchResults);
-            */ 
 
         }
 
@@ -152,9 +142,9 @@ namespace TermProject
             return valid;
         }
 
-        private ArrayList loadResults(string city, string state, string gender, string commitment, string haveKids, string wantKids, string occupation)
-        {
-            string url = "https://localhost:44369/api/DatingService/Search/LoadSearchResults/Member/" + city + "/" + state + "/" + gender + "/" + commitment + "/" + haveKids + "/" + wantKids + "/" + occupation;
+        private void loadResults(string city, string state, string gender, string commitment, string haveKids, string wantKids, string occupation)
+        {     
+            string url = "https://localhost:44369/api/DatingService/Search/LoadSearchResults/Member/" + GlobalData.APIKey + "/" + city + "/" + state + "/" + gender + "/" + commitment + "/" + haveKids + "/" + wantKids + "/" + occupation;
 
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
@@ -167,6 +157,17 @@ namespace TermProject
 
             JavaScriptSerializer js = new JavaScriptSerializer();
             MemberSearchResults[] profileResults = js.Deserialize<MemberSearchResults[]>(data);
+            List<ProfileDisplayClass> profileResultsList = new List<ProfileDisplayClass>();
+            
+            foreach (MemberSearchResults result in profileResults)
+            {
+                User userResult = new User();
+                int resultUserID = userResult.getUserID(result.Username);
+               
+
+                ProfileDisplayClass profileDisplay = new ProfileDisplayClass();
+                profileResultsList.Add(profileDisplay.retreiveProfileDisplayFromDB(resultUserID));
+            }
 
             ArrayList filterPassedProfileResults = new ArrayList();
 
@@ -176,7 +177,7 @@ namespace TermProject
             PassedList currentUserPassedList = new PassedList();
             currentUserPassedList = currentUserPassedList.getPasses(currentUserID);
 
-            foreach (MemberSearchResults result in profileResults)//adds search results that are not currently in the users passed list
+            foreach (ProfileDisplayClass result in profileResultsList)//adds search results that are not currently in the users passed list
             {
                 User userResult = new User();
                 int resultUserID = userResult.getUserID(result.Username);
@@ -194,7 +195,7 @@ namespace TermProject
             BlockedList currentUserBlockedList = new BlockedList();
             currentUserBlockedList = currentUserBlockedList.getBlocked(currentUserID);
 
-            foreach (MemberSearchResults result in filterPassedProfileResults)//adds search results that are not in the users blocked list
+            foreach (ProfileDisplayClass result in filterPassedProfileResults)//adds search results that are not in the users blocked list
             {
                 User userResult = new User();
                 int resultUserID = userResult.getUserID(result.Username);
@@ -211,7 +212,7 @@ namespace TermProject
 
             ArrayList filterBlockedByProfileResults = new ArrayList();
 
-            foreach (MemberSearchResults result in filterUserBlockedProfileResults.ToArray())//adds search results that do not have the current user blocked
+            foreach (ProfileDisplayClass result in filterUserBlockedProfileResults.ToArray())//adds search results that do not have the current user blocked
             {
                 User userResult = new User();
                 int resultUserID = userResult.getUserID(result.Username);
@@ -229,31 +230,87 @@ namespace TermProject
                 }
             }
 
-            return filterBlockedByProfileResults;
+            //return filterBlockedByProfileResults;
+            List<ProfileDisplayClass> filteredProfiles = filterBlockedByProfileResults.Cast<ProfileDisplayClass>().ToList();
+            //Table tblResults = generateResultsTable(filteredProfiles);
+            if (filteredProfiles.Count != 0)
+            {
+                Table tblResults = generateResultsTable(filteredProfiles);
+                resultsDiv.Controls.Add(tblResults);
+                resultsContainer.Visible = true;
+            }
+            else
+            {
+                Label lblNoResults = new Label();
+                lblNoResults.ID = "lblNoResults";
+                lblNoResults.Text = "There no profiles that meet your criteria, please search again.";
+                resultsDiv.Controls.Add(lblNoResults);
+                resultsContainer.Visible = true;
+            }
 
-           
-
+            
         }
 
-        private void ShowResults(ArrayList searchResults)
-
+        private Table generateResultsTable(List<ProfileDisplayClass> userProfiles)
         {
+            Table tblProfileList = new Table();
+            tblProfileList.HorizontalAlign = HorizontalAlign.Center;
+            tblProfileList.GridLines = GridLines.Horizontal;
+            tblProfileList.BorderStyle = BorderStyle.None;
+            tblProfileList.CellPadding = 5;
+            tblProfileList.Style.Add("width", "70%");
 
-            ResultsContainer.Visible = true;
-            rptSearchResults.DataSource = searchResults;
 
-            rptSearchResults.DataBind();
+            TableRow row = null;
+            TableCell cell = null;
+            ProfileDisplay profileDisplay = null;
 
+            for (int i = 0; i < userProfiles.Count; i++)
+            {
+                row = new TableRow();
+                row.CssClass = "text-center";
+                cell = new TableCell();
+                cell.CssClass = "text-center";
+                profileDisplay = (ProfileDisplay)LoadControl("ProfileDisplay.ascx");
+                profileDisplay.ID = "pdProfile_" + i;
+                profileDisplay.Username = userProfiles[i].Username;
+                profileDisplay.FirstName = userProfiles[i].FirstName;
+                profileDisplay.LastName = userProfiles[i].LastName;
+                profileDisplay.Title = userProfiles[i].Title;
+                profileDisplay.Age = userProfiles[i].Age;
+                profileDisplay.ImageUrl = convertByteArrayToImage(userProfiles[i].Username);
+                cell.Controls.Add(profileDisplay);
+                
+                row.Cells.Add(cell);
+                tblProfileList.Rows.Add(row);
+            }
+            return tblProfileList;
         }
 
-        protected void rptSearchResults_ResultCommand(Object sender, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        private string convertByteArrayToImage(string username)
         {
-            int rowIndex = e.Item.ItemIndex;
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_GetProfilePic";
 
-            Label lblSelectedProfileUserName = (Label)rptSearchResults.Items[rowIndex].FindControl("lblUsername");
-            String selectedProductUsername = lblSelectedProfileUserName.Text;
-            Session["RequestedProfile"] = selectedProductUsername;
-            Response.Redirect("Profile.aspx");
+            User tempUser = new User();
+            int userID = tempUser.getUserID(username);
+
+            objCmd.Parameters.AddWithValue("@userID", userID);
+            DataSet profilePicDS = objDB.GetDataSetUsingCmdObj(objCmd);
+            string imageUrl;
+            if (objDB.GetField("Photo", 0) == DBNull.Value)
+            {
+                imageUrl = null;
+            }
+            else
+            {
+                byte[] imageData = (byte[])objDB.GetField("Photo", 0);
+                imageUrl = "data:image/jpg;base64," + Convert.ToBase64String(imageData);
+
+            }
+            return imageUrl;
         }
     }
 }

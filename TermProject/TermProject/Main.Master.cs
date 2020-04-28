@@ -40,5 +40,10 @@ namespace TermProject
         {
             Response.Redirect("DateRequests.aspx");
         }
+
+        protected void btnMessages_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Messaging.aspx");
+        }
     }
 }

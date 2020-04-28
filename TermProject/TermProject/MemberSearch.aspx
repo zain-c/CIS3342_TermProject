@@ -8,20 +8,23 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="container" class="mainContainer">
-            <div id="search" class="searchContainer">
-                <h3>Find your match today!</h3> <br />
+    <div id="container" class="mainContainer" style="margin-bottom:10%">
+        <div id="search" class="searchContainer">
+            <h3>Find your match today!</h3>
+            <br />
 
-                <asp:Table ID="tblPublicSearchFilter" runat="server" HorizontalAlign="Center" Width="75%" CellPadding="10">
-                    <asp:TableHeaderRow>
-                        <asp:TableHeaderCell>Location</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Gender</asp:TableHeaderCell>
-                    </asp:TableHeaderRow>
-                    <asp:TableRow>
-                        <asp:TableCell>
-                            City &nbsp
-                            <asp:TextBox ID="txtLocationFilter" MaxLength="50"  runat="server"></asp:TextBox> <br /><br />
-                            State &nbsp
+            <asp:Table ID="tblPublicSearchFilter" runat="server" HorizontalAlign="Center" Width="75%" CellPadding="10">
+                <asp:TableHeaderRow>
+                    <asp:TableHeaderCell>Location</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Gender</asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        City &nbsp
+                            <asp:TextBox ID="txtLocationFilter" MaxLength="50" runat="server"></asp:TextBox>
+                        <br />
+                        <br />
+                        State &nbsp
                             <asp:DropDownList ID="ddStateFilter" runat="server">
                                 <asp:ListItem Value="Select">Select State</asp:ListItem>
                                 <asp:ListItem>AL</asp:ListItem>
@@ -75,9 +78,9 @@
                                 <asp:ListItem>WI</asp:ListItem>
                                 <asp:ListItem>WY</asp:ListItem>
                             </asp:DropDownList>
-                        </asp:TableCell>
-                        <asp:TableCell>
-                            Gender &nbsp
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        Gender &nbsp
                             <asp:DropDownList ID="ddGenderFilter" runat="server">
                                 <asp:ListItem Value="Select">Select Gender</asp:ListItem>
                                 <asp:ListItem Value="Both">Both</asp:ListItem>
@@ -85,126 +88,68 @@
                                 <asp:ListItem Value="Female">Female</asp:ListItem>
 
                             </asp:DropDownList>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                </asp:Table>
-                <asp:Table ID="tblPrivateSearchFilter" runat="server" HorizontalAlign="Center" Width="75%" CellPadding="10">
-                    <asp:TableHeaderRow>
-                        <asp:TableHeaderCell ToolTip="What level of commitment are you looking for?">Commitment</asp:TableHeaderCell>
-                        <asp:TableHeaderCell ToolTip="Would you like your matches to have kids?">Kids</asp:TableHeaderCell>
-                    </asp:TableHeaderRow>
-                    <asp:TableRow>
-                        <asp:TableCell>
-                            Commitment &nbsp
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+            <asp:Table ID="tblPrivateSearchFilter" runat="server" HorizontalAlign="Center" Width="75%" CellPadding="10">
+                <asp:TableHeaderRow>
+                    <asp:TableHeaderCell ToolTip="What level of commitment are you looking for?">Commitment</asp:TableHeaderCell>
+                    <asp:TableHeaderCell ToolTip="Would you like your matches to have kids?">Kids</asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        Commitment &nbsp
                             <asp:DropDownList ID="ddCommitmentFilter" ToolTip="What level of commitment are you looking for?" runat="server">
                                 <asp:ListItem Value="Select">Select Commitment</asp:ListItem>
                                 <asp:ListItem Value="Casual">Casual</asp:ListItem>
                                 <asp:ListItem Value="Relationship">Relationship</asp:ListItem>
                                 <asp:ListItem Value="Marriage">Marriage</asp:ListItem>
                             </asp:DropDownList>
-                        </asp:TableCell>
-                        <asp:TableCell>
-                            Have Kids &nbsp
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        Have Kids &nbsp
                             <asp:DropDownList ID="ddHaveKidsFilter" ToolTip="Would you like your matches to have kids?" runat="server">
                                 <asp:ListItem Value="Select">Select</asp:ListItem>
                                 <asp:ListItem Value="Either">Either</asp:ListItem>
                                 <asp:ListItem Value="Yes">Yes</asp:ListItem>
                                 <asp:ListItem Value="No">No</asp:ListItem>
                             </asp:DropDownList>
-                        </asp:TableCell>
-                        <asp:TableCell>
-                            Want Kids &nbsp
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        Want Kids &nbsp
                             <asp:DropDownList ID="ddWantKidsFilter" ToolTip="Do you want your matches to be interested in having children now or in the future?" runat="server">
                                 <asp:ListItem Value="Select">Select</asp:ListItem>
                                 <asp:ListItem Value="Either">Either</asp:ListItem>
                                 <asp:ListItem Value="Yes">Yes</asp:ListItem>
                                 <asp:ListItem Value="No">No</asp:ListItem>
                             </asp:DropDownList>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableHeaderRow>
-                        <asp:TableHeaderCell>Occupation</asp:TableHeaderCell>
-                    </asp:TableHeaderRow>
-                    <asp:TableRow>
-                        <asp:TableCell>
-                            Occupation &nbsp
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableHeaderRow>
+                    <asp:TableHeaderCell>Occupation</asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        Occupation &nbsp
                             <asp:TextBox ID="txtOccupationFilter" ToolTip="Enter your desired occupation." MaxLength="50" placeholder="Occupation" runat="server"></asp:TextBox>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                </asp:Table>
-                <asp:Label ID="lblErrorMsg" runat="server" Text="" Visible="false"></asp:Label>
-                <br />
-                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="searchButton" /> <br /><br />
-            
-                
-                <div id="ResultsContainer" class="container text-center" runat="server">
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+            <asp:Label ID="lblErrorMsg" runat="server" Text="" Visible="false"></asp:Label>
+            <br />
+            <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="searchButton" />
+            <br />
+            <br />
+            <div id="resultsContainer" runat="server" class="container text-center" visible="false">
                 <div class="row">
-                <div class="col">
-                <div class="table-responsive">
-                <Table id="ResultsTable" class="table-hover">
-                    <tr>
-                        <th>UserName</th>
-                        <th>Title</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Gender</th>
-                        <th>Occupation</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Commitment</th>
-                        <th>Has Kids</th>
-                        <th>Wants Kids</th>
-                        <th>View Profile</th>
-                    </tr>
-                
-                    <asp:Repeater ID="rptSearchResults" runat="server" OnItemCommand="rptSearchResults_ResultCommand">
-                        <ItemTemplate>
-                            <tr>
-                                <td>
-                                    <asp:Label ID="lblUsername" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "username") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblTitle" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "title") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblFirstName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "firstName") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblLastName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "lastName") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblGender" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "gender") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblOccupation" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "occupation") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblCity" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "city") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblState" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "state") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblCommitment" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "commitment") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblHasKids" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "haveKids") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblWantsKids" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "wantKids") %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Button ID="btnViewProfile" Text="View Profile" runat="server" />
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </table>
-                </div>  
-                </div><!--End Col-->
-                </div><!--End Row-->
+                    <div id="resultsDiv" runat="server" class="col">
+                        <asp:Label ID="lblResults" runat="server" Text="Results" ForeColor="Black" Font-Size="24px"></asp:Label>
+                        <hr style="border-top: 1px solid black; width: 100%" />
+                        <br />
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 </asp:Content>
 

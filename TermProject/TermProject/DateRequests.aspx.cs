@@ -58,7 +58,7 @@ namespace TermProject
 
         private void loadSentRequests()
         {
-            string url = "https://localhost:44369/api/DatingService/Profiles/LoadSentDateRequests/" + Session["Username"].ToString();
+            string url = "https://localhost:44369/api/DatingService/Profiles/LoadSentDateRequests/" + GlobalData.APIKey + "/" + Session["Username"].ToString();
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
 
@@ -93,7 +93,7 @@ namespace TermProject
 
         private void loadReceivedRequests()
         {
-            string url = "https://localhost:44369/api/DatingService/Profiles/LoadReceivedDateRequests/" + Session["Username"].ToString();
+            string url = "https://localhost:44369/api/DatingService/Profiles/LoadReceivedDateRequests/" + GlobalData.APIKey + "/" + Session["Username"].ToString();
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
 
@@ -213,7 +213,7 @@ namespace TermProject
                 Session.Add("PlanDateUsernameTo", profileDisplay.Username);
                 Session.Add("PlanDateUsernameFrom", Session["Username"].ToString());
 
-                string url = "https://localhost:44369/api/DatingService/Profiles/LoadSentDateRequests/" + Session["Username"].ToString();
+                string url = "https://localhost:44369/api/DatingService/Profiles/LoadSentDateRequests/" + GlobalData.APIKey + "/" + Session["Username"].ToString();
                 WebRequest request = WebRequest.Create(url);
                 WebResponse response = request.GetResponse();
 
@@ -234,7 +234,7 @@ namespace TermProject
                 Session.Add("PlanDateUsernameFrom", profileDisplay.Username);
                 Session.Add("PlanDateUsernameTo", Session["Username"].ToString());
 
-                string url = "https://localhost:44369/api/DatingService/Profiles/LoadReceivedDateRequests/" + Session["Username"].ToString();
+                string url = "https://localhost:44369/api/DatingService/Profiles/LoadReceivedDateRequests/" + GlobalData.APIKey + "/" + Session["Username"].ToString();
                 WebRequest request = WebRequest.Create(url);
                 WebResponse response = request.GetResponse();
 
@@ -261,7 +261,7 @@ namespace TermProject
             {
                 if(dateRequest.UserIDFrom == userIDFrom && dateRequest.UserIDTo == userIDTo)
                 {
-                    string url = "https://localhost:44369/api/DatingService/Profiles/GetDatePlanDetails/" + userIDFrom + "/" + userIDTo;
+                    string url = "https://localhost:44369/api/DatingService/Profiles/GetDatePlanDetails/" + GlobalData.APIKey + "/" + userIDFrom + "/" + userIDTo;
                     WebRequest request = WebRequest.Create(url);
                     WebResponse response = request.GetResponse();
 
@@ -415,7 +415,7 @@ namespace TermProject
 
                 try
                 {
-                    string url = "https://localhost:44369/api/DatingService/Profiles/UpdateDateRequestStatus/";
+                    string url = "https://localhost:44369/api/DatingService/Profiles/UpdateDateRequestStatus/" + GlobalData.APIKey;
                     WebRequest request = WebRequest.Create(url);
                     request.Method = "PUT";
                     request.ContentLength = jsonDateRequestObj.Length;
@@ -472,7 +472,7 @@ namespace TermProject
 
                 try
                 {
-                    string url = "https://localhost:44369/api/DatingService/Profiles/ModifyDatePlan/" + Session["PlanDateUsernameTo"].ToString() + "/" + Session["PlanDateUsernameFrom"].ToString();
+                    string url = "https://localhost:44369/api/DatingService/Profiles/ModifyDatePlan/" + GlobalData.APIKey + "/" + Session["PlanDateUsernameTo"].ToString() + "/" + Session["PlanDateUsernameFrom"].ToString();
                     WebRequest request = WebRequest.Create(url);
                     request.Method = "PUT";
                     request.ContentLength = jsonDatePlan.Length;

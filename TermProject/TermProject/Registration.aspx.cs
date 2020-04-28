@@ -58,7 +58,7 @@ namespace TermProject
         {
             Email emailObj = new Email();
             string to = recipient;
-            string from = "zain.contractor@temple.edu";
+            string from = "atozdatingsite@gmail.com";
             string subject = "Verify your Account";
             string message = "Please click the link to verify your email: http://localhost:49433/VerifyAccount.aspx";
             try
