@@ -786,11 +786,30 @@ namespace TermProject
                 lblErrorMsg.Text += "Date Request Sent <br />";
                 lblErrorMsg.Visible = true;
                 btnDateRequest.Enabled = false;
+                User tempUser = new User();
+                sendDateRequestEmail(tempUser.getEmailByUsername(Session["RequestedProfile"].ToString()));
             }
             else
             {
                 lblErrorMsg.Text += "*There was an error sending a date request. <br />";
                 lblErrorMsg.Visible = true;
+            }
+        }
+
+        private void sendDateRequestEmail(string recipient)
+        {
+            Email emailObj = new Email();
+            string to = recipient;
+            string from = "atozdatingsite@gmail.com";
+            string subject = "New Date Request";
+            string message = "You have a new date request from " + Session["Username"].ToString() + ". Visit the website to view the date request.";
+            try
+            {
+                emailObj.SendMail(to, from, subject, message);
+            }
+            catch (Exception ex)
+            {
+                
             }
         }
 
@@ -814,6 +833,199 @@ namespace TermProject
                 lblErrorMsg.Text += "User successfully added to Blocked List. <br />";
                 lblErrorMsg.Visible = true;
             }
+
+            removeFromLikesOrPasses();
+            deleteConversation();
+            deleteDateRequest();
+        }
+
+        private void removeFromLikesOrPasses()
+        {
+            UserProfile tempProfile = new UserProfile();
+            if(tempProfile.checkIfUserLikesOtherUser(Session["Username"].ToString(), Session["RequestedProfile"].ToString()))
+            {
+                string url = "https://localhost:44369/api/DatingService/Profiles/RemoveFromLikes/" + GlobalData.APIKey + "/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
+                WebRequest request = WebRequest.Create(url);
+                request.Method = "DELETE";
+                request.ContentLength = 0;
+
+                WebResponse response = request.GetResponse();
+
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                string data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                if(data == "true")
+                {
+                    lblErrorMsg.Text += "User successfully removed from your Likes. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+                else
+                {
+                    lblErrorMsg.Text += "Error removing this user from your Likes. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+            }
+            else if (tempProfile.checkIfUserLikesOtherUser(Session["RequestedProfile"].ToString(), Session["Username"].ToString()))
+            {
+                string url = "https://localhost:44369/api/DatingService/Profiles/RemoveFromLikes/" + GlobalData.APIKey + "/" + Session["RequestedProfile"].ToString() + "/" + Session["Username"].ToString();
+                WebRequest request = WebRequest.Create(url);
+                request.Method = "DELETE";
+                request.ContentLength = 0;
+
+                WebResponse response = request.GetResponse();
+
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                string data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                if (data == "true")
+                {
+                    lblErrorMsg.Text += "You were successfully removed from their Likes. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+                else
+                {
+                    lblErrorMsg.Text += "Error removing you from their Likes. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+            }
+            else if(tempProfile.checkIfUserPassedOtherUser(Session["Username"].ToString(), Session["RequestedProfile"].ToString()))
+            {
+                string url = "https://localhost:44369/api/DatingService/Profiles/RemoveFromPasses/" + GlobalData.APIKey + "/" + Session["Username"].ToString() + "/" + Session["RequestedProfile"].ToString();
+                WebRequest request = WebRequest.Create(url);
+                request.Method = "DELETE";
+                request.ContentLength = 0;
+
+                WebResponse response = request.GetResponse();
+
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                string data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                if (data == "true")
+                {
+                    lblErrorMsg.Text += "User successfully removed from your Passes. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+                else
+                {
+                    lblErrorMsg.Text += "Error removing this user from your Passes. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+            }
+            else if(tempProfile.checkIfUserPassedOtherUser(Session["RequestedProfile"].ToString(), Session["Username"].ToString()))
+            {
+                string url = "https://localhost:44369/api/DatingService/Profiles/RemoveFromPasses/" + GlobalData.APIKey + "/" + Session["RequestedProfile"].ToString() + "/" + Session["Username"].ToString();
+                WebRequest request = WebRequest.Create(url);
+                request.Method = "DELETE";
+                request.ContentLength = 0;
+
+                WebResponse response = request.GetResponse();
+
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                string data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                if (data == "true")
+                {
+                    lblErrorMsg.Text += "You were successfully removed from their Passes. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+                else
+                {
+                    lblErrorMsg.Text += "Error removing you from their Passes. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+            }
+            
+        }
+
+        private void deleteConversation()
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_GetConversation";
+            objCmd.Parameters.AddWithValue("@usernameOne", Session["Username"].ToString());
+            objCmd.Parameters.AddWithValue("@usernameTwo", Session["RequestedProfile"].ToString());
+
+            DataSet conversationDS = objDB.GetDataSetUsingCmdObj(objCmd);
+            if (conversationDS.Tables.Count > 0)
+            {
+                if (conversationDS.Tables[0].Rows.Count > 0)
+                {                    
+                    objCmd.CommandType = CommandType.StoredProcedure;
+                    objCmd.CommandText = "TP_DeleteConversation";
+                    objCmd.Parameters.Clear();
+                    objCmd.Parameters.AddWithValue("@usernameOne", Session["Username"].ToString());
+                    objCmd.Parameters.AddWithValue("@usernameTwo", Session["RequestedProfile"].ToString());
+
+                    int result = objDB.DoUpdateUsingCmdObj(objCmd);
+                    if (result == 1)
+                    {
+                        lblErrorMsg.Text += "Successfully deleted conversation with this user. <br />";
+                        lblErrorMsg.Visible = true;
+                    }
+                }
+                else
+                {
+                    lblErrorMsg.Text += "You have no conversations with this user to delete. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+            }
+            else
+            {
+                lblErrorMsg.Text += "You have no conversations with this user to delete. <br />";
+                lblErrorMsg.Visible = true;
+            }
+
+            
+        }
+
+        private void deleteDateRequest()
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_DeleteDateRequest";
+            int result = 0;
+
+            User tempUser = new User();
+            int userID1 = tempUser.getUserID(Session["Username"].ToString());
+            int userID2 = tempUser.getUserID(Session["RequestedProfile"].ToString());
+
+            UserProfile tempProfile = new UserProfile();
+            if(tempProfile.checkIfUserSentDateRequest(Session["Username"].ToString(), Session["RequestedProfile"].ToString()))
+            {
+                objCmd.Parameters.AddWithValue("@requestFrom", userID1);
+                objCmd.Parameters.AddWithValue("@requestTo", userID2);
+                result = objDB.DoUpdateUsingCmdObj(objCmd);
+                if(result == 1)
+                {
+                    lblErrorMsg.Text += "Successfully deleted date request to this user. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+            }
+            else if(tempProfile.checkIfUserReceivedDateRequest(Session["RequestedProfile"].ToString(), Session["Username"].ToString()))
+            {
+                objCmd.Parameters.AddWithValue("@requestFrom", userID2);
+                objCmd.Parameters.AddWithValue("@requestTo", userID1);
+                result = objDB.DoUpdateUsingCmdObj(objCmd);
+                if (result == 1)
+                {
+                    lblErrorMsg.Text += "Successfully deleted date request from this user. <br />";
+                    lblErrorMsg.Visible = true;
+                }
+            }            
         }
 
         protected void btnMessage_Click(object sender, EventArgs e)

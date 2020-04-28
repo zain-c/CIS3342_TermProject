@@ -124,6 +124,23 @@ namespace DatingSiteLibrary
             return userID;
         }
 
+        public string getEmailByUsername(string username)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_GetEmailByUsername";
+            objCmd.Parameters.AddWithValue("@username", username);
+
+            DataSet emailDS = objDB.GetDataSetUsingCmdObj(objCmd);
+            string email = "";
+            if (emailDS.Tables[0].Rows.Count > 0)
+            {
+                email = emailDS.Tables[0].Rows[0]["Email"].ToString();
+            }
+            return email;
+        }
+
         public bool verifyAccount(string username)
         {
             DBConnect objDB = new DBConnect();
