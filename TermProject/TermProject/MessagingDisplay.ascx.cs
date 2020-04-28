@@ -74,7 +74,7 @@ namespace TermProject
             objCmd.Parameters.AddWithValue("@usernameTwo", Session["MessageToUsername"].ToString());
             DataSet conversationDS = objDB.GetDataSetUsingCmdObj(objCmd);
 
-            string conversation = objDB.GetField("Content", 0).ToString();            
+            string conversation = objDB.GetField("Content", 0).ToString();
             lblMessages.Text = conversation;
             
         }        

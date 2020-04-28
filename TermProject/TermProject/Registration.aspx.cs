@@ -44,6 +44,12 @@ namespace TermProject
                     newUser.addSecurityQuestionsToDB(txtSecurityQuestion1.Text, txtSecurityQuestion2.Text, txtSecurityQuestion3.Text, userID);
 
                     Session.Add("Username", txtUsername.Text);
+
+                    HttpCookie myCookie = new HttpCookie("VerifyAccount");
+                    myCookie.Values["Username"] = txtUsername.Text;
+                    myCookie.Expires = new DateTime(2025, 1, 1);
+                    Response.Cookies.Add(myCookie);
+
                     sendVerificationEmail(txtEmail.Text);
                     Server.Transfer("ProfileCreation.aspx");
                 }
