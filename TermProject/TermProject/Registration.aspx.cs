@@ -44,6 +44,7 @@ namespace TermProject
                     newUser.addSecurityQuestionsToDB(txtSecurityQuestion1.Text, txtSecurityQuestion2.Text, txtSecurityQuestion3.Text, userID);
 
                     Session.Add("Username", txtUsername.Text);
+                    sendVerificationEmail(txtEmail.Text);
                     Server.Transfer("ProfileCreation.aspx");
                 }
                 catch
@@ -55,12 +56,22 @@ namespace TermProject
 
         private void sendVerificationEmail(string recipient)
         {
-            MailMessage objMail = new MailMessage();
-            MailAddress toAddress = new MailAddress(recipient);
-            MailAddress fromAddress = new MailAddress("tug85523@temple.edu");
-            string subject = "Verify your account";
-            string body = "Click the link below to verify your account <br />";
-
+            Email emailObj = new Email();
+            string to = recipient;
+            string from = "atozdatingsite@gmail.com";
+            string subject = "Verify your Account";
+            string message = "Please click the link to verify your email: http://localhost:49433/VerifyAccount.aspx";
+            try
+            {
+                emailObj.SendMail(to, from, subject, message);
+                //lblErrorMessage.Text += "Verification email sent.";
+                //lblErrorMessage.Visible = true;
+            }
+            catch(Exception ex)
+            {
+                lblErrorMessage.Text += "The email wasn't sent because one of the required fields was missing. <br />";
+                lblErrorMessage.Visible = true;
+            }
         }
 
         private int getUserID(string username)

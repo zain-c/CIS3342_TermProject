@@ -21,6 +21,7 @@
                         <asp:Button ID="btnNormalView" runat="server" class="btn btn-outline-warning" Text="Return to normal view" Visible="false" OnClick="btnNormalView_Click" />
                         <asp:Button ID="btnPass" runat="server" class="btn btn-outline-danger" Text="Pass" Visible="false" OnClick="btnPass_Click" />
                         <asp:Button ID="btnDateRequest" runat="server" class="btn btn-outline-primary" Text="Send Date Request" Visible="false" OnClick="btnDateRequest_Click" />
+                        <asp:Button ID="btnMessage" runat="server" class="btn btn-outline-primary" Text="Message" OnClick="btnMessage_Click" />
                         <asp:Button ID="btnBlock" runat="server" class="btn btn-outline-danger" Text="Block" Visible="false" OnClick="btnBlock_Click" />
                         <br />
                         <br />

@@ -127,6 +127,7 @@
     <Content Include="Stylesheets\RegistrationStyle.css" />
     <Content Include="MemberSearch.aspx" />
     <Content Include="Stylesheets\SearchStyle.css" />
+    <Content Include="VerifyAccount.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +229,13 @@
     </Compile>
     <Compile Include="MemberSearch.aspx.designer.cs">
       <DependentUpon>MemberSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerifyAccount.aspx.cs">
+      <DependentUpon>VerifyAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerifyAccount.aspx.designer.cs">
+      <DependentUpon>VerifyAccount.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

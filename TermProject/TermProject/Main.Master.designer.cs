@@ -76,6 +76,15 @@ namespace TermProject {
         protected global::System.Web.UI.WebControls.Button btnDateRequests;
         
         /// <summary>
+        /// btnMessages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMessages;
+        
+        /// <summary>
         /// btnLogOut control.
         /// </summary>
         /// <remarks>

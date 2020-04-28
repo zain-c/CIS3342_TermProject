@@ -29,7 +29,7 @@ namespace TermProject
 
         private void loadLikes()
         {
-            string url = "https://localhost:44369/api/DatingService/Profiles/LoadLikedList/" + Session["Username"].ToString();
+            string url = "https://localhost:44369/api/DatingService/Profiles/LoadLikedList/" + GlobalData.APIKey + "/" + Session["Username"].ToString();
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
 
@@ -56,7 +56,7 @@ namespace TermProject
 
         private void loadPasses()
         {
-            string url = "https://localhost:44369/api/DatingService/Profiles/LoadPassList/" + Session["Username"].ToString();
+            string url = "https://localhost:44369/api/DatingService/Profiles/LoadPassList/" + GlobalData.APIKey + "/" + Session["Username"].ToString();
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
 
@@ -154,7 +154,7 @@ namespace TermProject
             ProfileDisplay profileDisplay = ((ProfileDisplay)likes.FindControl("pdProfileLikes_" + rowClicked));
             string usernameToRemove = profileDisplay.Username;
 
-            string url = "https://localhost:44369/api/DatingService/Profiles/RemoveFromLikes/" + Session["Username"].ToString() + "/" + usernameToRemove;
+            string url = "https://localhost:44369/api/DatingService/Profiles/RemoveFromLikes/" + GlobalData.APIKey + "/" + Session["Username"].ToString() + "/" + usernameToRemove;
             WebRequest request = WebRequest.Create(url);
             request.Method = "DELETE";
             request.ContentLength = 0;
@@ -235,7 +235,7 @@ namespace TermProject
             string usernameToTransfer = profileDisplay.Username; //get the username of the profile to remove from Passes and add to Likes
 
             //First remove the profile from Passes List
-            string removeUrl = "https://localhost:44369/api/DatingService/Profiles/RemoveFromPasses/" + Session["Username"].ToString() + "/" + usernameToTransfer;
+            string removeUrl = "https://localhost:44369/api/DatingService/Profiles/RemoveFromPasses/" + GlobalData.APIKey + "/" + Session["Username"].ToString() + "/" + usernameToTransfer;
             WebRequest removeRequest = WebRequest.Create(removeUrl);
             removeRequest.Method = "DELETE";
             removeRequest.ContentLength = 0;
@@ -250,7 +250,7 @@ namespace TermProject
             if (removeData == "true") //if the removal from Passes is successful
             {
                 //Now add that profile to Likes List
-                string likeUrl = "https://localhost:44369/api/DatingService/Profiles/AddLikes/" + Session["Username"].ToString() + "/" + usernameToTransfer;
+                string likeUrl = "https://localhost:44369/api/DatingService/Profiles/AddLikes/" + GlobalData.APIKey + "/" + Session["Username"].ToString() + "/" + usernameToTransfer;
                 WebRequest likeRequest = WebRequest.Create(likeUrl);
                 likeRequest.Method = "PUT";
                 likeRequest.ContentLength = 0;
@@ -289,7 +289,7 @@ namespace TermProject
             ProfileDisplay profileDisplay = ((ProfileDisplay)passes.FindControl("pdProfilePass_" + rowClicked));
             string usernameToRemove = profileDisplay.Username;
 
-            string url = "https://localhost:44369/api/DatingService/Profiles/RemoveFromPasses/" + Session["Username"].ToString() + "/" + usernameToRemove;
+            string url = "https://localhost:44369/api/DatingService/Profiles/RemoveFromPasses/" + GlobalData.APIKey + "/" + Session["Username"].ToString() + "/" + usernameToRemove;
             WebRequest request = WebRequest.Create(url);
             request.Method = "DELETE";
             request.ContentLength = 0;

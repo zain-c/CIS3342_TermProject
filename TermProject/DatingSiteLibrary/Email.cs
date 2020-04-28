@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using System.Net;
 
 namespace DatingSiteLibrary
 {
@@ -18,7 +19,7 @@ namespace DatingSiteLibrary
         private String messageBody;
         private Boolean isHTMLBody = true;
         private MailPriority priority = MailPriority.Normal;
-        private String mailHost = "smtp.temple.edu";
+        private String mailHost = "smtp.gmail.com";
 
         public void SendMail(String recipient, String sender, String subject, String body, String cc = "", String bcc = "")
         {
@@ -49,6 +50,9 @@ namespace DatingSiteLibrary
                 }
 
                 SmtpClient smtpMailClient = new SmtpClient(this.mailHost);
+                smtpMailClient.Port = 587;
+                smtpMailClient.EnableSsl = true;
+                smtpMailClient.Credentials = new NetworkCredential("atozdatingsite@gmail.com", "A2ZDating!");
                 smtpMailClient.Send(objMail);
             }
             catch (Exception ex)

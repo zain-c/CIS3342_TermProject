@@ -8,7 +8,7 @@ using Utilities;
 namespace DatingSiteLibrary
 {
     public class GlobalData
-    { 
-       
+    {
+        public static string APIKey = "1234";
     }
 }
