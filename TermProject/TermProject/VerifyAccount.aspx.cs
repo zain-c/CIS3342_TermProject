@@ -15,14 +15,15 @@ namespace TermProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty((string)Session["Username"]))
+            if (Request.Cookies["VerifyAccount"] == null)
             {
                 Response.Redirect("Login.aspx");
             }
             else
             {
                 User tempUser = new User();
-                if (tempUser.verifyAccount(Session["Username"].ToString()))
+                HttpCookie cookie = Request.Cookies["LoginCookie"];
+                if (tempUser.verifyAccount(cookie.Values["Username"].ToString()))
                 {
                     lblVerify.Text = "Your account has been verified.";
                 }

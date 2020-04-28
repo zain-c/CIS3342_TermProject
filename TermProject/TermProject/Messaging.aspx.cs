@@ -113,6 +113,7 @@ namespace TermProject
 
                 row.Cells.Add(cell);
                 row.Cells.Add(messageCell);
+                row.Cells.Add(deleteCell);
                 tblProfileList.Rows.Add(row);
             }
             return tblProfileList;
@@ -120,7 +121,23 @@ namespace TermProject
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Button btnDelete = (Button)sender;
+            int rowNum = int.Parse(btnDelete.ID.Split('_')[1]);
+            ProfileDisplay profileDisplay = ((ProfileDisplay)conversationsDiv.FindControl("pdProfile_" + rowNum));
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCmd = new SqlCommand();
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "TP_DeleteConversation";
+            objCmd.Parameters.AddWithValue("@usernameOne", Session["Username"].ToString());
+            objCmd.Parameters.AddWithValue("@usernameTwo", profileDisplay.Username);
+
+            int result = objDB.DoUpdateUsingCmdObj(objCmd);
+            if(result == 1)
+            {
+                conversationsDiv.Controls.RemoveAt(conversationsDiv.Controls.Count - 1);
+                loadConversations();
+            }
         }
 
         private void BtnMessage_Click(object sender, EventArgs e)
