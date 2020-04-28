@@ -47,6 +47,22 @@ namespace TermProject
             if(result == 1)
             {
                 DataBind();
+
+                User tempUser = new User();
+                string recipient = tempUser.getEmailByUsername(Session["MessageToUsername"].ToString());
+                Email emailObj = new Email();
+                string to = recipient;
+                string from = "atozdatingsite@gmail.com";
+                string subject = "New Message";
+                string message = "You have a new message from " + Session["Username"].ToString() + ". Visit the website to view the message.";
+                try
+                {
+                    emailObj.SendMail(to, from, subject, message);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
             txtSendMessage.Text = string.Empty;
         }
